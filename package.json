@@ -1,0 +1,1 @@
+{"name": "niko-monorepo", "private": true, "workspaces": ["apps/*", "packages/*"]}

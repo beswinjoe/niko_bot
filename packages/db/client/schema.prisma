@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id // Discord User ID
+  username  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cases     ModerationCase[] @relation("UserCases")
+  moderated ModerationCase[] @relation("ModeratorCases")
+  warnings  Warning[]
+}
+
+model Guild {
+  id          String   @id // Discord Guild ID
+  name        String
+  memberCount Int      @default(0)
+  joinedAt    DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  settings        GuildSetting?
+  cases           ModerationCase[]
+  warnings        Warning[]
+  securityEvents  SecurityEvent[]
+  raidEvents      RaidEvent[]
+  memberSnapshots MemberSnapshot[]
+  messageActivity MessageActivity[]
+}
+
+model GuildSetting {
+  guildId String @id
+  guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  // Security Toggles
+  antiRaidEnabled    Boolean @default(false)
+  antiNukeEnabled    Boolean @default(false)
+  antiSpamEnabled    Boolean @default(false)
+  antiMassMention    Boolean @default(false)
+  antiWebhookAbuse   Boolean @default(false)
+  scamDetection      Boolean @default(true)
+  autoLockdown       Boolean @default(false)
+  verificationSystem Boolean @default(false)
+
+  // AI Moderation
+  aiModerationEnabled Boolean @default(true)
+  aiLogChannelId      String?
+  aiActionThreshold   Int     @default(80) // 0-100 confidence
+
+  // Channels
+  modLogChannelId      String?
+  securityLogChannelId String?
+}
+
+model ModerationCase {
+  id          Int      @id @default(autoincrement())
+  guildId     String
+  userId      String
+  moderatorId String
+  type        String // BAN, KICK, TIMEOUT, WARN, UNWARN, PURGE, LOCK
+  reason      String?
+  createdAt   DateTime @default(now())
+
+  guild     Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  user      User  @relation("UserCases", fields: [userId], references: [id], onDelete: Cascade)
+  moderator User  @relation("ModeratorCases", fields: [moderatorId], references: [id], onDelete: Cascade)
+
+  @@index([guildId])
+  @@index([userId])
+}
+
+model Warning {
+  id        Int      @id @default(autoincrement())
+  guildId   String
+  userId    String
+  reason    String
+  createdAt DateTime @default(now())
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([guildId, userId])
+}
+
+model SecurityEvent {
+  id          Int      @id @default(autoincrement())
+  guildId     String
+  type        String // SPAM, RAID_JOIN, NUKE_ATTEMPT, SCAM_LINK
+  severity    String // LOW, MEDIUM, HIGH, CRITICAL
+  description String
+  createdAt   DateTime @default(now())
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  @@index([guildId])
+  @@index([createdAt])
+}
+
+model RaidEvent {
+  id        Int       @id @default(autoincrement())
+  guildId   String
+  status    String // ACTIVE, MITIGATED, RESOLVED
+  startedAt DateTime  @default(now())
+  endedAt   DateTime?
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+}
+
+model MemberSnapshot {
+  id        Int      @id @default(autoincrement())
+  guildId   String
+  count     Int
+  timestamp DateTime @default(now())
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  @@index([guildId, timestamp])
+}
+
+model MessageActivity {
+  id        Int      @id @default(autoincrement())
+  guildId   String
+  channelId String
+  count     Int      @default(1)
+  timestamp DateTime @default(now()) // Stored by hour
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  @@unique([guildId, channelId, timestamp])
+}
+
+model BotStat {
+  id          Int      @id @default(autoincrement())
+  serverCount Int
+  userCount   Int
+  shardCount  Int
+  updatedAt   DateTime @updatedAt
+}
+
+model BotStatHistory {
+  id          Int      @id @default(autoincrement())
+  serverCount Int
+  userCount   Int
+  shardCount  Int
+  timestamp   DateTime @default(now())
+}
