@@ -1,14 +1,17 @@
 import 'dotenv/config';
 import { client, commands } from './client';
 import { Events, REST, Routes } from 'discord.js';
-import { banCommand } from './commands/moderation/ban';
-import { kickCommand } from './commands/moderation/kick';
-import { warnCommand } from './commands/moderation/warn';
-import { casesCommand } from './commands/moderation/cases';
+import { nikoCommand } from './commands/niko';
+import { securityCommand } from './commands/security';
+import { moderationCommand } from './commands/moderation';
+import { configCommand } from './commands/config';
+import { analyticsCommand } from './commands/analytics';
 import { sentinel } from './services/sentinel';
 import { intelligence } from './services/intelligence';
 import { startWorker, boss } from './worker';
 import { initAIModerationWorker } from './worker/aiModeration';
+import { initUnbanWorker } from './worker/unbanWorker';
+import { handlePrefixCommand } from './handlers/prefixCommandHandler';
 
 async function bootstrap() {
   const token = process.env.DISCORD_TOKEN;
@@ -17,25 +20,39 @@ async function bootstrap() {
   }
 
   // Load events and commands here...
-  commands.set(banCommand.data.name, banCommand);
-  commands.set(kickCommand.data.name, kickCommand);
-  commands.set(warnCommand.data.name, warnCommand);
-  commands.set(casesCommand.data.name, casesCommand);
+  commands.set(nikoCommand.data.name, nikoCommand);
+  commands.set(securityCommand.data.name, securityCommand);
+  commands.set(moderationCommand.data.name, moderationCommand);
+  commands.set(configCommand.data.name, configCommand);
+  commands.set(analyticsCommand.data.name, analyticsCommand);
 
   // Initialize background workers (pg-boss via PostgreSQL)
   await startWorker();
   await initAIModerationWorker();
+  await initUnbanWorker();
 
   client.once(Events.ClientReady, async (readyClient) => {
     console.log(`[Niko] Logged in as ${readyClient.user.tag}`);
     const rest = new REST().setToken(token);
     try {
       console.log(`[Niko] Started refreshing ${commands.size} application (/) commands.`);
-      await rest.put(
-        Routes.applicationCommands(readyClient.user.id),
-        { body: commands.map(cmd => cmd.data.toJSON()) },
-      );
-      console.log(`[Niko] Successfully reloaded application (/) commands.`);
+      
+      const body = commands.map(cmd => cmd.data.toJSON());
+      const devGuildId = process.env.DEV_GUILD_ID;
+
+      if (process.env.NODE_ENV === 'development' && devGuildId) {
+        await rest.put(
+          Routes.applicationGuildCommands(readyClient.user.id, devGuildId),
+          { body },
+        );
+        console.log(`[Niko] Successfully reloaded guild application (/) commands for guild ${devGuildId}.`);
+      } else {
+        await rest.put(
+          Routes.applicationCommands(readyClient.user.id),
+          { body },
+        );
+        console.log(`[Niko] Successfully reloaded global application (/) commands.`);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -47,6 +64,9 @@ async function bootstrap() {
 
   client.on(Events.MessageCreate, async (message) => {
     if (message.author.bot) return;
+    
+    // Process prefix commands (includes AFK check/mention handling inside)
+    await handlePrefixCommand(message);
     
     await sentinel.evaluateMessage(message);
     

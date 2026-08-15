@@ -50,6 +50,8 @@ model Guild {
   raidEvents       RaidEvent[]
   memberSnapshots  MemberSnapshot[]
   messageActivity  MessageActivity[]
+  rolePermissions  RoleCommandPermission[]
+  rules            Rule[]
 }
 
 model GuildSetting {
@@ -74,6 +76,14 @@ model GuildSetting {
   // Channels
   modLogChannelId     String?
   securityLogChannelId String?
+
+  // Role Configurations
+  modRole           String?
+  seniorModRole     String?
+  adminRole         String?
+  mutedRole         String?
+
+  prefix            String @default("!")
 }
 
 model ModerationCase {
@@ -83,6 +93,8 @@ model ModerationCase {
   moderatorId String
   type        String   // BAN, KICK, TIMEOUT, WARN, UNWARN, PURGE, LOCK
   reason      String?
+  duration    String?
+  expiresAt   DateTime?
   createdAt   DateTime @default(now())
   
   guild     Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
@@ -167,4 +179,34 @@ model BotStatHistory {
   userCount   Int
   shardCount  Int
   timestamp   DateTime @default(now())
+}
+
+model RoleCommandPermission {
+  id        Int      @id @default(autoincrement())
+  guildId   String
+  roleId    String
+  command   String
+  createdAt DateTime @default(now())
+
+  guild     Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  @@unique([guildId, roleId, command])
+  @@index([guildId, command])
+}
+
+model Rule {
+  id        Int      @id @default(autoincrement())
+  guildId   String
+  content   String
+  createdAt DateTime @default(now())
+
+  guild     Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  @@index([guildId])
+}
+
+model AfkStatus {
+  userId    String   @id
+  reason    String?
+  startedAt DateTime @default(now())
 }
