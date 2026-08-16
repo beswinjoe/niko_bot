@@ -1,5 +1,6 @@
 import { Client, Guild, GuildMember, Message, User } from 'discord.js';
 import { prisma } from '@niko/db';
+import { cache } from '../cache/CacheManager';
 
 export enum ThreatLevel {
   LOW = 'LOW',
@@ -16,8 +17,7 @@ class SentinelService {
     const guildId = member.guild.id;
     const now = Date.now();
     
-    // Get settings
-    const settings = await prisma.guildSetting.findUnique({ where: { guildId } });
+    const settings = await cache.getGuildSettings(guildId);
     if (!settings || !settings.antiRaidEnabled) return;
 
     // Track join rate
@@ -39,7 +39,7 @@ class SentinelService {
     const guildId = message.guild.id;
     const now = Date.now();
 
-    const settings = await prisma.guildSetting.findUnique({ where: { guildId } });
+    const settings = await cache.getGuildSettings(guildId);
     if (!settings || !settings.antiSpamEnabled) return;
 
     let msgs = this.messageCache.get(authorId) || [];

@@ -7,8 +7,8 @@ export interface UnbanJobData {
 }
 
 export async function initUnbanWorker() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await boss.work('unban', async (jobs: any) => {
+  await boss.createQueue('unban').catch(() => {});
+  await boss.work('unban', { pollingIntervalSeconds: 30 }, async (jobs: any) => {
     const jobList = Array.isArray(jobs) ? jobs : [jobs];
     
     for (const job of jobList) {

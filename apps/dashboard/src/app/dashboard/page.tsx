@@ -1,10 +1,10 @@
 import { getSession } from '@/lib/session';
 import { getDiscordUserGuilds, hasManageGuildPermission, getGuildIconUrl } from '@/lib/discord';
-import { PrismaClient } from '@niko/db';
+import { prisma } from "@niko/db";
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
-const prisma = new PrismaClient();
+
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
     select: { id: true, memberCount: true }
   });
   
-  const installedGuildIds = new Set(dbGuilds.map(g => g.id));
+  const installedGuildIds = new Set(dbGuilds.map((g: any) => g.id));
   const addBotUrl = `https://discord.com/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=277025508352&scope=bot%20applications.commands`;
   
   return (

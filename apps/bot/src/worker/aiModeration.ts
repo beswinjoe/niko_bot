@@ -19,8 +19,7 @@ async function classifyContent(content: string): Promise<{ isToxic: boolean, sco
 
 export async function initAIModerationWorker() {
   try { await boss.createQueue('ai-moderation'); } catch (e) {}
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await boss.work('ai-moderation', async (jobs: any) => {
+  await boss.work('ai-moderation', { pollingIntervalSeconds: 30 }, async (jobs: any) => {
     // We can handle batch jobs or single jobs, pg-boss passes an array by default in new versions
     // or a single job. Let's handle it assuming a single job or array.
     const jobList = Array.isArray(jobs) ? jobs : [jobs];

@@ -60,18 +60,18 @@ export class ModerationService {
 
       // Fetch Server Configuration
       const settings = await (prisma as any).guildSetting.findUnique({ where: { guildId: guild.id } });
+      const prefix = settings?.prefix || '$';
 
       // Fetch command permissions
       const rolePerms = await (prisma as any).roleCommandPermission.findMany({ where: { guildId: guild.id } });
 
       // Helper for role checks
-      const checkRole = (cmdName: string, fallbackRoleId?: string | null) => {
+      const checkRole = (cmdName: string) => {
         if (moderator.id === guild.ownerId) return true;
-        const cmdPerms = rolePerms.filter((p: any) => p.command === cmdName);
+        const cmdPerms = rolePerms.filter((p: any) => p.command === cmdName || p.command === '*');
         
         if (cmdPerms.length === 0) {
-          // If no specific command permissions are configured, check the fallback role (e.g. modRole)
-          return !fallbackRoleId || moderator.roles.cache.has(fallbackRoleId);
+          return false;
         }
         
         return cmdPerms.some((p: any) => moderator.roles.cache.has(p.roleId));
@@ -83,11 +83,11 @@ export class ModerationService {
       let actionMs: number | null = null;
 
       if (action === 'WARN') {
-        if (!checkRole('warn', settings?.modRole)) {
-          return { success: false, error: 'You lack the configured role required for this command.' };
+        if (!checkRole('warn')) {
+          return { success: false, error: `⚠️ This command has not been assigned to any of your roles.\n\nA server owner can configure it with:\n\`${prefix}permissions add @Role warn\`` };
         }
         if (!moderator.permissions.has(PermissionFlagsBits.ModerateMembers)) {
-          return { success: false, error: 'You do not have permission to warn members.' };
+          return { success: false, error: '⚠️ You do not have the Discord permission to warn members.' };
         }
         await (prisma as any).warning.create({
           data: { guildId: guild.id, userId: targetUser.id, reason }
@@ -95,13 +95,27 @@ export class ModerationService {
         actionDesc = 'Warn';
       } 
       else if (action === 'TIMEOUT') {
-        if (!checkRole('timeout', settings?.modRole)) {
-          return { success: false, error: 'You lack the configured role required for this command.' };
+        if (!checkRole('timeout') && !checkRole('mute')) {
+          return { success: false, error: `⚠️ This command has not been assigned to any of your roles.\n\nA server owner can configure it with:\n\`${prefix}permissions add @Role mute\`` };
         }
         if (!moderator.permissions.has(PermissionFlagsBits.ModerateMembers)) {
-          return { success: false, error: 'You do not have permission to timeout members.' };
+          return { success: false, error: '⚠️ You do not have the Discord permission to mute members.' };
         }
         if (!targetMember) return { success: false, error: 'User is not in the server.' };
+        
+        const muteRole = settings?.mutedRole ? guild.roles.cache.get(settings.mutedRole) : null;
+        if (!muteRole) {
+          return { success: false, error: `⚠️ This server does not have a mute role configured.\n\nUse \`${prefix}muterole @Role\` to set one or \`${prefix}muterole create [name]\` to create one.` };
+        }
+
+        const me = guild.members.me;
+        if (!me?.permissions.has(PermissionFlagsBits.ManageRoles)) {
+          return { success: false, error: '⚠️ Niko needs the `Manage Roles` permission to perform this action.' };
+        }
+        if (muteRole.position >= me.roles.highest.position) {
+          return { success: false, error: '⚠️ Niko cannot manage that role because it is equal to or higher than Niko\'s highest role.' };
+        }
+
         if (!durationStr) return { success: false, error: 'Duration is required for timeout.' };
         
         const ms = parseDuration(durationStr);
@@ -110,28 +124,40 @@ export class ModerationService {
         }
         actionMs = ms;
         
-        await targetMember.timeout(ms, reason);
-        actionDesc = 'Timeout';
+        await targetMember.roles.add(muteRole, reason);
+        await targetMember.timeout(ms, reason).catch(() => null); // Fallback to timeout, but don't fail if permissions are weird.
+        
+        actionDesc = 'Mute';
         parsedDurationLabel = durationStr;
       } 
       else if (action === 'KICK') {
-        if (!checkRole('kick', settings?.seniorModRole)) {
-          return { success: false, error: 'You lack the configured role required for this command.' };
+        if (!checkRole('kick')) {
+          return { success: false, error: `⚠️ This command has not been assigned to any of your roles.\n\nA server owner can configure it with:\n\`${prefix}permissions add @Role kick\`` };
         }
         if (!moderator.permissions.has(PermissionFlagsBits.KickMembers)) {
-          return { success: false, error: 'You do not have permission to kick members.' };
+          return { success: false, error: '⚠️ You do not have the Discord permission to kick members.' };
         }
         if (!targetMember) return { success: false, error: 'User is not in the server.' };
+        
+        const me = guild.members.me;
+        if (!me?.permissions.has(PermissionFlagsBits.KickMembers)) {
+          return { success: false, error: '⚠️ Niko needs the `Kick Members` permission to perform this action.' };
+        }
         
         await targetMember.kick(reason);
         actionDesc = 'Kick';
       } 
       else if (action === 'BAN') {
-        if (!checkRole('ban', settings?.adminRole)) {
-          return { success: false, error: 'You lack the configured role required for this command.' };
+        if (!checkRole('ban')) {
+          return { success: false, error: `⚠️ This command has not been assigned to any of your roles.\n\nA server owner can configure it with:\n\`${prefix}permissions add @Role ban\`` };
         }
         if (!moderator.permissions.has(PermissionFlagsBits.BanMembers)) {
-          return { success: false, error: 'You do not have permission to ban members.' };
+          return { success: false, error: '⚠️ You do not have the Discord permission to ban members.' };
+        }
+        
+        const me = guild.members.me;
+        if (!me?.permissions.has(PermissionFlagsBits.BanMembers)) {
+          return { success: false, error: '⚠️ Niko needs the `Ban Members` permission to perform this action.' };
         }
         
         let ms: number | null = null;
@@ -202,6 +228,109 @@ export class ModerationService {
       console.error('[ModerationService] Error:', error);
       return { success: false, error: error.message || 'An internal error occurred.' };
     }
+  }
+
+  public async purge(
+    client: Client,
+    guild: Guild,
+    moderator: GuildMember,
+    channel: any,
+    amount: number
+  ): Promise<ModerationResult> {
+    const settings = await (prisma as any).guildSetting.findUnique({ where: { guildId: guild.id } });
+    const prefix = settings?.prefix || '$';
+
+    const rolePerms = await (prisma as any).roleCommandPermission.findMany({ where: { guildId: guild.id } });
+    const cmdPerms = rolePerms.filter((p: any) => p.command === 'purge' || p.command === '*');
+    const hasPerm = moderator.id === guild.ownerId || 
+      (cmdPerms.length > 0 ? cmdPerms.some((p: any) => moderator.roles.cache.has(p.roleId)) : false);
+
+    if (!hasPerm) return { success: false, error: `⚠️ This command has not been assigned to any of your roles.\n\nA server owner can configure it with:\n\`${prefix}permissions add @Role purge\`` };
+    if (!moderator.permissions.has(PermissionFlagsBits.ManageMessages)) return { success: false, error: '⚠️ You do not have the Discord permission to manage messages.' };
+    
+    if (isNaN(amount) || amount < 1 || amount > 100) return { success: false, error: 'Please provide a valid amount between 1 and 100.' };
+    
+    if (channel.isTextBased() && 'bulkDelete' in channel) {
+      const deleted = await channel.bulkDelete(amount, true).catch(() => null);
+      if (deleted) return { success: true, embed: new EmbedBuilder().setColor('#10B981').setDescription(`Successfully purged ${deleted.size} messages.`) };
+    }
+    return { success: false, error: 'Failed to purge messages or cannot purge in this channel type.' };
+  }
+
+  public async unban(
+    client: Client,
+    guild: Guild,
+    moderator: GuildMember,
+    targetId: string,
+    reason: string
+  ): Promise<ModerationResult> {
+    const settings = await (prisma as any).guildSetting.findUnique({ where: { guildId: guild.id } });
+    const prefix = settings?.prefix || '$';
+
+    const rolePerms = await (prisma as any).roleCommandPermission.findMany({ where: { guildId: guild.id } });
+    const cmdPerms = rolePerms.filter((p: any) => p.command === 'unban' || p.command === 'ban' || p.command === '*');
+    const hasPerm = moderator.id === guild.ownerId || 
+      (cmdPerms.length > 0 ? cmdPerms.some((p: any) => moderator.roles.cache.has(p.roleId)) : false);
+
+    if (!hasPerm) return { success: false, error: `⚠️ This command has not been assigned to any of your roles.\n\nA server owner can configure it with:\n\`${prefix}permissions add @Role unban\`` };
+    if (!moderator.permissions.has(PermissionFlagsBits.BanMembers)) return { success: false, error: '⚠️ You do not have the Discord permission to unban members.' };
+    
+    const me = guild.members.me;
+    if (!me?.permissions.has(PermissionFlagsBits.BanMembers)) {
+      return { success: false, error: '⚠️ Niko needs the `Ban Members` permission to perform this action.' };
+    }
+
+    try {
+      await guild.members.unban(targetId, reason);
+      
+      try {
+        const userToDm = await client.users.fetch(targetId);
+        if (userToDm) {
+          await userToDm.send(`You were unbanned from ${guild.name}.\nReason: ${reason}`);
+        }
+      } catch {
+        // Silently fail DM
+      }
+
+      const modCase = await (prisma as any).moderationCase.create({
+        data: {
+          guildId: guild.id,
+          userId: targetId,
+          moderatorId: moderator.user.id,
+          type: 'UNBAN',
+          reason
+        } as any
+      });
+      return { success: true, embed: new EmbedBuilder().setColor('#10B981').setDescription(`Successfully unbanned <@${targetId}>. Case #${modCase.id}`) };
+    } catch (e: any) {
+      return { success: false, error: `Failed to unban user: ${e.message}` };
+    }
+  }
+
+  public async getCases(
+    guild: Guild,
+    targetUserId?: string,
+    actionType?: ModerationAction | 'UNBAN'
+  ): Promise<ModerationResult> {
+    const where: any = { guildId: guild.id };
+    if (targetUserId) where.userId = targetUserId;
+    if (actionType) where.type = actionType;
+
+    const cases = await (prisma as any).moderationCase.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+      take: 10
+    });
+
+    const embed = new EmbedBuilder().setColor('#3B82F6').setTitle(`Moderation Cases`);
+    if (cases.length === 0) embed.setDescription('No cases found.');
+    else {
+      embed.setDescription(cases.map((c: any) => 
+        `\`#${c.id}\` **${c.type}** | Target: <@${c.userId}> | Mod: <@${c.moderatorId}> | Reason: ${c.reason || 'None'}` + 
+        (c.duration ? ` | Duration: ${c.duration}` : '')
+      ).join('\n'));
+    }
+    return { success: true, embed };
   }
 }
 

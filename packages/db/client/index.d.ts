@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Session
+ * 
+ */
+export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
+/**
  * Model Guild
  * 
  */
@@ -68,6 +73,26 @@ export type BotStat = $Result.DefaultSelection<Prisma.$BotStatPayload>
  * 
  */
 export type BotStatHistory = $Result.DefaultSelection<Prisma.$BotStatHistoryPayload>
+/**
+ * Model RoleCommandPermission
+ * 
+ */
+export type RoleCommandPermission = $Result.DefaultSelection<Prisma.$RoleCommandPermissionPayload>
+/**
+ * Model Rule
+ * 
+ */
+export type Rule = $Result.DefaultSelection<Prisma.$RulePayload>
+/**
+ * Model AfkStatus
+ * 
+ */
+export type AfkStatus = $Result.DefaultSelection<Prisma.$AfkStatusPayload>
+/**
+ * Model DashboardAuditLog
+ * 
+ */
+export type DashboardAuditLog = $Result.DefaultSelection<Prisma.$DashboardAuditLogPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -203,6 +228,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs>;
 
   /**
+   * `prisma.session`: Exposes CRUD operations for the **Session** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sessions
+    * const sessions = await prisma.session.findMany()
+    * ```
+    */
+  get session(): Prisma.SessionDelegate<ExtArgs>;
+
+  /**
    * `prisma.guild`: Exposes CRUD operations for the **Guild** model.
     * Example usage:
     * ```ts
@@ -301,6 +336,46 @@ export class PrismaClient<
     * ```
     */
   get botStatHistory(): Prisma.BotStatHistoryDelegate<ExtArgs>;
+
+  /**
+   * `prisma.roleCommandPermission`: Exposes CRUD operations for the **RoleCommandPermission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RoleCommandPermissions
+    * const roleCommandPermissions = await prisma.roleCommandPermission.findMany()
+    * ```
+    */
+  get roleCommandPermission(): Prisma.RoleCommandPermissionDelegate<ExtArgs>;
+
+  /**
+   * `prisma.rule`: Exposes CRUD operations for the **Rule** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Rules
+    * const rules = await prisma.rule.findMany()
+    * ```
+    */
+  get rule(): Prisma.RuleDelegate<ExtArgs>;
+
+  /**
+   * `prisma.afkStatus`: Exposes CRUD operations for the **AfkStatus** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AfkStatuses
+    * const afkStatuses = await prisma.afkStatus.findMany()
+    * ```
+    */
+  get afkStatus(): Prisma.AfkStatusDelegate<ExtArgs>;
+
+  /**
+   * `prisma.dashboardAuditLog`: Exposes CRUD operations for the **DashboardAuditLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DashboardAuditLogs
+    * const dashboardAuditLogs = await prisma.dashboardAuditLog.findMany()
+    * ```
+    */
+  get dashboardAuditLog(): Prisma.DashboardAuditLogDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -743,6 +818,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    Session: 'Session',
     Guild: 'Guild',
     GuildSetting: 'GuildSetting',
     ModerationCase: 'ModerationCase',
@@ -752,7 +828,11 @@ export namespace Prisma {
     MemberSnapshot: 'MemberSnapshot',
     MessageActivity: 'MessageActivity',
     BotStat: 'BotStat',
-    BotStatHistory: 'BotStatHistory'
+    BotStatHistory: 'BotStatHistory',
+    RoleCommandPermission: 'RoleCommandPermission',
+    Rule: 'Rule',
+    AfkStatus: 'AfkStatus',
+    DashboardAuditLog: 'DashboardAuditLog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -768,7 +848,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "guild" | "guildSetting" | "moderationCase" | "warning" | "securityEvent" | "raidEvent" | "memberSnapshot" | "messageActivity" | "botStat" | "botStatHistory"
+      modelProps: "user" | "session" | "guild" | "guildSetting" | "moderationCase" | "warning" | "securityEvent" | "raidEvent" | "memberSnapshot" | "messageActivity" | "botStat" | "botStatHistory" | "roleCommandPermission" | "rule" | "afkStatus" | "dashboardAuditLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -839,6 +919,76 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Session: {
+        payload: Prisma.$SessionPayload<ExtArgs>
+        fields: Prisma.SessionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SessionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SessionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          findFirst: {
+            args: Prisma.SessionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SessionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          findMany: {
+            args: Prisma.SessionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>[]
+          }
+          create: {
+            args: Prisma.SessionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          createMany: {
+            args: Prisma.SessionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SessionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>[]
+          }
+          delete: {
+            args: Prisma.SessionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          update: {
+            args: Prisma.SessionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          deleteMany: {
+            args: Prisma.SessionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SessionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SessionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          aggregate: {
+            args: Prisma.SessionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSession>
+          }
+          groupBy: {
+            args: Prisma.SessionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SessionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SessionCountArgs<ExtArgs>
+            result: $Utils.Optional<SessionCountAggregateOutputType> | number
           }
         }
       }
@@ -1542,6 +1692,286 @@ export namespace Prisma {
           }
         }
       }
+      RoleCommandPermission: {
+        payload: Prisma.$RoleCommandPermissionPayload<ExtArgs>
+        fields: Prisma.RoleCommandPermissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RoleCommandPermissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RoleCommandPermissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload>
+          }
+          findFirst: {
+            args: Prisma.RoleCommandPermissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RoleCommandPermissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload>
+          }
+          findMany: {
+            args: Prisma.RoleCommandPermissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload>[]
+          }
+          create: {
+            args: Prisma.RoleCommandPermissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload>
+          }
+          createMany: {
+            args: Prisma.RoleCommandPermissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RoleCommandPermissionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload>[]
+          }
+          delete: {
+            args: Prisma.RoleCommandPermissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload>
+          }
+          update: {
+            args: Prisma.RoleCommandPermissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.RoleCommandPermissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RoleCommandPermissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.RoleCommandPermissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoleCommandPermissionPayload>
+          }
+          aggregate: {
+            args: Prisma.RoleCommandPermissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRoleCommandPermission>
+          }
+          groupBy: {
+            args: Prisma.RoleCommandPermissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RoleCommandPermissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RoleCommandPermissionCountArgs<ExtArgs>
+            result: $Utils.Optional<RoleCommandPermissionCountAggregateOutputType> | number
+          }
+        }
+      }
+      Rule: {
+        payload: Prisma.$RulePayload<ExtArgs>
+        fields: Prisma.RuleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RuleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RuleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload>
+          }
+          findFirst: {
+            args: Prisma.RuleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RuleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload>
+          }
+          findMany: {
+            args: Prisma.RuleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload>[]
+          }
+          create: {
+            args: Prisma.RuleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload>
+          }
+          createMany: {
+            args: Prisma.RuleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RuleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload>[]
+          }
+          delete: {
+            args: Prisma.RuleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload>
+          }
+          update: {
+            args: Prisma.RuleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload>
+          }
+          deleteMany: {
+            args: Prisma.RuleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RuleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.RuleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RulePayload>
+          }
+          aggregate: {
+            args: Prisma.RuleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRule>
+          }
+          groupBy: {
+            args: Prisma.RuleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RuleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RuleCountArgs<ExtArgs>
+            result: $Utils.Optional<RuleCountAggregateOutputType> | number
+          }
+        }
+      }
+      AfkStatus: {
+        payload: Prisma.$AfkStatusPayload<ExtArgs>
+        fields: Prisma.AfkStatusFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AfkStatusFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AfkStatusFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload>
+          }
+          findFirst: {
+            args: Prisma.AfkStatusFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AfkStatusFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload>
+          }
+          findMany: {
+            args: Prisma.AfkStatusFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload>[]
+          }
+          create: {
+            args: Prisma.AfkStatusCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload>
+          }
+          createMany: {
+            args: Prisma.AfkStatusCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AfkStatusCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload>[]
+          }
+          delete: {
+            args: Prisma.AfkStatusDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload>
+          }
+          update: {
+            args: Prisma.AfkStatusUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload>
+          }
+          deleteMany: {
+            args: Prisma.AfkStatusDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AfkStatusUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AfkStatusUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AfkStatusPayload>
+          }
+          aggregate: {
+            args: Prisma.AfkStatusAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAfkStatus>
+          }
+          groupBy: {
+            args: Prisma.AfkStatusGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AfkStatusGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AfkStatusCountArgs<ExtArgs>
+            result: $Utils.Optional<AfkStatusCountAggregateOutputType> | number
+          }
+        }
+      }
+      DashboardAuditLog: {
+        payload: Prisma.$DashboardAuditLogPayload<ExtArgs>
+        fields: Prisma.DashboardAuditLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DashboardAuditLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DashboardAuditLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload>
+          }
+          findFirst: {
+            args: Prisma.DashboardAuditLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DashboardAuditLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload>
+          }
+          findMany: {
+            args: Prisma.DashboardAuditLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload>[]
+          }
+          create: {
+            args: Prisma.DashboardAuditLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload>
+          }
+          createMany: {
+            args: Prisma.DashboardAuditLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DashboardAuditLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload>[]
+          }
+          delete: {
+            args: Prisma.DashboardAuditLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload>
+          }
+          update: {
+            args: Prisma.DashboardAuditLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.DashboardAuditLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DashboardAuditLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DashboardAuditLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DashboardAuditLogPayload>
+          }
+          aggregate: {
+            args: Prisma.DashboardAuditLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDashboardAuditLog>
+          }
+          groupBy: {
+            args: Prisma.DashboardAuditLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DashboardAuditLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DashboardAuditLogCountArgs<ExtArgs>
+            result: $Utils.Optional<DashboardAuditLogCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1706,12 +2136,16 @@ export namespace Prisma {
     cases: number
     moderated: number
     warnings: number
+    sessions: number
+    DashboardAuditLog: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cases?: boolean | UserCountOutputTypeCountCasesArgs
     moderated?: boolean | UserCountOutputTypeCountModeratedArgs
     warnings?: boolean | UserCountOutputTypeCountWarningsArgs
+    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+    DashboardAuditLog?: boolean | UserCountOutputTypeCountDashboardAuditLogArgs
   }
 
   // Custom InputTypes
@@ -1746,6 +2180,20 @@ export namespace Prisma {
     where?: WarningWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDashboardAuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DashboardAuditLogWhereInput
+  }
+
 
   /**
    * Count Type GuildCountOutputType
@@ -1758,6 +2206,9 @@ export namespace Prisma {
     raidEvents: number
     memberSnapshots: number
     messageActivity: number
+    rolePermissions: number
+    rules: number
+    DashboardAuditLog: number
   }
 
   export type GuildCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1767,6 +2218,9 @@ export namespace Prisma {
     raidEvents?: boolean | GuildCountOutputTypeCountRaidEventsArgs
     memberSnapshots?: boolean | GuildCountOutputTypeCountMemberSnapshotsArgs
     messageActivity?: boolean | GuildCountOutputTypeCountMessageActivityArgs
+    rolePermissions?: boolean | GuildCountOutputTypeCountRolePermissionsArgs
+    rules?: boolean | GuildCountOutputTypeCountRulesArgs
+    DashboardAuditLog?: boolean | GuildCountOutputTypeCountDashboardAuditLogArgs
   }
 
   // Custom InputTypes
@@ -1822,6 +2276,27 @@ export namespace Prisma {
     where?: MessageActivityWhereInput
   }
 
+  /**
+   * GuildCountOutputType without action
+   */
+  export type GuildCountOutputTypeCountRolePermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoleCommandPermissionWhereInput
+  }
+
+  /**
+   * GuildCountOutputType without action
+   */
+  export type GuildCountOutputTypeCountRulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RuleWhereInput
+  }
+
+  /**
+   * GuildCountOutputType without action
+   */
+  export type GuildCountOutputTypeCountDashboardAuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DashboardAuditLogWhereInput
+  }
+
 
   /**
    * Models
@@ -1840,22 +2315,31 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: string | null
     username: string | null
+    globalName: string | null
+    avatar: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    lastLoginAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
     username: string | null
+    globalName: string | null
+    avatar: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    lastLoginAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     username: number
+    globalName: number
+    avatar: number
     createdAt: number
     updatedAt: number
+    lastLoginAt: number
     _all: number
   }
 
@@ -1863,22 +2347,31 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     username?: true
+    globalName?: true
+    avatar?: true
     createdAt?: true
     updatedAt?: true
+    lastLoginAt?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     username?: true
+    globalName?: true
+    avatar?: true
     createdAt?: true
     updatedAt?: true
+    lastLoginAt?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     username?: true
+    globalName?: true
+    avatar?: true
     createdAt?: true
     updatedAt?: true
+    lastLoginAt?: true
     _all?: true
   }
 
@@ -1957,8 +2450,11 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: string
     username: string
+    globalName: string | null
+    avatar: string | null
     createdAt: Date
     updatedAt: Date
+    lastLoginAt: Date | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1981,32 +2477,45 @@ export namespace Prisma {
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     username?: boolean
+    globalName?: boolean
+    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    lastLoginAt?: boolean
     cases?: boolean | User$casesArgs<ExtArgs>
     moderated?: boolean | User$moderatedArgs<ExtArgs>
     warnings?: boolean | User$warningsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
+    DashboardAuditLog?: boolean | User$DashboardAuditLogArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     username?: boolean
+    globalName?: boolean
+    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    lastLoginAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
     username?: boolean
+    globalName?: boolean
+    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    lastLoginAt?: boolean
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cases?: boolean | User$casesArgs<ExtArgs>
     moderated?: boolean | User$moderatedArgs<ExtArgs>
     warnings?: boolean | User$warningsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
+    DashboardAuditLog?: boolean | User$DashboardAuditLogArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2017,12 +2526,17 @@ export namespace Prisma {
       cases: Prisma.$ModerationCasePayload<ExtArgs>[]
       moderated: Prisma.$ModerationCasePayload<ExtArgs>[]
       warnings: Prisma.$WarningPayload<ExtArgs>[]
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
+      DashboardAuditLog: Prisma.$DashboardAuditLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       username: string
+      globalName: string | null
+      avatar: string | null
       createdAt: Date
       updatedAt: Date
+      lastLoginAt: Date | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2390,6 +2904,8 @@ export namespace Prisma {
     cases<T extends User$casesArgs<ExtArgs> = {}>(args?: Subset<T, User$casesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModerationCasePayload<ExtArgs>, T, "findMany"> | Null>
     moderated<T extends User$moderatedArgs<ExtArgs> = {}>(args?: Subset<T, User$moderatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModerationCasePayload<ExtArgs>, T, "findMany"> | Null>
     warnings<T extends User$warningsArgs<ExtArgs> = {}>(args?: Subset<T, User$warningsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WarningPayload<ExtArgs>, T, "findMany"> | Null>
+    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany"> | Null>
+    DashboardAuditLog<T extends User$DashboardAuditLogArgs<ExtArgs> = {}>(args?: Subset<T, User$DashboardAuditLogArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2421,8 +2937,11 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly username: FieldRef<"User", 'String'>
+    readonly globalName: FieldRef<"User", 'String'>
+    readonly avatar: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly lastLoginAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -2797,6 +3316,46 @@ export namespace Prisma {
   }
 
   /**
+   * User.sessions
+   */
+  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.DashboardAuditLog
+   */
+  export type User$DashboardAuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    where?: DashboardAuditLogWhereInput
+    orderBy?: DashboardAuditLogOrderByWithRelationInput | DashboardAuditLogOrderByWithRelationInput[]
+    cursor?: DashboardAuditLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DashboardAuditLogScalarFieldEnum | DashboardAuditLogScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2808,6 +3367,939 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Session
+   */
+
+  export type AggregateSession = {
+    _count: SessionCountAggregateOutputType | null
+    _min: SessionMinAggregateOutputType | null
+    _max: SessionMaxAggregateOutputType | null
+  }
+
+  export type SessionMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    lastUsedAt: Date | null
+  }
+
+  export type SessionMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    lastUsedAt: Date | null
+  }
+
+  export type SessionCountAggregateOutputType = {
+    id: number
+    userId: number
+    expiresAt: number
+    createdAt: number
+    lastUsedAt: number
+    _all: number
+  }
+
+
+  export type SessionMinAggregateInputType = {
+    id?: true
+    userId?: true
+    expiresAt?: true
+    createdAt?: true
+    lastUsedAt?: true
+  }
+
+  export type SessionMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    expiresAt?: true
+    createdAt?: true
+    lastUsedAt?: true
+  }
+
+  export type SessionCountAggregateInputType = {
+    id?: true
+    userId?: true
+    expiresAt?: true
+    createdAt?: true
+    lastUsedAt?: true
+    _all?: true
+  }
+
+  export type SessionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Session to aggregate.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Sessions
+    **/
+    _count?: true | SessionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SessionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SessionMaxAggregateInputType
+  }
+
+  export type GetSessionAggregateType<T extends SessionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSession]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSession[P]>
+      : GetScalarType<T[P], AggregateSession[P]>
+  }
+
+
+
+
+  export type SessionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithAggregationInput | SessionOrderByWithAggregationInput[]
+    by: SessionScalarFieldEnum[] | SessionScalarFieldEnum
+    having?: SessionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SessionCountAggregateInputType | true
+    _min?: SessionMinAggregateInputType
+    _max?: SessionMaxAggregateInputType
+  }
+
+  export type SessionGroupByOutputType = {
+    id: string
+    userId: string
+    expiresAt: Date
+    createdAt: Date
+    lastUsedAt: Date
+    _count: SessionCountAggregateOutputType | null
+    _min: SessionMinAggregateOutputType | null
+    _max: SessionMaxAggregateOutputType | null
+  }
+
+  type GetSessionGroupByPayload<T extends SessionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SessionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SessionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SessionGroupByOutputType[P]>
+            : GetScalarType<T[P], SessionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    lastUsedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session"]>
+
+  export type SessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    lastUsedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session"]>
+
+  export type SessionSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    lastUsedAt?: boolean
+  }
+
+  export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $SessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Session"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      expiresAt: Date
+      createdAt: Date
+      lastUsedAt: Date
+    }, ExtArgs["result"]["session"]>
+    composites: {}
+  }
+
+  type SessionGetPayload<S extends boolean | null | undefined | SessionDefaultArgs> = $Result.GetResult<Prisma.$SessionPayload, S>
+
+  type SessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SessionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SessionCountAggregateInputType | true
+    }
+
+  export interface SessionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Session'], meta: { name: 'Session' } }
+    /**
+     * Find zero or one Session that matches the filter.
+     * @param {SessionFindUniqueArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SessionFindUniqueArgs>(args: SelectSubset<T, SessionFindUniqueArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Session that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SessionFindUniqueOrThrowArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SessionFindUniqueOrThrowArgs>(args: SelectSubset<T, SessionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Session that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionFindFirstArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SessionFindFirstArgs>(args?: SelectSubset<T, SessionFindFirstArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Session that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionFindFirstOrThrowArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SessionFindFirstOrThrowArgs>(args?: SelectSubset<T, SessionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Sessions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sessions
+     * const sessions = await prisma.session.findMany()
+     * 
+     * // Get first 10 Sessions
+     * const sessions = await prisma.session.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sessionWithIdOnly = await prisma.session.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SessionFindManyArgs>(args?: SelectSubset<T, SessionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Session.
+     * @param {SessionCreateArgs} args - Arguments to create a Session.
+     * @example
+     * // Create one Session
+     * const Session = await prisma.session.create({
+     *   data: {
+     *     // ... data to create a Session
+     *   }
+     * })
+     * 
+     */
+    create<T extends SessionCreateArgs>(args: SelectSubset<T, SessionCreateArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Sessions.
+     * @param {SessionCreateManyArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const session = await prisma.session.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SessionCreateManyArgs>(args?: SelectSubset<T, SessionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Sessions and returns the data saved in the database.
+     * @param {SessionCreateManyAndReturnArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const session = await prisma.session.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Sessions and only return the `id`
+     * const sessionWithIdOnly = await prisma.session.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SessionCreateManyAndReturnArgs>(args?: SelectSubset<T, SessionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Session.
+     * @param {SessionDeleteArgs} args - Arguments to delete one Session.
+     * @example
+     * // Delete one Session
+     * const Session = await prisma.session.delete({
+     *   where: {
+     *     // ... filter to delete one Session
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SessionDeleteArgs>(args: SelectSubset<T, SessionDeleteArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Session.
+     * @param {SessionUpdateArgs} args - Arguments to update one Session.
+     * @example
+     * // Update one Session
+     * const session = await prisma.session.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SessionUpdateArgs>(args: SelectSubset<T, SessionUpdateArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Sessions.
+     * @param {SessionDeleteManyArgs} args - Arguments to filter Sessions to delete.
+     * @example
+     * // Delete a few Sessions
+     * const { count } = await prisma.session.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SessionDeleteManyArgs>(args?: SelectSubset<T, SessionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sessions
+     * const session = await prisma.session.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SessionUpdateManyArgs>(args: SelectSubset<T, SessionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Session.
+     * @param {SessionUpsertArgs} args - Arguments to update or create a Session.
+     * @example
+     * // Update or create a Session
+     * const session = await prisma.session.upsert({
+     *   create: {
+     *     // ... data to create a Session
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Session we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SessionUpsertArgs>(args: SelectSubset<T, SessionUpsertArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionCountArgs} args - Arguments to filter Sessions to count.
+     * @example
+     * // Count the number of Sessions
+     * const count = await prisma.session.count({
+     *   where: {
+     *     // ... the filter for the Sessions we want to count
+     *   }
+     * })
+    **/
+    count<T extends SessionCountArgs>(
+      args?: Subset<T, SessionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SessionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Session.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SessionAggregateArgs>(args: Subset<T, SessionAggregateArgs>): Prisma.PrismaPromise<GetSessionAggregateType<T>>
+
+    /**
+     * Group by Session.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SessionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SessionGroupByArgs['orderBy'] }
+        : { orderBy?: SessionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Session model
+   */
+  readonly fields: SessionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Session.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Session model
+   */ 
+  interface SessionFieldRefs {
+    readonly id: FieldRef<"Session", 'String'>
+    readonly userId: FieldRef<"Session", 'String'>
+    readonly expiresAt: FieldRef<"Session", 'DateTime'>
+    readonly createdAt: FieldRef<"Session", 'DateTime'>
+    readonly lastUsedAt: FieldRef<"Session", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Session findUnique
+   */
+  export type SessionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session findUniqueOrThrow
+   */
+  export type SessionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session findFirst
+   */
+  export type SessionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sessions.
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sessions.
+     */
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * Session findFirstOrThrow
+   */
+  export type SessionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sessions.
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sessions.
+     */
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * Session findMany
+   */
+  export type SessionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Sessions to fetch.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Sessions.
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * Session create
+   */
+  export type SessionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Session.
+     */
+    data: XOR<SessionCreateInput, SessionUncheckedCreateInput>
+  }
+
+  /**
+   * Session createMany
+   */
+  export type SessionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Sessions.
+     */
+    data: SessionCreateManyInput | SessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Session createManyAndReturn
+   */
+  export type SessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Sessions.
+     */
+    data: SessionCreateManyInput | SessionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Session update
+   */
+  export type SessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Session.
+     */
+    data: XOR<SessionUpdateInput, SessionUncheckedUpdateInput>
+    /**
+     * Choose, which Session to update.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session updateMany
+   */
+  export type SessionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Sessions.
+     */
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyInput>
+    /**
+     * Filter which Sessions to update
+     */
+    where?: SessionWhereInput
+  }
+
+  /**
+   * Session upsert
+   */
+  export type SessionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Session to update in case it exists.
+     */
+    where: SessionWhereUniqueInput
+    /**
+     * In case the Session found by the `where` argument doesn't exist, create a new Session with this data.
+     */
+    create: XOR<SessionCreateInput, SessionUncheckedCreateInput>
+    /**
+     * In case the Session was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SessionUpdateInput, SessionUncheckedUpdateInput>
+  }
+
+  /**
+   * Session delete
+   */
+  export type SessionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter which Session to delete.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session deleteMany
+   */
+  export type SessionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sessions to delete
+     */
+    where?: SessionWhereInput
+  }
+
+  /**
+   * Session without action
+   */
+  export type SessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
   }
 
 
@@ -3016,6 +4508,9 @@ export namespace Prisma {
     raidEvents?: boolean | Guild$raidEventsArgs<ExtArgs>
     memberSnapshots?: boolean | Guild$memberSnapshotsArgs<ExtArgs>
     messageActivity?: boolean | Guild$messageActivityArgs<ExtArgs>
+    rolePermissions?: boolean | Guild$rolePermissionsArgs<ExtArgs>
+    rules?: boolean | Guild$rulesArgs<ExtArgs>
+    DashboardAuditLog?: boolean | Guild$DashboardAuditLogArgs<ExtArgs>
     _count?: boolean | GuildCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["guild"]>
 
@@ -3043,6 +4538,9 @@ export namespace Prisma {
     raidEvents?: boolean | Guild$raidEventsArgs<ExtArgs>
     memberSnapshots?: boolean | Guild$memberSnapshotsArgs<ExtArgs>
     messageActivity?: boolean | Guild$messageActivityArgs<ExtArgs>
+    rolePermissions?: boolean | Guild$rolePermissionsArgs<ExtArgs>
+    rules?: boolean | Guild$rulesArgs<ExtArgs>
+    DashboardAuditLog?: boolean | Guild$DashboardAuditLogArgs<ExtArgs>
     _count?: boolean | GuildCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type GuildIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3057,6 +4555,9 @@ export namespace Prisma {
       raidEvents: Prisma.$RaidEventPayload<ExtArgs>[]
       memberSnapshots: Prisma.$MemberSnapshotPayload<ExtArgs>[]
       messageActivity: Prisma.$MessageActivityPayload<ExtArgs>[]
+      rolePermissions: Prisma.$RoleCommandPermissionPayload<ExtArgs>[]
+      rules: Prisma.$RulePayload<ExtArgs>[]
+      DashboardAuditLog: Prisma.$DashboardAuditLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3435,6 +4936,9 @@ export namespace Prisma {
     raidEvents<T extends Guild$raidEventsArgs<ExtArgs> = {}>(args?: Subset<T, Guild$raidEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RaidEventPayload<ExtArgs>, T, "findMany"> | Null>
     memberSnapshots<T extends Guild$memberSnapshotsArgs<ExtArgs> = {}>(args?: Subset<T, Guild$memberSnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberSnapshotPayload<ExtArgs>, T, "findMany"> | Null>
     messageActivity<T extends Guild$messageActivityArgs<ExtArgs> = {}>(args?: Subset<T, Guild$messageActivityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessageActivityPayload<ExtArgs>, T, "findMany"> | Null>
+    rolePermissions<T extends Guild$rolePermissionsArgs<ExtArgs> = {}>(args?: Subset<T, Guild$rolePermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "findMany"> | Null>
+    rules<T extends Guild$rulesArgs<ExtArgs> = {}>(args?: Subset<T, Guild$rulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "findMany"> | Null>
+    DashboardAuditLog<T extends Guild$DashboardAuditLogArgs<ExtArgs> = {}>(args?: Subset<T, Guild$DashboardAuditLogArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3918,6 +5422,66 @@ export namespace Prisma {
   }
 
   /**
+   * Guild.rolePermissions
+   */
+  export type Guild$rolePermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    where?: RoleCommandPermissionWhereInput
+    orderBy?: RoleCommandPermissionOrderByWithRelationInput | RoleCommandPermissionOrderByWithRelationInput[]
+    cursor?: RoleCommandPermissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RoleCommandPermissionScalarFieldEnum | RoleCommandPermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Guild.rules
+   */
+  export type Guild$rulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    where?: RuleWhereInput
+    orderBy?: RuleOrderByWithRelationInput | RuleOrderByWithRelationInput[]
+    cursor?: RuleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RuleScalarFieldEnum | RuleScalarFieldEnum[]
+  }
+
+  /**
+   * Guild.DashboardAuditLog
+   */
+  export type Guild$DashboardAuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    where?: DashboardAuditLogWhereInput
+    orderBy?: DashboardAuditLogOrderByWithRelationInput | DashboardAuditLogOrderByWithRelationInput[]
+    cursor?: DashboardAuditLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DashboardAuditLogScalarFieldEnum | DashboardAuditLogScalarFieldEnum[]
+  }
+
+  /**
    * Guild without action
    */
   export type GuildDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3967,6 +5531,11 @@ export namespace Prisma {
     aiActionThreshold: number | null
     modLogChannelId: string | null
     securityLogChannelId: string | null
+    modRole: string | null
+    seniorModRole: string | null
+    adminRole: string | null
+    mutedRole: string | null
+    prefix: string | null
   }
 
   export type GuildSettingMaxAggregateOutputType = {
@@ -3984,6 +5553,11 @@ export namespace Prisma {
     aiActionThreshold: number | null
     modLogChannelId: string | null
     securityLogChannelId: string | null
+    modRole: string | null
+    seniorModRole: string | null
+    adminRole: string | null
+    mutedRole: string | null
+    prefix: string | null
   }
 
   export type GuildSettingCountAggregateOutputType = {
@@ -4001,6 +5575,11 @@ export namespace Prisma {
     aiActionThreshold: number
     modLogChannelId: number
     securityLogChannelId: number
+    modRole: number
+    seniorModRole: number
+    adminRole: number
+    mutedRole: number
+    prefix: number
     _all: number
   }
 
@@ -4028,6 +5607,11 @@ export namespace Prisma {
     aiActionThreshold?: true
     modLogChannelId?: true
     securityLogChannelId?: true
+    modRole?: true
+    seniorModRole?: true
+    adminRole?: true
+    mutedRole?: true
+    prefix?: true
   }
 
   export type GuildSettingMaxAggregateInputType = {
@@ -4045,6 +5629,11 @@ export namespace Prisma {
     aiActionThreshold?: true
     modLogChannelId?: true
     securityLogChannelId?: true
+    modRole?: true
+    seniorModRole?: true
+    adminRole?: true
+    mutedRole?: true
+    prefix?: true
   }
 
   export type GuildSettingCountAggregateInputType = {
@@ -4062,6 +5651,11 @@ export namespace Prisma {
     aiActionThreshold?: true
     modLogChannelId?: true
     securityLogChannelId?: true
+    modRole?: true
+    seniorModRole?: true
+    adminRole?: true
+    mutedRole?: true
+    prefix?: true
     _all?: true
   }
 
@@ -4166,6 +5760,11 @@ export namespace Prisma {
     aiActionThreshold: number
     modLogChannelId: string | null
     securityLogChannelId: string | null
+    modRole: string | null
+    seniorModRole: string | null
+    adminRole: string | null
+    mutedRole: string | null
+    prefix: string
     _count: GuildSettingCountAggregateOutputType | null
     _avg: GuildSettingAvgAggregateOutputType | null
     _sum: GuildSettingSumAggregateOutputType | null
@@ -4202,6 +5801,11 @@ export namespace Prisma {
     aiActionThreshold?: boolean
     modLogChannelId?: boolean
     securityLogChannelId?: boolean
+    modRole?: boolean
+    seniorModRole?: boolean
+    adminRole?: boolean
+    mutedRole?: boolean
+    prefix?: boolean
     guild?: boolean | GuildDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["guildSetting"]>
 
@@ -4220,6 +5824,11 @@ export namespace Prisma {
     aiActionThreshold?: boolean
     modLogChannelId?: boolean
     securityLogChannelId?: boolean
+    modRole?: boolean
+    seniorModRole?: boolean
+    adminRole?: boolean
+    mutedRole?: boolean
+    prefix?: boolean
     guild?: boolean | GuildDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["guildSetting"]>
 
@@ -4238,6 +5847,11 @@ export namespace Prisma {
     aiActionThreshold?: boolean
     modLogChannelId?: boolean
     securityLogChannelId?: boolean
+    modRole?: boolean
+    seniorModRole?: boolean
+    adminRole?: boolean
+    mutedRole?: boolean
+    prefix?: boolean
   }
 
   export type GuildSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4267,6 +5881,11 @@ export namespace Prisma {
       aiActionThreshold: number
       modLogChannelId: string | null
       securityLogChannelId: string | null
+      modRole: string | null
+      seniorModRole: string | null
+      adminRole: string | null
+      mutedRole: string | null
+      prefix: string
     }, ExtArgs["result"]["guildSetting"]>
     composites: {}
   }
@@ -4675,6 +6294,11 @@ export namespace Prisma {
     readonly aiActionThreshold: FieldRef<"GuildSetting", 'Int'>
     readonly modLogChannelId: FieldRef<"GuildSetting", 'String'>
     readonly securityLogChannelId: FieldRef<"GuildSetting", 'String'>
+    readonly modRole: FieldRef<"GuildSetting", 'String'>
+    readonly seniorModRole: FieldRef<"GuildSetting", 'String'>
+    readonly adminRole: FieldRef<"GuildSetting", 'String'>
+    readonly mutedRole: FieldRef<"GuildSetting", 'String'>
+    readonly prefix: FieldRef<"GuildSetting", 'String'>
   }
     
 
@@ -5034,6 +6658,8 @@ export namespace Prisma {
     moderatorId: string | null
     type: string | null
     reason: string | null
+    duration: string | null
+    expiresAt: Date | null
     createdAt: Date | null
   }
 
@@ -5044,6 +6670,8 @@ export namespace Prisma {
     moderatorId: string | null
     type: string | null
     reason: string | null
+    duration: string | null
+    expiresAt: Date | null
     createdAt: Date | null
   }
 
@@ -5054,6 +6682,8 @@ export namespace Prisma {
     moderatorId: number
     type: number
     reason: number
+    duration: number
+    expiresAt: number
     createdAt: number
     _all: number
   }
@@ -5074,6 +6704,8 @@ export namespace Prisma {
     moderatorId?: true
     type?: true
     reason?: true
+    duration?: true
+    expiresAt?: true
     createdAt?: true
   }
 
@@ -5084,6 +6716,8 @@ export namespace Prisma {
     moderatorId?: true
     type?: true
     reason?: true
+    duration?: true
+    expiresAt?: true
     createdAt?: true
   }
 
@@ -5094,6 +6728,8 @@ export namespace Prisma {
     moderatorId?: true
     type?: true
     reason?: true
+    duration?: true
+    expiresAt?: true
     createdAt?: true
     _all?: true
   }
@@ -5191,6 +6827,8 @@ export namespace Prisma {
     moderatorId: string
     type: string
     reason: string | null
+    duration: string | null
+    expiresAt: Date | null
     createdAt: Date
     _count: ModerationCaseCountAggregateOutputType | null
     _avg: ModerationCaseAvgAggregateOutputType | null
@@ -5220,6 +6858,8 @@ export namespace Prisma {
     moderatorId?: boolean
     type?: boolean
     reason?: boolean
+    duration?: boolean
+    expiresAt?: boolean
     createdAt?: boolean
     guild?: boolean | GuildDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5233,6 +6873,8 @@ export namespace Prisma {
     moderatorId?: boolean
     type?: boolean
     reason?: boolean
+    duration?: boolean
+    expiresAt?: boolean
     createdAt?: boolean
     guild?: boolean | GuildDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5246,6 +6888,8 @@ export namespace Prisma {
     moderatorId?: boolean
     type?: boolean
     reason?: boolean
+    duration?: boolean
+    expiresAt?: boolean
     createdAt?: boolean
   }
 
@@ -5274,6 +6918,8 @@ export namespace Prisma {
       moderatorId: string
       type: string
       reason: string | null
+      duration: string | null
+      expiresAt: Date | null
       createdAt: Date
     }, ExtArgs["result"]["moderationCase"]>
     composites: {}
@@ -5677,6 +7323,8 @@ export namespace Prisma {
     readonly moderatorId: FieldRef<"ModerationCase", 'String'>
     readonly type: FieldRef<"ModerationCase", 'String'>
     readonly reason: FieldRef<"ModerationCase", 'String'>
+    readonly duration: FieldRef<"ModerationCase", 'String'>
+    readonly expiresAt: FieldRef<"ModerationCase", 'DateTime'>
     readonly createdAt: FieldRef<"ModerationCase", 'DateTime'>
   }
     
@@ -12708,6 +14356,3787 @@ export namespace Prisma {
 
 
   /**
+   * Model RoleCommandPermission
+   */
+
+  export type AggregateRoleCommandPermission = {
+    _count: RoleCommandPermissionCountAggregateOutputType | null
+    _avg: RoleCommandPermissionAvgAggregateOutputType | null
+    _sum: RoleCommandPermissionSumAggregateOutputType | null
+    _min: RoleCommandPermissionMinAggregateOutputType | null
+    _max: RoleCommandPermissionMaxAggregateOutputType | null
+  }
+
+  export type RoleCommandPermissionAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type RoleCommandPermissionSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type RoleCommandPermissionMinAggregateOutputType = {
+    id: number | null
+    guildId: string | null
+    roleId: string | null
+    command: string | null
+    createdAt: Date | null
+  }
+
+  export type RoleCommandPermissionMaxAggregateOutputType = {
+    id: number | null
+    guildId: string | null
+    roleId: string | null
+    command: string | null
+    createdAt: Date | null
+  }
+
+  export type RoleCommandPermissionCountAggregateOutputType = {
+    id: number
+    guildId: number
+    roleId: number
+    command: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RoleCommandPermissionAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type RoleCommandPermissionSumAggregateInputType = {
+    id?: true
+  }
+
+  export type RoleCommandPermissionMinAggregateInputType = {
+    id?: true
+    guildId?: true
+    roleId?: true
+    command?: true
+    createdAt?: true
+  }
+
+  export type RoleCommandPermissionMaxAggregateInputType = {
+    id?: true
+    guildId?: true
+    roleId?: true
+    command?: true
+    createdAt?: true
+  }
+
+  export type RoleCommandPermissionCountAggregateInputType = {
+    id?: true
+    guildId?: true
+    roleId?: true
+    command?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RoleCommandPermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoleCommandPermission to aggregate.
+     */
+    where?: RoleCommandPermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoleCommandPermissions to fetch.
+     */
+    orderBy?: RoleCommandPermissionOrderByWithRelationInput | RoleCommandPermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RoleCommandPermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoleCommandPermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoleCommandPermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RoleCommandPermissions
+    **/
+    _count?: true | RoleCommandPermissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RoleCommandPermissionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RoleCommandPermissionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RoleCommandPermissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RoleCommandPermissionMaxAggregateInputType
+  }
+
+  export type GetRoleCommandPermissionAggregateType<T extends RoleCommandPermissionAggregateArgs> = {
+        [P in keyof T & keyof AggregateRoleCommandPermission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRoleCommandPermission[P]>
+      : GetScalarType<T[P], AggregateRoleCommandPermission[P]>
+  }
+
+
+
+
+  export type RoleCommandPermissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoleCommandPermissionWhereInput
+    orderBy?: RoleCommandPermissionOrderByWithAggregationInput | RoleCommandPermissionOrderByWithAggregationInput[]
+    by: RoleCommandPermissionScalarFieldEnum[] | RoleCommandPermissionScalarFieldEnum
+    having?: RoleCommandPermissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RoleCommandPermissionCountAggregateInputType | true
+    _avg?: RoleCommandPermissionAvgAggregateInputType
+    _sum?: RoleCommandPermissionSumAggregateInputType
+    _min?: RoleCommandPermissionMinAggregateInputType
+    _max?: RoleCommandPermissionMaxAggregateInputType
+  }
+
+  export type RoleCommandPermissionGroupByOutputType = {
+    id: number
+    guildId: string
+    roleId: string
+    command: string
+    createdAt: Date
+    _count: RoleCommandPermissionCountAggregateOutputType | null
+    _avg: RoleCommandPermissionAvgAggregateOutputType | null
+    _sum: RoleCommandPermissionSumAggregateOutputType | null
+    _min: RoleCommandPermissionMinAggregateOutputType | null
+    _max: RoleCommandPermissionMaxAggregateOutputType | null
+  }
+
+  type GetRoleCommandPermissionGroupByPayload<T extends RoleCommandPermissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RoleCommandPermissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RoleCommandPermissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RoleCommandPermissionGroupByOutputType[P]>
+            : GetScalarType<T[P], RoleCommandPermissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RoleCommandPermissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guildId?: boolean
+    roleId?: boolean
+    command?: boolean
+    createdAt?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["roleCommandPermission"]>
+
+  export type RoleCommandPermissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guildId?: boolean
+    roleId?: boolean
+    command?: boolean
+    createdAt?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["roleCommandPermission"]>
+
+  export type RoleCommandPermissionSelectScalar = {
+    id?: boolean
+    guildId?: boolean
+    roleId?: boolean
+    command?: boolean
+    createdAt?: boolean
+  }
+
+  export type RoleCommandPermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }
+  export type RoleCommandPermissionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }
+
+  export type $RoleCommandPermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RoleCommandPermission"
+    objects: {
+      guild: Prisma.$GuildPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      guildId: string
+      roleId: string
+      command: string
+      createdAt: Date
+    }, ExtArgs["result"]["roleCommandPermission"]>
+    composites: {}
+  }
+
+  type RoleCommandPermissionGetPayload<S extends boolean | null | undefined | RoleCommandPermissionDefaultArgs> = $Result.GetResult<Prisma.$RoleCommandPermissionPayload, S>
+
+  type RoleCommandPermissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RoleCommandPermissionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RoleCommandPermissionCountAggregateInputType | true
+    }
+
+  export interface RoleCommandPermissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RoleCommandPermission'], meta: { name: 'RoleCommandPermission' } }
+    /**
+     * Find zero or one RoleCommandPermission that matches the filter.
+     * @param {RoleCommandPermissionFindUniqueArgs} args - Arguments to find a RoleCommandPermission
+     * @example
+     * // Get one RoleCommandPermission
+     * const roleCommandPermission = await prisma.roleCommandPermission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RoleCommandPermissionFindUniqueArgs>(args: SelectSubset<T, RoleCommandPermissionFindUniqueArgs<ExtArgs>>): Prisma__RoleCommandPermissionClient<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one RoleCommandPermission that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {RoleCommandPermissionFindUniqueOrThrowArgs} args - Arguments to find a RoleCommandPermission
+     * @example
+     * // Get one RoleCommandPermission
+     * const roleCommandPermission = await prisma.roleCommandPermission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RoleCommandPermissionFindUniqueOrThrowArgs>(args: SelectSubset<T, RoleCommandPermissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RoleCommandPermissionClient<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first RoleCommandPermission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleCommandPermissionFindFirstArgs} args - Arguments to find a RoleCommandPermission
+     * @example
+     * // Get one RoleCommandPermission
+     * const roleCommandPermission = await prisma.roleCommandPermission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RoleCommandPermissionFindFirstArgs>(args?: SelectSubset<T, RoleCommandPermissionFindFirstArgs<ExtArgs>>): Prisma__RoleCommandPermissionClient<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first RoleCommandPermission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleCommandPermissionFindFirstOrThrowArgs} args - Arguments to find a RoleCommandPermission
+     * @example
+     * // Get one RoleCommandPermission
+     * const roleCommandPermission = await prisma.roleCommandPermission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RoleCommandPermissionFindFirstOrThrowArgs>(args?: SelectSubset<T, RoleCommandPermissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__RoleCommandPermissionClient<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more RoleCommandPermissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleCommandPermissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RoleCommandPermissions
+     * const roleCommandPermissions = await prisma.roleCommandPermission.findMany()
+     * 
+     * // Get first 10 RoleCommandPermissions
+     * const roleCommandPermissions = await prisma.roleCommandPermission.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const roleCommandPermissionWithIdOnly = await prisma.roleCommandPermission.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RoleCommandPermissionFindManyArgs>(args?: SelectSubset<T, RoleCommandPermissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a RoleCommandPermission.
+     * @param {RoleCommandPermissionCreateArgs} args - Arguments to create a RoleCommandPermission.
+     * @example
+     * // Create one RoleCommandPermission
+     * const RoleCommandPermission = await prisma.roleCommandPermission.create({
+     *   data: {
+     *     // ... data to create a RoleCommandPermission
+     *   }
+     * })
+     * 
+     */
+    create<T extends RoleCommandPermissionCreateArgs>(args: SelectSubset<T, RoleCommandPermissionCreateArgs<ExtArgs>>): Prisma__RoleCommandPermissionClient<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many RoleCommandPermissions.
+     * @param {RoleCommandPermissionCreateManyArgs} args - Arguments to create many RoleCommandPermissions.
+     * @example
+     * // Create many RoleCommandPermissions
+     * const roleCommandPermission = await prisma.roleCommandPermission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RoleCommandPermissionCreateManyArgs>(args?: SelectSubset<T, RoleCommandPermissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RoleCommandPermissions and returns the data saved in the database.
+     * @param {RoleCommandPermissionCreateManyAndReturnArgs} args - Arguments to create many RoleCommandPermissions.
+     * @example
+     * // Create many RoleCommandPermissions
+     * const roleCommandPermission = await prisma.roleCommandPermission.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RoleCommandPermissions and only return the `id`
+     * const roleCommandPermissionWithIdOnly = await prisma.roleCommandPermission.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RoleCommandPermissionCreateManyAndReturnArgs>(args?: SelectSubset<T, RoleCommandPermissionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a RoleCommandPermission.
+     * @param {RoleCommandPermissionDeleteArgs} args - Arguments to delete one RoleCommandPermission.
+     * @example
+     * // Delete one RoleCommandPermission
+     * const RoleCommandPermission = await prisma.roleCommandPermission.delete({
+     *   where: {
+     *     // ... filter to delete one RoleCommandPermission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RoleCommandPermissionDeleteArgs>(args: SelectSubset<T, RoleCommandPermissionDeleteArgs<ExtArgs>>): Prisma__RoleCommandPermissionClient<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one RoleCommandPermission.
+     * @param {RoleCommandPermissionUpdateArgs} args - Arguments to update one RoleCommandPermission.
+     * @example
+     * // Update one RoleCommandPermission
+     * const roleCommandPermission = await prisma.roleCommandPermission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RoleCommandPermissionUpdateArgs>(args: SelectSubset<T, RoleCommandPermissionUpdateArgs<ExtArgs>>): Prisma__RoleCommandPermissionClient<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more RoleCommandPermissions.
+     * @param {RoleCommandPermissionDeleteManyArgs} args - Arguments to filter RoleCommandPermissions to delete.
+     * @example
+     * // Delete a few RoleCommandPermissions
+     * const { count } = await prisma.roleCommandPermission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RoleCommandPermissionDeleteManyArgs>(args?: SelectSubset<T, RoleCommandPermissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RoleCommandPermissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleCommandPermissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RoleCommandPermissions
+     * const roleCommandPermission = await prisma.roleCommandPermission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RoleCommandPermissionUpdateManyArgs>(args: SelectSubset<T, RoleCommandPermissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one RoleCommandPermission.
+     * @param {RoleCommandPermissionUpsertArgs} args - Arguments to update or create a RoleCommandPermission.
+     * @example
+     * // Update or create a RoleCommandPermission
+     * const roleCommandPermission = await prisma.roleCommandPermission.upsert({
+     *   create: {
+     *     // ... data to create a RoleCommandPermission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RoleCommandPermission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RoleCommandPermissionUpsertArgs>(args: SelectSubset<T, RoleCommandPermissionUpsertArgs<ExtArgs>>): Prisma__RoleCommandPermissionClient<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of RoleCommandPermissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleCommandPermissionCountArgs} args - Arguments to filter RoleCommandPermissions to count.
+     * @example
+     * // Count the number of RoleCommandPermissions
+     * const count = await prisma.roleCommandPermission.count({
+     *   where: {
+     *     // ... the filter for the RoleCommandPermissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends RoleCommandPermissionCountArgs>(
+      args?: Subset<T, RoleCommandPermissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RoleCommandPermissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RoleCommandPermission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleCommandPermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RoleCommandPermissionAggregateArgs>(args: Subset<T, RoleCommandPermissionAggregateArgs>): Prisma.PrismaPromise<GetRoleCommandPermissionAggregateType<T>>
+
+    /**
+     * Group by RoleCommandPermission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleCommandPermissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RoleCommandPermissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RoleCommandPermissionGroupByArgs['orderBy'] }
+        : { orderBy?: RoleCommandPermissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RoleCommandPermissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRoleCommandPermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RoleCommandPermission model
+   */
+  readonly fields: RoleCommandPermissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RoleCommandPermission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RoleCommandPermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    guild<T extends GuildDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GuildDefaultArgs<ExtArgs>>): Prisma__GuildClient<$Result.GetResult<Prisma.$GuildPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RoleCommandPermission model
+   */ 
+  interface RoleCommandPermissionFieldRefs {
+    readonly id: FieldRef<"RoleCommandPermission", 'Int'>
+    readonly guildId: FieldRef<"RoleCommandPermission", 'String'>
+    readonly roleId: FieldRef<"RoleCommandPermission", 'String'>
+    readonly command: FieldRef<"RoleCommandPermission", 'String'>
+    readonly createdAt: FieldRef<"RoleCommandPermission", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RoleCommandPermission findUnique
+   */
+  export type RoleCommandPermissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RoleCommandPermission to fetch.
+     */
+    where: RoleCommandPermissionWhereUniqueInput
+  }
+
+  /**
+   * RoleCommandPermission findUniqueOrThrow
+   */
+  export type RoleCommandPermissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RoleCommandPermission to fetch.
+     */
+    where: RoleCommandPermissionWhereUniqueInput
+  }
+
+  /**
+   * RoleCommandPermission findFirst
+   */
+  export type RoleCommandPermissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RoleCommandPermission to fetch.
+     */
+    where?: RoleCommandPermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoleCommandPermissions to fetch.
+     */
+    orderBy?: RoleCommandPermissionOrderByWithRelationInput | RoleCommandPermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoleCommandPermissions.
+     */
+    cursor?: RoleCommandPermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoleCommandPermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoleCommandPermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoleCommandPermissions.
+     */
+    distinct?: RoleCommandPermissionScalarFieldEnum | RoleCommandPermissionScalarFieldEnum[]
+  }
+
+  /**
+   * RoleCommandPermission findFirstOrThrow
+   */
+  export type RoleCommandPermissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RoleCommandPermission to fetch.
+     */
+    where?: RoleCommandPermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoleCommandPermissions to fetch.
+     */
+    orderBy?: RoleCommandPermissionOrderByWithRelationInput | RoleCommandPermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoleCommandPermissions.
+     */
+    cursor?: RoleCommandPermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoleCommandPermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoleCommandPermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoleCommandPermissions.
+     */
+    distinct?: RoleCommandPermissionScalarFieldEnum | RoleCommandPermissionScalarFieldEnum[]
+  }
+
+  /**
+   * RoleCommandPermission findMany
+   */
+  export type RoleCommandPermissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RoleCommandPermissions to fetch.
+     */
+    where?: RoleCommandPermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoleCommandPermissions to fetch.
+     */
+    orderBy?: RoleCommandPermissionOrderByWithRelationInput | RoleCommandPermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RoleCommandPermissions.
+     */
+    cursor?: RoleCommandPermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoleCommandPermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoleCommandPermissions.
+     */
+    skip?: number
+    distinct?: RoleCommandPermissionScalarFieldEnum | RoleCommandPermissionScalarFieldEnum[]
+  }
+
+  /**
+   * RoleCommandPermission create
+   */
+  export type RoleCommandPermissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RoleCommandPermission.
+     */
+    data: XOR<RoleCommandPermissionCreateInput, RoleCommandPermissionUncheckedCreateInput>
+  }
+
+  /**
+   * RoleCommandPermission createMany
+   */
+  export type RoleCommandPermissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RoleCommandPermissions.
+     */
+    data: RoleCommandPermissionCreateManyInput | RoleCommandPermissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RoleCommandPermission createManyAndReturn
+   */
+  export type RoleCommandPermissionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many RoleCommandPermissions.
+     */
+    data: RoleCommandPermissionCreateManyInput | RoleCommandPermissionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RoleCommandPermission update
+   */
+  export type RoleCommandPermissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RoleCommandPermission.
+     */
+    data: XOR<RoleCommandPermissionUpdateInput, RoleCommandPermissionUncheckedUpdateInput>
+    /**
+     * Choose, which RoleCommandPermission to update.
+     */
+    where: RoleCommandPermissionWhereUniqueInput
+  }
+
+  /**
+   * RoleCommandPermission updateMany
+   */
+  export type RoleCommandPermissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RoleCommandPermissions.
+     */
+    data: XOR<RoleCommandPermissionUpdateManyMutationInput, RoleCommandPermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which RoleCommandPermissions to update
+     */
+    where?: RoleCommandPermissionWhereInput
+  }
+
+  /**
+   * RoleCommandPermission upsert
+   */
+  export type RoleCommandPermissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RoleCommandPermission to update in case it exists.
+     */
+    where: RoleCommandPermissionWhereUniqueInput
+    /**
+     * In case the RoleCommandPermission found by the `where` argument doesn't exist, create a new RoleCommandPermission with this data.
+     */
+    create: XOR<RoleCommandPermissionCreateInput, RoleCommandPermissionUncheckedCreateInput>
+    /**
+     * In case the RoleCommandPermission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RoleCommandPermissionUpdateInput, RoleCommandPermissionUncheckedUpdateInput>
+  }
+
+  /**
+   * RoleCommandPermission delete
+   */
+  export type RoleCommandPermissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+    /**
+     * Filter which RoleCommandPermission to delete.
+     */
+    where: RoleCommandPermissionWhereUniqueInput
+  }
+
+  /**
+   * RoleCommandPermission deleteMany
+   */
+  export type RoleCommandPermissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoleCommandPermissions to delete
+     */
+    where?: RoleCommandPermissionWhereInput
+  }
+
+  /**
+   * RoleCommandPermission without action
+   */
+  export type RoleCommandPermissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCommandPermission
+     */
+    select?: RoleCommandPermissionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleCommandPermissionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Rule
+   */
+
+  export type AggregateRule = {
+    _count: RuleCountAggregateOutputType | null
+    _avg: RuleAvgAggregateOutputType | null
+    _sum: RuleSumAggregateOutputType | null
+    _min: RuleMinAggregateOutputType | null
+    _max: RuleMaxAggregateOutputType | null
+  }
+
+  export type RuleAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type RuleSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type RuleMinAggregateOutputType = {
+    id: number | null
+    guildId: string | null
+    content: string | null
+    createdAt: Date | null
+  }
+
+  export type RuleMaxAggregateOutputType = {
+    id: number | null
+    guildId: string | null
+    content: string | null
+    createdAt: Date | null
+  }
+
+  export type RuleCountAggregateOutputType = {
+    id: number
+    guildId: number
+    content: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RuleAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type RuleSumAggregateInputType = {
+    id?: true
+  }
+
+  export type RuleMinAggregateInputType = {
+    id?: true
+    guildId?: true
+    content?: true
+    createdAt?: true
+  }
+
+  export type RuleMaxAggregateInputType = {
+    id?: true
+    guildId?: true
+    content?: true
+    createdAt?: true
+  }
+
+  export type RuleCountAggregateInputType = {
+    id?: true
+    guildId?: true
+    content?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RuleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Rule to aggregate.
+     */
+    where?: RuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rules to fetch.
+     */
+    orderBy?: RuleOrderByWithRelationInput | RuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Rules
+    **/
+    _count?: true | RuleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RuleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RuleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RuleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RuleMaxAggregateInputType
+  }
+
+  export type GetRuleAggregateType<T extends RuleAggregateArgs> = {
+        [P in keyof T & keyof AggregateRule]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRule[P]>
+      : GetScalarType<T[P], AggregateRule[P]>
+  }
+
+
+
+
+  export type RuleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RuleWhereInput
+    orderBy?: RuleOrderByWithAggregationInput | RuleOrderByWithAggregationInput[]
+    by: RuleScalarFieldEnum[] | RuleScalarFieldEnum
+    having?: RuleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RuleCountAggregateInputType | true
+    _avg?: RuleAvgAggregateInputType
+    _sum?: RuleSumAggregateInputType
+    _min?: RuleMinAggregateInputType
+    _max?: RuleMaxAggregateInputType
+  }
+
+  export type RuleGroupByOutputType = {
+    id: number
+    guildId: string
+    content: string
+    createdAt: Date
+    _count: RuleCountAggregateOutputType | null
+    _avg: RuleAvgAggregateOutputType | null
+    _sum: RuleSumAggregateOutputType | null
+    _min: RuleMinAggregateOutputType | null
+    _max: RuleMaxAggregateOutputType | null
+  }
+
+  type GetRuleGroupByPayload<T extends RuleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RuleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RuleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RuleGroupByOutputType[P]>
+            : GetScalarType<T[P], RuleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RuleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guildId?: boolean
+    content?: boolean
+    createdAt?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rule"]>
+
+  export type RuleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guildId?: boolean
+    content?: boolean
+    createdAt?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rule"]>
+
+  export type RuleSelectScalar = {
+    id?: boolean
+    guildId?: boolean
+    content?: boolean
+    createdAt?: boolean
+  }
+
+  export type RuleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }
+  export type RuleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }
+
+  export type $RulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Rule"
+    objects: {
+      guild: Prisma.$GuildPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      guildId: string
+      content: string
+      createdAt: Date
+    }, ExtArgs["result"]["rule"]>
+    composites: {}
+  }
+
+  type RuleGetPayload<S extends boolean | null | undefined | RuleDefaultArgs> = $Result.GetResult<Prisma.$RulePayload, S>
+
+  type RuleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RuleFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RuleCountAggregateInputType | true
+    }
+
+  export interface RuleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Rule'], meta: { name: 'Rule' } }
+    /**
+     * Find zero or one Rule that matches the filter.
+     * @param {RuleFindUniqueArgs} args - Arguments to find a Rule
+     * @example
+     * // Get one Rule
+     * const rule = await prisma.rule.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RuleFindUniqueArgs>(args: SelectSubset<T, RuleFindUniqueArgs<ExtArgs>>): Prisma__RuleClient<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Rule that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {RuleFindUniqueOrThrowArgs} args - Arguments to find a Rule
+     * @example
+     * // Get one Rule
+     * const rule = await prisma.rule.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RuleFindUniqueOrThrowArgs>(args: SelectSubset<T, RuleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RuleClient<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Rule that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RuleFindFirstArgs} args - Arguments to find a Rule
+     * @example
+     * // Get one Rule
+     * const rule = await prisma.rule.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RuleFindFirstArgs>(args?: SelectSubset<T, RuleFindFirstArgs<ExtArgs>>): Prisma__RuleClient<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Rule that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RuleFindFirstOrThrowArgs} args - Arguments to find a Rule
+     * @example
+     * // Get one Rule
+     * const rule = await prisma.rule.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RuleFindFirstOrThrowArgs>(args?: SelectSubset<T, RuleFindFirstOrThrowArgs<ExtArgs>>): Prisma__RuleClient<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Rules that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RuleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Rules
+     * const rules = await prisma.rule.findMany()
+     * 
+     * // Get first 10 Rules
+     * const rules = await prisma.rule.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ruleWithIdOnly = await prisma.rule.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RuleFindManyArgs>(args?: SelectSubset<T, RuleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Rule.
+     * @param {RuleCreateArgs} args - Arguments to create a Rule.
+     * @example
+     * // Create one Rule
+     * const Rule = await prisma.rule.create({
+     *   data: {
+     *     // ... data to create a Rule
+     *   }
+     * })
+     * 
+     */
+    create<T extends RuleCreateArgs>(args: SelectSubset<T, RuleCreateArgs<ExtArgs>>): Prisma__RuleClient<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Rules.
+     * @param {RuleCreateManyArgs} args - Arguments to create many Rules.
+     * @example
+     * // Create many Rules
+     * const rule = await prisma.rule.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RuleCreateManyArgs>(args?: SelectSubset<T, RuleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Rules and returns the data saved in the database.
+     * @param {RuleCreateManyAndReturnArgs} args - Arguments to create many Rules.
+     * @example
+     * // Create many Rules
+     * const rule = await prisma.rule.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Rules and only return the `id`
+     * const ruleWithIdOnly = await prisma.rule.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RuleCreateManyAndReturnArgs>(args?: SelectSubset<T, RuleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Rule.
+     * @param {RuleDeleteArgs} args - Arguments to delete one Rule.
+     * @example
+     * // Delete one Rule
+     * const Rule = await prisma.rule.delete({
+     *   where: {
+     *     // ... filter to delete one Rule
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RuleDeleteArgs>(args: SelectSubset<T, RuleDeleteArgs<ExtArgs>>): Prisma__RuleClient<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Rule.
+     * @param {RuleUpdateArgs} args - Arguments to update one Rule.
+     * @example
+     * // Update one Rule
+     * const rule = await prisma.rule.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RuleUpdateArgs>(args: SelectSubset<T, RuleUpdateArgs<ExtArgs>>): Prisma__RuleClient<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Rules.
+     * @param {RuleDeleteManyArgs} args - Arguments to filter Rules to delete.
+     * @example
+     * // Delete a few Rules
+     * const { count } = await prisma.rule.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RuleDeleteManyArgs>(args?: SelectSubset<T, RuleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Rules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RuleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Rules
+     * const rule = await prisma.rule.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RuleUpdateManyArgs>(args: SelectSubset<T, RuleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Rule.
+     * @param {RuleUpsertArgs} args - Arguments to update or create a Rule.
+     * @example
+     * // Update or create a Rule
+     * const rule = await prisma.rule.upsert({
+     *   create: {
+     *     // ... data to create a Rule
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Rule we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RuleUpsertArgs>(args: SelectSubset<T, RuleUpsertArgs<ExtArgs>>): Prisma__RuleClient<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Rules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RuleCountArgs} args - Arguments to filter Rules to count.
+     * @example
+     * // Count the number of Rules
+     * const count = await prisma.rule.count({
+     *   where: {
+     *     // ... the filter for the Rules we want to count
+     *   }
+     * })
+    **/
+    count<T extends RuleCountArgs>(
+      args?: Subset<T, RuleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RuleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Rule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RuleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RuleAggregateArgs>(args: Subset<T, RuleAggregateArgs>): Prisma.PrismaPromise<GetRuleAggregateType<T>>
+
+    /**
+     * Group by Rule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RuleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RuleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RuleGroupByArgs['orderBy'] }
+        : { orderBy?: RuleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RuleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRuleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Rule model
+   */
+  readonly fields: RuleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Rule.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RuleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    guild<T extends GuildDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GuildDefaultArgs<ExtArgs>>): Prisma__GuildClient<$Result.GetResult<Prisma.$GuildPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Rule model
+   */ 
+  interface RuleFieldRefs {
+    readonly id: FieldRef<"Rule", 'Int'>
+    readonly guildId: FieldRef<"Rule", 'String'>
+    readonly content: FieldRef<"Rule", 'String'>
+    readonly createdAt: FieldRef<"Rule", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Rule findUnique
+   */
+  export type RuleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    /**
+     * Filter, which Rule to fetch.
+     */
+    where: RuleWhereUniqueInput
+  }
+
+  /**
+   * Rule findUniqueOrThrow
+   */
+  export type RuleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    /**
+     * Filter, which Rule to fetch.
+     */
+    where: RuleWhereUniqueInput
+  }
+
+  /**
+   * Rule findFirst
+   */
+  export type RuleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    /**
+     * Filter, which Rule to fetch.
+     */
+    where?: RuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rules to fetch.
+     */
+    orderBy?: RuleOrderByWithRelationInput | RuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Rules.
+     */
+    cursor?: RuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Rules.
+     */
+    distinct?: RuleScalarFieldEnum | RuleScalarFieldEnum[]
+  }
+
+  /**
+   * Rule findFirstOrThrow
+   */
+  export type RuleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    /**
+     * Filter, which Rule to fetch.
+     */
+    where?: RuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rules to fetch.
+     */
+    orderBy?: RuleOrderByWithRelationInput | RuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Rules.
+     */
+    cursor?: RuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Rules.
+     */
+    distinct?: RuleScalarFieldEnum | RuleScalarFieldEnum[]
+  }
+
+  /**
+   * Rule findMany
+   */
+  export type RuleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    /**
+     * Filter, which Rules to fetch.
+     */
+    where?: RuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rules to fetch.
+     */
+    orderBy?: RuleOrderByWithRelationInput | RuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Rules.
+     */
+    cursor?: RuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rules.
+     */
+    skip?: number
+    distinct?: RuleScalarFieldEnum | RuleScalarFieldEnum[]
+  }
+
+  /**
+   * Rule create
+   */
+  export type RuleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Rule.
+     */
+    data: XOR<RuleCreateInput, RuleUncheckedCreateInput>
+  }
+
+  /**
+   * Rule createMany
+   */
+  export type RuleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Rules.
+     */
+    data: RuleCreateManyInput | RuleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Rule createManyAndReturn
+   */
+  export type RuleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Rules.
+     */
+    data: RuleCreateManyInput | RuleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Rule update
+   */
+  export type RuleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Rule.
+     */
+    data: XOR<RuleUpdateInput, RuleUncheckedUpdateInput>
+    /**
+     * Choose, which Rule to update.
+     */
+    where: RuleWhereUniqueInput
+  }
+
+  /**
+   * Rule updateMany
+   */
+  export type RuleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Rules.
+     */
+    data: XOR<RuleUpdateManyMutationInput, RuleUncheckedUpdateManyInput>
+    /**
+     * Filter which Rules to update
+     */
+    where?: RuleWhereInput
+  }
+
+  /**
+   * Rule upsert
+   */
+  export type RuleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Rule to update in case it exists.
+     */
+    where: RuleWhereUniqueInput
+    /**
+     * In case the Rule found by the `where` argument doesn't exist, create a new Rule with this data.
+     */
+    create: XOR<RuleCreateInput, RuleUncheckedCreateInput>
+    /**
+     * In case the Rule was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RuleUpdateInput, RuleUncheckedUpdateInput>
+  }
+
+  /**
+   * Rule delete
+   */
+  export type RuleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+    /**
+     * Filter which Rule to delete.
+     */
+    where: RuleWhereUniqueInput
+  }
+
+  /**
+   * Rule deleteMany
+   */
+  export type RuleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Rules to delete
+     */
+    where?: RuleWhereInput
+  }
+
+  /**
+   * Rule without action
+   */
+  export type RuleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rule
+     */
+    select?: RuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RuleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AfkStatus
+   */
+
+  export type AggregateAfkStatus = {
+    _count: AfkStatusCountAggregateOutputType | null
+    _min: AfkStatusMinAggregateOutputType | null
+    _max: AfkStatusMaxAggregateOutputType | null
+  }
+
+  export type AfkStatusMinAggregateOutputType = {
+    userId: string | null
+    reason: string | null
+    startedAt: Date | null
+  }
+
+  export type AfkStatusMaxAggregateOutputType = {
+    userId: string | null
+    reason: string | null
+    startedAt: Date | null
+  }
+
+  export type AfkStatusCountAggregateOutputType = {
+    userId: number
+    reason: number
+    startedAt: number
+    _all: number
+  }
+
+
+  export type AfkStatusMinAggregateInputType = {
+    userId?: true
+    reason?: true
+    startedAt?: true
+  }
+
+  export type AfkStatusMaxAggregateInputType = {
+    userId?: true
+    reason?: true
+    startedAt?: true
+  }
+
+  export type AfkStatusCountAggregateInputType = {
+    userId?: true
+    reason?: true
+    startedAt?: true
+    _all?: true
+  }
+
+  export type AfkStatusAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AfkStatus to aggregate.
+     */
+    where?: AfkStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AfkStatuses to fetch.
+     */
+    orderBy?: AfkStatusOrderByWithRelationInput | AfkStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AfkStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AfkStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AfkStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AfkStatuses
+    **/
+    _count?: true | AfkStatusCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AfkStatusMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AfkStatusMaxAggregateInputType
+  }
+
+  export type GetAfkStatusAggregateType<T extends AfkStatusAggregateArgs> = {
+        [P in keyof T & keyof AggregateAfkStatus]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAfkStatus[P]>
+      : GetScalarType<T[P], AggregateAfkStatus[P]>
+  }
+
+
+
+
+  export type AfkStatusGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AfkStatusWhereInput
+    orderBy?: AfkStatusOrderByWithAggregationInput | AfkStatusOrderByWithAggregationInput[]
+    by: AfkStatusScalarFieldEnum[] | AfkStatusScalarFieldEnum
+    having?: AfkStatusScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AfkStatusCountAggregateInputType | true
+    _min?: AfkStatusMinAggregateInputType
+    _max?: AfkStatusMaxAggregateInputType
+  }
+
+  export type AfkStatusGroupByOutputType = {
+    userId: string
+    reason: string | null
+    startedAt: Date
+    _count: AfkStatusCountAggregateOutputType | null
+    _min: AfkStatusMinAggregateOutputType | null
+    _max: AfkStatusMaxAggregateOutputType | null
+  }
+
+  type GetAfkStatusGroupByPayload<T extends AfkStatusGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AfkStatusGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AfkStatusGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AfkStatusGroupByOutputType[P]>
+            : GetScalarType<T[P], AfkStatusGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AfkStatusSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    reason?: boolean
+    startedAt?: boolean
+  }, ExtArgs["result"]["afkStatus"]>
+
+  export type AfkStatusSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    reason?: boolean
+    startedAt?: boolean
+  }, ExtArgs["result"]["afkStatus"]>
+
+  export type AfkStatusSelectScalar = {
+    userId?: boolean
+    reason?: boolean
+    startedAt?: boolean
+  }
+
+
+  export type $AfkStatusPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AfkStatus"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      userId: string
+      reason: string | null
+      startedAt: Date
+    }, ExtArgs["result"]["afkStatus"]>
+    composites: {}
+  }
+
+  type AfkStatusGetPayload<S extends boolean | null | undefined | AfkStatusDefaultArgs> = $Result.GetResult<Prisma.$AfkStatusPayload, S>
+
+  type AfkStatusCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AfkStatusFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: AfkStatusCountAggregateInputType | true
+    }
+
+  export interface AfkStatusDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AfkStatus'], meta: { name: 'AfkStatus' } }
+    /**
+     * Find zero or one AfkStatus that matches the filter.
+     * @param {AfkStatusFindUniqueArgs} args - Arguments to find a AfkStatus
+     * @example
+     * // Get one AfkStatus
+     * const afkStatus = await prisma.afkStatus.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AfkStatusFindUniqueArgs>(args: SelectSubset<T, AfkStatusFindUniqueArgs<ExtArgs>>): Prisma__AfkStatusClient<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one AfkStatus that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {AfkStatusFindUniqueOrThrowArgs} args - Arguments to find a AfkStatus
+     * @example
+     * // Get one AfkStatus
+     * const afkStatus = await prisma.afkStatus.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AfkStatusFindUniqueOrThrowArgs>(args: SelectSubset<T, AfkStatusFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AfkStatusClient<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first AfkStatus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AfkStatusFindFirstArgs} args - Arguments to find a AfkStatus
+     * @example
+     * // Get one AfkStatus
+     * const afkStatus = await prisma.afkStatus.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AfkStatusFindFirstArgs>(args?: SelectSubset<T, AfkStatusFindFirstArgs<ExtArgs>>): Prisma__AfkStatusClient<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first AfkStatus that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AfkStatusFindFirstOrThrowArgs} args - Arguments to find a AfkStatus
+     * @example
+     * // Get one AfkStatus
+     * const afkStatus = await prisma.afkStatus.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AfkStatusFindFirstOrThrowArgs>(args?: SelectSubset<T, AfkStatusFindFirstOrThrowArgs<ExtArgs>>): Prisma__AfkStatusClient<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more AfkStatuses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AfkStatusFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AfkStatuses
+     * const afkStatuses = await prisma.afkStatus.findMany()
+     * 
+     * // Get first 10 AfkStatuses
+     * const afkStatuses = await prisma.afkStatus.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const afkStatusWithUserIdOnly = await prisma.afkStatus.findMany({ select: { userId: true } })
+     * 
+     */
+    findMany<T extends AfkStatusFindManyArgs>(args?: SelectSubset<T, AfkStatusFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a AfkStatus.
+     * @param {AfkStatusCreateArgs} args - Arguments to create a AfkStatus.
+     * @example
+     * // Create one AfkStatus
+     * const AfkStatus = await prisma.afkStatus.create({
+     *   data: {
+     *     // ... data to create a AfkStatus
+     *   }
+     * })
+     * 
+     */
+    create<T extends AfkStatusCreateArgs>(args: SelectSubset<T, AfkStatusCreateArgs<ExtArgs>>): Prisma__AfkStatusClient<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many AfkStatuses.
+     * @param {AfkStatusCreateManyArgs} args - Arguments to create many AfkStatuses.
+     * @example
+     * // Create many AfkStatuses
+     * const afkStatus = await prisma.afkStatus.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AfkStatusCreateManyArgs>(args?: SelectSubset<T, AfkStatusCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AfkStatuses and returns the data saved in the database.
+     * @param {AfkStatusCreateManyAndReturnArgs} args - Arguments to create many AfkStatuses.
+     * @example
+     * // Create many AfkStatuses
+     * const afkStatus = await prisma.afkStatus.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AfkStatuses and only return the `userId`
+     * const afkStatusWithUserIdOnly = await prisma.afkStatus.createManyAndReturn({ 
+     *   select: { userId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AfkStatusCreateManyAndReturnArgs>(args?: SelectSubset<T, AfkStatusCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a AfkStatus.
+     * @param {AfkStatusDeleteArgs} args - Arguments to delete one AfkStatus.
+     * @example
+     * // Delete one AfkStatus
+     * const AfkStatus = await prisma.afkStatus.delete({
+     *   where: {
+     *     // ... filter to delete one AfkStatus
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AfkStatusDeleteArgs>(args: SelectSubset<T, AfkStatusDeleteArgs<ExtArgs>>): Prisma__AfkStatusClient<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one AfkStatus.
+     * @param {AfkStatusUpdateArgs} args - Arguments to update one AfkStatus.
+     * @example
+     * // Update one AfkStatus
+     * const afkStatus = await prisma.afkStatus.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AfkStatusUpdateArgs>(args: SelectSubset<T, AfkStatusUpdateArgs<ExtArgs>>): Prisma__AfkStatusClient<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more AfkStatuses.
+     * @param {AfkStatusDeleteManyArgs} args - Arguments to filter AfkStatuses to delete.
+     * @example
+     * // Delete a few AfkStatuses
+     * const { count } = await prisma.afkStatus.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AfkStatusDeleteManyArgs>(args?: SelectSubset<T, AfkStatusDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AfkStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AfkStatusUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AfkStatuses
+     * const afkStatus = await prisma.afkStatus.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AfkStatusUpdateManyArgs>(args: SelectSubset<T, AfkStatusUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one AfkStatus.
+     * @param {AfkStatusUpsertArgs} args - Arguments to update or create a AfkStatus.
+     * @example
+     * // Update or create a AfkStatus
+     * const afkStatus = await prisma.afkStatus.upsert({
+     *   create: {
+     *     // ... data to create a AfkStatus
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AfkStatus we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AfkStatusUpsertArgs>(args: SelectSubset<T, AfkStatusUpsertArgs<ExtArgs>>): Prisma__AfkStatusClient<$Result.GetResult<Prisma.$AfkStatusPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of AfkStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AfkStatusCountArgs} args - Arguments to filter AfkStatuses to count.
+     * @example
+     * // Count the number of AfkStatuses
+     * const count = await prisma.afkStatus.count({
+     *   where: {
+     *     // ... the filter for the AfkStatuses we want to count
+     *   }
+     * })
+    **/
+    count<T extends AfkStatusCountArgs>(
+      args?: Subset<T, AfkStatusCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AfkStatusCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AfkStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AfkStatusAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AfkStatusAggregateArgs>(args: Subset<T, AfkStatusAggregateArgs>): Prisma.PrismaPromise<GetAfkStatusAggregateType<T>>
+
+    /**
+     * Group by AfkStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AfkStatusGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AfkStatusGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AfkStatusGroupByArgs['orderBy'] }
+        : { orderBy?: AfkStatusGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AfkStatusGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAfkStatusGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AfkStatus model
+   */
+  readonly fields: AfkStatusFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AfkStatus.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AfkStatusClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AfkStatus model
+   */ 
+  interface AfkStatusFieldRefs {
+    readonly userId: FieldRef<"AfkStatus", 'String'>
+    readonly reason: FieldRef<"AfkStatus", 'String'>
+    readonly startedAt: FieldRef<"AfkStatus", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AfkStatus findUnique
+   */
+  export type AfkStatusFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+    /**
+     * Filter, which AfkStatus to fetch.
+     */
+    where: AfkStatusWhereUniqueInput
+  }
+
+  /**
+   * AfkStatus findUniqueOrThrow
+   */
+  export type AfkStatusFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+    /**
+     * Filter, which AfkStatus to fetch.
+     */
+    where: AfkStatusWhereUniqueInput
+  }
+
+  /**
+   * AfkStatus findFirst
+   */
+  export type AfkStatusFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+    /**
+     * Filter, which AfkStatus to fetch.
+     */
+    where?: AfkStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AfkStatuses to fetch.
+     */
+    orderBy?: AfkStatusOrderByWithRelationInput | AfkStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AfkStatuses.
+     */
+    cursor?: AfkStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AfkStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AfkStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AfkStatuses.
+     */
+    distinct?: AfkStatusScalarFieldEnum | AfkStatusScalarFieldEnum[]
+  }
+
+  /**
+   * AfkStatus findFirstOrThrow
+   */
+  export type AfkStatusFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+    /**
+     * Filter, which AfkStatus to fetch.
+     */
+    where?: AfkStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AfkStatuses to fetch.
+     */
+    orderBy?: AfkStatusOrderByWithRelationInput | AfkStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AfkStatuses.
+     */
+    cursor?: AfkStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AfkStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AfkStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AfkStatuses.
+     */
+    distinct?: AfkStatusScalarFieldEnum | AfkStatusScalarFieldEnum[]
+  }
+
+  /**
+   * AfkStatus findMany
+   */
+  export type AfkStatusFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+    /**
+     * Filter, which AfkStatuses to fetch.
+     */
+    where?: AfkStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AfkStatuses to fetch.
+     */
+    orderBy?: AfkStatusOrderByWithRelationInput | AfkStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AfkStatuses.
+     */
+    cursor?: AfkStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AfkStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AfkStatuses.
+     */
+    skip?: number
+    distinct?: AfkStatusScalarFieldEnum | AfkStatusScalarFieldEnum[]
+  }
+
+  /**
+   * AfkStatus create
+   */
+  export type AfkStatusCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+    /**
+     * The data needed to create a AfkStatus.
+     */
+    data: XOR<AfkStatusCreateInput, AfkStatusUncheckedCreateInput>
+  }
+
+  /**
+   * AfkStatus createMany
+   */
+  export type AfkStatusCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AfkStatuses.
+     */
+    data: AfkStatusCreateManyInput | AfkStatusCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AfkStatus createManyAndReturn
+   */
+  export type AfkStatusCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many AfkStatuses.
+     */
+    data: AfkStatusCreateManyInput | AfkStatusCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AfkStatus update
+   */
+  export type AfkStatusUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+    /**
+     * The data needed to update a AfkStatus.
+     */
+    data: XOR<AfkStatusUpdateInput, AfkStatusUncheckedUpdateInput>
+    /**
+     * Choose, which AfkStatus to update.
+     */
+    where: AfkStatusWhereUniqueInput
+  }
+
+  /**
+   * AfkStatus updateMany
+   */
+  export type AfkStatusUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AfkStatuses.
+     */
+    data: XOR<AfkStatusUpdateManyMutationInput, AfkStatusUncheckedUpdateManyInput>
+    /**
+     * Filter which AfkStatuses to update
+     */
+    where?: AfkStatusWhereInput
+  }
+
+  /**
+   * AfkStatus upsert
+   */
+  export type AfkStatusUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+    /**
+     * The filter to search for the AfkStatus to update in case it exists.
+     */
+    where: AfkStatusWhereUniqueInput
+    /**
+     * In case the AfkStatus found by the `where` argument doesn't exist, create a new AfkStatus with this data.
+     */
+    create: XOR<AfkStatusCreateInput, AfkStatusUncheckedCreateInput>
+    /**
+     * In case the AfkStatus was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AfkStatusUpdateInput, AfkStatusUncheckedUpdateInput>
+  }
+
+  /**
+   * AfkStatus delete
+   */
+  export type AfkStatusDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+    /**
+     * Filter which AfkStatus to delete.
+     */
+    where: AfkStatusWhereUniqueInput
+  }
+
+  /**
+   * AfkStatus deleteMany
+   */
+  export type AfkStatusDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AfkStatuses to delete
+     */
+    where?: AfkStatusWhereInput
+  }
+
+  /**
+   * AfkStatus without action
+   */
+  export type AfkStatusDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AfkStatus
+     */
+    select?: AfkStatusSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DashboardAuditLog
+   */
+
+  export type AggregateDashboardAuditLog = {
+    _count: DashboardAuditLogCountAggregateOutputType | null
+    _avg: DashboardAuditLogAvgAggregateOutputType | null
+    _sum: DashboardAuditLogSumAggregateOutputType | null
+    _min: DashboardAuditLogMinAggregateOutputType | null
+    _max: DashboardAuditLogMaxAggregateOutputType | null
+  }
+
+  export type DashboardAuditLogAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type DashboardAuditLogSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type DashboardAuditLogMinAggregateOutputType = {
+    id: number | null
+    guildId: string | null
+    actorUserId: string | null
+    action: string | null
+    targetType: string | null
+    targetId: string | null
+    createdAt: Date | null
+  }
+
+  export type DashboardAuditLogMaxAggregateOutputType = {
+    id: number | null
+    guildId: string | null
+    actorUserId: string | null
+    action: string | null
+    targetType: string | null
+    targetId: string | null
+    createdAt: Date | null
+  }
+
+  export type DashboardAuditLogCountAggregateOutputType = {
+    id: number
+    guildId: number
+    actorUserId: number
+    action: number
+    targetType: number
+    targetId: number
+    metadata: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type DashboardAuditLogAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type DashboardAuditLogSumAggregateInputType = {
+    id?: true
+  }
+
+  export type DashboardAuditLogMinAggregateInputType = {
+    id?: true
+    guildId?: true
+    actorUserId?: true
+    action?: true
+    targetType?: true
+    targetId?: true
+    createdAt?: true
+  }
+
+  export type DashboardAuditLogMaxAggregateInputType = {
+    id?: true
+    guildId?: true
+    actorUserId?: true
+    action?: true
+    targetType?: true
+    targetId?: true
+    createdAt?: true
+  }
+
+  export type DashboardAuditLogCountAggregateInputType = {
+    id?: true
+    guildId?: true
+    actorUserId?: true
+    action?: true
+    targetType?: true
+    targetId?: true
+    metadata?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type DashboardAuditLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DashboardAuditLog to aggregate.
+     */
+    where?: DashboardAuditLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DashboardAuditLogs to fetch.
+     */
+    orderBy?: DashboardAuditLogOrderByWithRelationInput | DashboardAuditLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DashboardAuditLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DashboardAuditLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DashboardAuditLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DashboardAuditLogs
+    **/
+    _count?: true | DashboardAuditLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DashboardAuditLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DashboardAuditLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DashboardAuditLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DashboardAuditLogMaxAggregateInputType
+  }
+
+  export type GetDashboardAuditLogAggregateType<T extends DashboardAuditLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateDashboardAuditLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDashboardAuditLog[P]>
+      : GetScalarType<T[P], AggregateDashboardAuditLog[P]>
+  }
+
+
+
+
+  export type DashboardAuditLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DashboardAuditLogWhereInput
+    orderBy?: DashboardAuditLogOrderByWithAggregationInput | DashboardAuditLogOrderByWithAggregationInput[]
+    by: DashboardAuditLogScalarFieldEnum[] | DashboardAuditLogScalarFieldEnum
+    having?: DashboardAuditLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DashboardAuditLogCountAggregateInputType | true
+    _avg?: DashboardAuditLogAvgAggregateInputType
+    _sum?: DashboardAuditLogSumAggregateInputType
+    _min?: DashboardAuditLogMinAggregateInputType
+    _max?: DashboardAuditLogMaxAggregateInputType
+  }
+
+  export type DashboardAuditLogGroupByOutputType = {
+    id: number
+    guildId: string
+    actorUserId: string
+    action: string
+    targetType: string | null
+    targetId: string | null
+    metadata: JsonValue | null
+    createdAt: Date
+    _count: DashboardAuditLogCountAggregateOutputType | null
+    _avg: DashboardAuditLogAvgAggregateOutputType | null
+    _sum: DashboardAuditLogSumAggregateOutputType | null
+    _min: DashboardAuditLogMinAggregateOutputType | null
+    _max: DashboardAuditLogMaxAggregateOutputType | null
+  }
+
+  type GetDashboardAuditLogGroupByPayload<T extends DashboardAuditLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DashboardAuditLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DashboardAuditLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DashboardAuditLogGroupByOutputType[P]>
+            : GetScalarType<T[P], DashboardAuditLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DashboardAuditLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guildId?: boolean
+    actorUserId?: boolean
+    action?: boolean
+    targetType?: boolean
+    targetId?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dashboardAuditLog"]>
+
+  export type DashboardAuditLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guildId?: boolean
+    actorUserId?: boolean
+    action?: boolean
+    targetType?: boolean
+    targetId?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dashboardAuditLog"]>
+
+  export type DashboardAuditLogSelectScalar = {
+    id?: boolean
+    guildId?: boolean
+    actorUserId?: boolean
+    action?: boolean
+    targetType?: boolean
+    targetId?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+  }
+
+  export type DashboardAuditLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DashboardAuditLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $DashboardAuditLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DashboardAuditLog"
+    objects: {
+      guild: Prisma.$GuildPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      guildId: string
+      actorUserId: string
+      action: string
+      targetType: string | null
+      targetId: string | null
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+    }, ExtArgs["result"]["dashboardAuditLog"]>
+    composites: {}
+  }
+
+  type DashboardAuditLogGetPayload<S extends boolean | null | undefined | DashboardAuditLogDefaultArgs> = $Result.GetResult<Prisma.$DashboardAuditLogPayload, S>
+
+  type DashboardAuditLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<DashboardAuditLogFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: DashboardAuditLogCountAggregateInputType | true
+    }
+
+  export interface DashboardAuditLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DashboardAuditLog'], meta: { name: 'DashboardAuditLog' } }
+    /**
+     * Find zero or one DashboardAuditLog that matches the filter.
+     * @param {DashboardAuditLogFindUniqueArgs} args - Arguments to find a DashboardAuditLog
+     * @example
+     * // Get one DashboardAuditLog
+     * const dashboardAuditLog = await prisma.dashboardAuditLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DashboardAuditLogFindUniqueArgs>(args: SelectSubset<T, DashboardAuditLogFindUniqueArgs<ExtArgs>>): Prisma__DashboardAuditLogClient<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one DashboardAuditLog that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {DashboardAuditLogFindUniqueOrThrowArgs} args - Arguments to find a DashboardAuditLog
+     * @example
+     * // Get one DashboardAuditLog
+     * const dashboardAuditLog = await prisma.dashboardAuditLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DashboardAuditLogFindUniqueOrThrowArgs>(args: SelectSubset<T, DashboardAuditLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DashboardAuditLogClient<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first DashboardAuditLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DashboardAuditLogFindFirstArgs} args - Arguments to find a DashboardAuditLog
+     * @example
+     * // Get one DashboardAuditLog
+     * const dashboardAuditLog = await prisma.dashboardAuditLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DashboardAuditLogFindFirstArgs>(args?: SelectSubset<T, DashboardAuditLogFindFirstArgs<ExtArgs>>): Prisma__DashboardAuditLogClient<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first DashboardAuditLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DashboardAuditLogFindFirstOrThrowArgs} args - Arguments to find a DashboardAuditLog
+     * @example
+     * // Get one DashboardAuditLog
+     * const dashboardAuditLog = await prisma.dashboardAuditLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DashboardAuditLogFindFirstOrThrowArgs>(args?: SelectSubset<T, DashboardAuditLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__DashboardAuditLogClient<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more DashboardAuditLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DashboardAuditLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DashboardAuditLogs
+     * const dashboardAuditLogs = await prisma.dashboardAuditLog.findMany()
+     * 
+     * // Get first 10 DashboardAuditLogs
+     * const dashboardAuditLogs = await prisma.dashboardAuditLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dashboardAuditLogWithIdOnly = await prisma.dashboardAuditLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DashboardAuditLogFindManyArgs>(args?: SelectSubset<T, DashboardAuditLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a DashboardAuditLog.
+     * @param {DashboardAuditLogCreateArgs} args - Arguments to create a DashboardAuditLog.
+     * @example
+     * // Create one DashboardAuditLog
+     * const DashboardAuditLog = await prisma.dashboardAuditLog.create({
+     *   data: {
+     *     // ... data to create a DashboardAuditLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends DashboardAuditLogCreateArgs>(args: SelectSubset<T, DashboardAuditLogCreateArgs<ExtArgs>>): Prisma__DashboardAuditLogClient<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many DashboardAuditLogs.
+     * @param {DashboardAuditLogCreateManyArgs} args - Arguments to create many DashboardAuditLogs.
+     * @example
+     * // Create many DashboardAuditLogs
+     * const dashboardAuditLog = await prisma.dashboardAuditLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DashboardAuditLogCreateManyArgs>(args?: SelectSubset<T, DashboardAuditLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DashboardAuditLogs and returns the data saved in the database.
+     * @param {DashboardAuditLogCreateManyAndReturnArgs} args - Arguments to create many DashboardAuditLogs.
+     * @example
+     * // Create many DashboardAuditLogs
+     * const dashboardAuditLog = await prisma.dashboardAuditLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DashboardAuditLogs and only return the `id`
+     * const dashboardAuditLogWithIdOnly = await prisma.dashboardAuditLog.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DashboardAuditLogCreateManyAndReturnArgs>(args?: SelectSubset<T, DashboardAuditLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a DashboardAuditLog.
+     * @param {DashboardAuditLogDeleteArgs} args - Arguments to delete one DashboardAuditLog.
+     * @example
+     * // Delete one DashboardAuditLog
+     * const DashboardAuditLog = await prisma.dashboardAuditLog.delete({
+     *   where: {
+     *     // ... filter to delete one DashboardAuditLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DashboardAuditLogDeleteArgs>(args: SelectSubset<T, DashboardAuditLogDeleteArgs<ExtArgs>>): Prisma__DashboardAuditLogClient<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one DashboardAuditLog.
+     * @param {DashboardAuditLogUpdateArgs} args - Arguments to update one DashboardAuditLog.
+     * @example
+     * // Update one DashboardAuditLog
+     * const dashboardAuditLog = await prisma.dashboardAuditLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DashboardAuditLogUpdateArgs>(args: SelectSubset<T, DashboardAuditLogUpdateArgs<ExtArgs>>): Prisma__DashboardAuditLogClient<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more DashboardAuditLogs.
+     * @param {DashboardAuditLogDeleteManyArgs} args - Arguments to filter DashboardAuditLogs to delete.
+     * @example
+     * // Delete a few DashboardAuditLogs
+     * const { count } = await prisma.dashboardAuditLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DashboardAuditLogDeleteManyArgs>(args?: SelectSubset<T, DashboardAuditLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DashboardAuditLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DashboardAuditLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DashboardAuditLogs
+     * const dashboardAuditLog = await prisma.dashboardAuditLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DashboardAuditLogUpdateManyArgs>(args: SelectSubset<T, DashboardAuditLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one DashboardAuditLog.
+     * @param {DashboardAuditLogUpsertArgs} args - Arguments to update or create a DashboardAuditLog.
+     * @example
+     * // Update or create a DashboardAuditLog
+     * const dashboardAuditLog = await prisma.dashboardAuditLog.upsert({
+     *   create: {
+     *     // ... data to create a DashboardAuditLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DashboardAuditLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DashboardAuditLogUpsertArgs>(args: SelectSubset<T, DashboardAuditLogUpsertArgs<ExtArgs>>): Prisma__DashboardAuditLogClient<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of DashboardAuditLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DashboardAuditLogCountArgs} args - Arguments to filter DashboardAuditLogs to count.
+     * @example
+     * // Count the number of DashboardAuditLogs
+     * const count = await prisma.dashboardAuditLog.count({
+     *   where: {
+     *     // ... the filter for the DashboardAuditLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends DashboardAuditLogCountArgs>(
+      args?: Subset<T, DashboardAuditLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DashboardAuditLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DashboardAuditLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DashboardAuditLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DashboardAuditLogAggregateArgs>(args: Subset<T, DashboardAuditLogAggregateArgs>): Prisma.PrismaPromise<GetDashboardAuditLogAggregateType<T>>
+
+    /**
+     * Group by DashboardAuditLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DashboardAuditLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DashboardAuditLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DashboardAuditLogGroupByArgs['orderBy'] }
+        : { orderBy?: DashboardAuditLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DashboardAuditLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDashboardAuditLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DashboardAuditLog model
+   */
+  readonly fields: DashboardAuditLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DashboardAuditLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DashboardAuditLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    guild<T extends GuildDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GuildDefaultArgs<ExtArgs>>): Prisma__GuildClient<$Result.GetResult<Prisma.$GuildPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DashboardAuditLog model
+   */ 
+  interface DashboardAuditLogFieldRefs {
+    readonly id: FieldRef<"DashboardAuditLog", 'Int'>
+    readonly guildId: FieldRef<"DashboardAuditLog", 'String'>
+    readonly actorUserId: FieldRef<"DashboardAuditLog", 'String'>
+    readonly action: FieldRef<"DashboardAuditLog", 'String'>
+    readonly targetType: FieldRef<"DashboardAuditLog", 'String'>
+    readonly targetId: FieldRef<"DashboardAuditLog", 'String'>
+    readonly metadata: FieldRef<"DashboardAuditLog", 'Json'>
+    readonly createdAt: FieldRef<"DashboardAuditLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DashboardAuditLog findUnique
+   */
+  export type DashboardAuditLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    /**
+     * Filter, which DashboardAuditLog to fetch.
+     */
+    where: DashboardAuditLogWhereUniqueInput
+  }
+
+  /**
+   * DashboardAuditLog findUniqueOrThrow
+   */
+  export type DashboardAuditLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    /**
+     * Filter, which DashboardAuditLog to fetch.
+     */
+    where: DashboardAuditLogWhereUniqueInput
+  }
+
+  /**
+   * DashboardAuditLog findFirst
+   */
+  export type DashboardAuditLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    /**
+     * Filter, which DashboardAuditLog to fetch.
+     */
+    where?: DashboardAuditLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DashboardAuditLogs to fetch.
+     */
+    orderBy?: DashboardAuditLogOrderByWithRelationInput | DashboardAuditLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DashboardAuditLogs.
+     */
+    cursor?: DashboardAuditLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DashboardAuditLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DashboardAuditLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DashboardAuditLogs.
+     */
+    distinct?: DashboardAuditLogScalarFieldEnum | DashboardAuditLogScalarFieldEnum[]
+  }
+
+  /**
+   * DashboardAuditLog findFirstOrThrow
+   */
+  export type DashboardAuditLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    /**
+     * Filter, which DashboardAuditLog to fetch.
+     */
+    where?: DashboardAuditLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DashboardAuditLogs to fetch.
+     */
+    orderBy?: DashboardAuditLogOrderByWithRelationInput | DashboardAuditLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DashboardAuditLogs.
+     */
+    cursor?: DashboardAuditLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DashboardAuditLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DashboardAuditLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DashboardAuditLogs.
+     */
+    distinct?: DashboardAuditLogScalarFieldEnum | DashboardAuditLogScalarFieldEnum[]
+  }
+
+  /**
+   * DashboardAuditLog findMany
+   */
+  export type DashboardAuditLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    /**
+     * Filter, which DashboardAuditLogs to fetch.
+     */
+    where?: DashboardAuditLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DashboardAuditLogs to fetch.
+     */
+    orderBy?: DashboardAuditLogOrderByWithRelationInput | DashboardAuditLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DashboardAuditLogs.
+     */
+    cursor?: DashboardAuditLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DashboardAuditLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DashboardAuditLogs.
+     */
+    skip?: number
+    distinct?: DashboardAuditLogScalarFieldEnum | DashboardAuditLogScalarFieldEnum[]
+  }
+
+  /**
+   * DashboardAuditLog create
+   */
+  export type DashboardAuditLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DashboardAuditLog.
+     */
+    data: XOR<DashboardAuditLogCreateInput, DashboardAuditLogUncheckedCreateInput>
+  }
+
+  /**
+   * DashboardAuditLog createMany
+   */
+  export type DashboardAuditLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DashboardAuditLogs.
+     */
+    data: DashboardAuditLogCreateManyInput | DashboardAuditLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DashboardAuditLog createManyAndReturn
+   */
+  export type DashboardAuditLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many DashboardAuditLogs.
+     */
+    data: DashboardAuditLogCreateManyInput | DashboardAuditLogCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DashboardAuditLog update
+   */
+  export type DashboardAuditLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DashboardAuditLog.
+     */
+    data: XOR<DashboardAuditLogUpdateInput, DashboardAuditLogUncheckedUpdateInput>
+    /**
+     * Choose, which DashboardAuditLog to update.
+     */
+    where: DashboardAuditLogWhereUniqueInput
+  }
+
+  /**
+   * DashboardAuditLog updateMany
+   */
+  export type DashboardAuditLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DashboardAuditLogs.
+     */
+    data: XOR<DashboardAuditLogUpdateManyMutationInput, DashboardAuditLogUncheckedUpdateManyInput>
+    /**
+     * Filter which DashboardAuditLogs to update
+     */
+    where?: DashboardAuditLogWhereInput
+  }
+
+  /**
+   * DashboardAuditLog upsert
+   */
+  export type DashboardAuditLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DashboardAuditLog to update in case it exists.
+     */
+    where: DashboardAuditLogWhereUniqueInput
+    /**
+     * In case the DashboardAuditLog found by the `where` argument doesn't exist, create a new DashboardAuditLog with this data.
+     */
+    create: XOR<DashboardAuditLogCreateInput, DashboardAuditLogUncheckedCreateInput>
+    /**
+     * In case the DashboardAuditLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DashboardAuditLogUpdateInput, DashboardAuditLogUncheckedUpdateInput>
+  }
+
+  /**
+   * DashboardAuditLog delete
+   */
+  export type DashboardAuditLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+    /**
+     * Filter which DashboardAuditLog to delete.
+     */
+    where: DashboardAuditLogWhereUniqueInput
+  }
+
+  /**
+   * DashboardAuditLog deleteMany
+   */
+  export type DashboardAuditLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DashboardAuditLogs to delete
+     */
+    where?: DashboardAuditLogWhereInput
+  }
+
+  /**
+   * DashboardAuditLog without action
+   */
+  export type DashboardAuditLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DashboardAuditLog
+     */
+    select?: DashboardAuditLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DashboardAuditLogInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12724,11 +18153,25 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     username: 'username',
+    globalName: 'globalName',
+    avatar: 'avatar',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    lastLoginAt: 'lastLoginAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const SessionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt',
+    lastUsedAt: 'lastUsedAt'
+  };
+
+  export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
   export const GuildScalarFieldEnum: {
@@ -12756,7 +18199,12 @@ export namespace Prisma {
     aiLogChannelId: 'aiLogChannelId',
     aiActionThreshold: 'aiActionThreshold',
     modLogChannelId: 'modLogChannelId',
-    securityLogChannelId: 'securityLogChannelId'
+    securityLogChannelId: 'securityLogChannelId',
+    modRole: 'modRole',
+    seniorModRole: 'seniorModRole',
+    adminRole: 'adminRole',
+    mutedRole: 'mutedRole',
+    prefix: 'prefix'
   };
 
   export type GuildSettingScalarFieldEnum = (typeof GuildSettingScalarFieldEnum)[keyof typeof GuildSettingScalarFieldEnum]
@@ -12769,6 +18217,8 @@ export namespace Prisma {
     moderatorId: 'moderatorId',
     type: 'type',
     reason: 'reason',
+    duration: 'duration',
+    expiresAt: 'expiresAt',
     createdAt: 'createdAt'
   };
 
@@ -12852,12 +18302,64 @@ export namespace Prisma {
   export type BotStatHistoryScalarFieldEnum = (typeof BotStatHistoryScalarFieldEnum)[keyof typeof BotStatHistoryScalarFieldEnum]
 
 
+  export const RoleCommandPermissionScalarFieldEnum: {
+    id: 'id',
+    guildId: 'guildId',
+    roleId: 'roleId',
+    command: 'command',
+    createdAt: 'createdAt'
+  };
+
+  export type RoleCommandPermissionScalarFieldEnum = (typeof RoleCommandPermissionScalarFieldEnum)[keyof typeof RoleCommandPermissionScalarFieldEnum]
+
+
+  export const RuleScalarFieldEnum: {
+    id: 'id',
+    guildId: 'guildId',
+    content: 'content',
+    createdAt: 'createdAt'
+  };
+
+  export type RuleScalarFieldEnum = (typeof RuleScalarFieldEnum)[keyof typeof RuleScalarFieldEnum]
+
+
+  export const AfkStatusScalarFieldEnum: {
+    userId: 'userId',
+    reason: 'reason',
+    startedAt: 'startedAt'
+  };
+
+  export type AfkStatusScalarFieldEnum = (typeof AfkStatusScalarFieldEnum)[keyof typeof AfkStatusScalarFieldEnum]
+
+
+  export const DashboardAuditLogScalarFieldEnum: {
+    id: 'id',
+    guildId: 'guildId',
+    actorUserId: 'actorUserId',
+    action: 'action',
+    targetType: 'targetType',
+    targetId: 'targetId',
+    metadata: 'metadata',
+    createdAt: 'createdAt'
+  };
+
+  export type DashboardAuditLogScalarFieldEnum = (typeof DashboardAuditLogScalarFieldEnum)[keyof typeof DashboardAuditLogScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -12874,6 +18376,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -12931,6 +18442,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -12953,21 +18471,31 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
     username?: StringFilter<"User"> | string
+    globalName?: StringNullableFilter<"User"> | string | null
+    avatar?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
     cases?: ModerationCaseListRelationFilter
     moderated?: ModerationCaseListRelationFilter
     warnings?: WarningListRelationFilter
+    sessions?: SessionListRelationFilter
+    DashboardAuditLog?: DashboardAuditLogListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     username?: SortOrder
+    globalName?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    lastLoginAt?: SortOrderInput | SortOrder
     cases?: ModerationCaseOrderByRelationAggregateInput
     moderated?: ModerationCaseOrderByRelationAggregateInput
     warnings?: WarningOrderByRelationAggregateInput
+    sessions?: SessionOrderByRelationAggregateInput
+    DashboardAuditLog?: DashboardAuditLogOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12976,18 +18504,26 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     username?: StringFilter<"User"> | string
+    globalName?: StringNullableFilter<"User"> | string | null
+    avatar?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
     cases?: ModerationCaseListRelationFilter
     moderated?: ModerationCaseListRelationFilter
     warnings?: WarningListRelationFilter
+    sessions?: SessionListRelationFilter
+    DashboardAuditLog?: DashboardAuditLogListRelationFilter
   }, "id">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     username?: SortOrder
+    globalName?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    lastLoginAt?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -12999,8 +18535,66 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
     username?: StringWithAggregatesFilter<"User"> | string
+    globalName?: StringNullableWithAggregatesFilter<"User"> | string | null
+    avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    lastLoginAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  }
+
+  export type SessionWhereInput = {
+    AND?: SessionWhereInput | SessionWhereInput[]
+    OR?: SessionWhereInput[]
+    NOT?: SessionWhereInput | SessionWhereInput[]
+    id?: StringFilter<"Session"> | string
+    userId?: StringFilter<"Session"> | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastUsedAt?: DateTimeFilter<"Session"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type SessionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type SessionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SessionWhereInput | SessionWhereInput[]
+    OR?: SessionWhereInput[]
+    NOT?: SessionWhereInput | SessionWhereInput[]
+    userId?: StringFilter<"Session"> | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastUsedAt?: DateTimeFilter<"Session"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type SessionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    _count?: SessionCountOrderByAggregateInput
+    _max?: SessionMaxOrderByAggregateInput
+    _min?: SessionMinOrderByAggregateInput
+  }
+
+  export type SessionScalarWhereWithAggregatesInput = {
+    AND?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
+    OR?: SessionScalarWhereWithAggregatesInput[]
+    NOT?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Session"> | string
+    userId?: StringWithAggregatesFilter<"Session"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    lastUsedAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
   }
 
   export type GuildWhereInput = {
@@ -13019,6 +18613,9 @@ export namespace Prisma {
     raidEvents?: RaidEventListRelationFilter
     memberSnapshots?: MemberSnapshotListRelationFilter
     messageActivity?: MessageActivityListRelationFilter
+    rolePermissions?: RoleCommandPermissionListRelationFilter
+    rules?: RuleListRelationFilter
+    DashboardAuditLog?: DashboardAuditLogListRelationFilter
   }
 
   export type GuildOrderByWithRelationInput = {
@@ -13034,6 +18631,9 @@ export namespace Prisma {
     raidEvents?: RaidEventOrderByRelationAggregateInput
     memberSnapshots?: MemberSnapshotOrderByRelationAggregateInput
     messageActivity?: MessageActivityOrderByRelationAggregateInput
+    rolePermissions?: RoleCommandPermissionOrderByRelationAggregateInput
+    rules?: RuleOrderByRelationAggregateInput
+    DashboardAuditLog?: DashboardAuditLogOrderByRelationAggregateInput
   }
 
   export type GuildWhereUniqueInput = Prisma.AtLeast<{
@@ -13052,6 +18652,9 @@ export namespace Prisma {
     raidEvents?: RaidEventListRelationFilter
     memberSnapshots?: MemberSnapshotListRelationFilter
     messageActivity?: MessageActivityListRelationFilter
+    rolePermissions?: RoleCommandPermissionListRelationFilter
+    rules?: RuleListRelationFilter
+    DashboardAuditLog?: DashboardAuditLogListRelationFilter
   }, "id">
 
   export type GuildOrderByWithAggregationInput = {
@@ -13096,6 +18699,11 @@ export namespace Prisma {
     aiActionThreshold?: IntFilter<"GuildSetting"> | number
     modLogChannelId?: StringNullableFilter<"GuildSetting"> | string | null
     securityLogChannelId?: StringNullableFilter<"GuildSetting"> | string | null
+    modRole?: StringNullableFilter<"GuildSetting"> | string | null
+    seniorModRole?: StringNullableFilter<"GuildSetting"> | string | null
+    adminRole?: StringNullableFilter<"GuildSetting"> | string | null
+    mutedRole?: StringNullableFilter<"GuildSetting"> | string | null
+    prefix?: StringFilter<"GuildSetting"> | string
     guild?: XOR<GuildRelationFilter, GuildWhereInput>
   }
 
@@ -13114,6 +18722,11 @@ export namespace Prisma {
     aiActionThreshold?: SortOrder
     modLogChannelId?: SortOrderInput | SortOrder
     securityLogChannelId?: SortOrderInput | SortOrder
+    modRole?: SortOrderInput | SortOrder
+    seniorModRole?: SortOrderInput | SortOrder
+    adminRole?: SortOrderInput | SortOrder
+    mutedRole?: SortOrderInput | SortOrder
+    prefix?: SortOrder
     guild?: GuildOrderByWithRelationInput
   }
 
@@ -13135,6 +18748,11 @@ export namespace Prisma {
     aiActionThreshold?: IntFilter<"GuildSetting"> | number
     modLogChannelId?: StringNullableFilter<"GuildSetting"> | string | null
     securityLogChannelId?: StringNullableFilter<"GuildSetting"> | string | null
+    modRole?: StringNullableFilter<"GuildSetting"> | string | null
+    seniorModRole?: StringNullableFilter<"GuildSetting"> | string | null
+    adminRole?: StringNullableFilter<"GuildSetting"> | string | null
+    mutedRole?: StringNullableFilter<"GuildSetting"> | string | null
+    prefix?: StringFilter<"GuildSetting"> | string
     guild?: XOR<GuildRelationFilter, GuildWhereInput>
   }, "guildId">
 
@@ -13153,6 +18771,11 @@ export namespace Prisma {
     aiActionThreshold?: SortOrder
     modLogChannelId?: SortOrderInput | SortOrder
     securityLogChannelId?: SortOrderInput | SortOrder
+    modRole?: SortOrderInput | SortOrder
+    seniorModRole?: SortOrderInput | SortOrder
+    adminRole?: SortOrderInput | SortOrder
+    mutedRole?: SortOrderInput | SortOrder
+    prefix?: SortOrder
     _count?: GuildSettingCountOrderByAggregateInput
     _avg?: GuildSettingAvgOrderByAggregateInput
     _max?: GuildSettingMaxOrderByAggregateInput
@@ -13178,6 +18801,11 @@ export namespace Prisma {
     aiActionThreshold?: IntWithAggregatesFilter<"GuildSetting"> | number
     modLogChannelId?: StringNullableWithAggregatesFilter<"GuildSetting"> | string | null
     securityLogChannelId?: StringNullableWithAggregatesFilter<"GuildSetting"> | string | null
+    modRole?: StringNullableWithAggregatesFilter<"GuildSetting"> | string | null
+    seniorModRole?: StringNullableWithAggregatesFilter<"GuildSetting"> | string | null
+    adminRole?: StringNullableWithAggregatesFilter<"GuildSetting"> | string | null
+    mutedRole?: StringNullableWithAggregatesFilter<"GuildSetting"> | string | null
+    prefix?: StringWithAggregatesFilter<"GuildSetting"> | string
   }
 
   export type ModerationCaseWhereInput = {
@@ -13190,6 +18818,8 @@ export namespace Prisma {
     moderatorId?: StringFilter<"ModerationCase"> | string
     type?: StringFilter<"ModerationCase"> | string
     reason?: StringNullableFilter<"ModerationCase"> | string | null
+    duration?: StringNullableFilter<"ModerationCase"> | string | null
+    expiresAt?: DateTimeNullableFilter<"ModerationCase"> | Date | string | null
     createdAt?: DateTimeFilter<"ModerationCase"> | Date | string
     guild?: XOR<GuildRelationFilter, GuildWhereInput>
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -13203,6 +18833,8 @@ export namespace Prisma {
     moderatorId?: SortOrder
     type?: SortOrder
     reason?: SortOrderInput | SortOrder
+    duration?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     guild?: GuildOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
@@ -13219,6 +18851,8 @@ export namespace Prisma {
     moderatorId?: StringFilter<"ModerationCase"> | string
     type?: StringFilter<"ModerationCase"> | string
     reason?: StringNullableFilter<"ModerationCase"> | string | null
+    duration?: StringNullableFilter<"ModerationCase"> | string | null
+    expiresAt?: DateTimeNullableFilter<"ModerationCase"> | Date | string | null
     createdAt?: DateTimeFilter<"ModerationCase"> | Date | string
     guild?: XOR<GuildRelationFilter, GuildWhereInput>
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -13232,6 +18866,8 @@ export namespace Prisma {
     moderatorId?: SortOrder
     type?: SortOrder
     reason?: SortOrderInput | SortOrder
+    duration?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: ModerationCaseCountOrderByAggregateInput
     _avg?: ModerationCaseAvgOrderByAggregateInput
@@ -13250,6 +18886,8 @@ export namespace Prisma {
     moderatorId?: StringWithAggregatesFilter<"ModerationCase"> | string
     type?: StringWithAggregatesFilter<"ModerationCase"> | string
     reason?: StringNullableWithAggregatesFilter<"ModerationCase"> | string | null
+    duration?: StringNullableWithAggregatesFilter<"ModerationCase"> | string | null
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"ModerationCase"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ModerationCase"> | Date | string
   }
 
@@ -13650,65 +19288,376 @@ export namespace Prisma {
     timestamp?: DateTimeWithAggregatesFilter<"BotStatHistory"> | Date | string
   }
 
+  export type RoleCommandPermissionWhereInput = {
+    AND?: RoleCommandPermissionWhereInput | RoleCommandPermissionWhereInput[]
+    OR?: RoleCommandPermissionWhereInput[]
+    NOT?: RoleCommandPermissionWhereInput | RoleCommandPermissionWhereInput[]
+    id?: IntFilter<"RoleCommandPermission"> | number
+    guildId?: StringFilter<"RoleCommandPermission"> | string
+    roleId?: StringFilter<"RoleCommandPermission"> | string
+    command?: StringFilter<"RoleCommandPermission"> | string
+    createdAt?: DateTimeFilter<"RoleCommandPermission"> | Date | string
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+  }
+
+  export type RoleCommandPermissionOrderByWithRelationInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    roleId?: SortOrder
+    command?: SortOrder
+    createdAt?: SortOrder
+    guild?: GuildOrderByWithRelationInput
+  }
+
+  export type RoleCommandPermissionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    guildId_roleId_command?: RoleCommandPermissionGuildIdRoleIdCommandCompoundUniqueInput
+    AND?: RoleCommandPermissionWhereInput | RoleCommandPermissionWhereInput[]
+    OR?: RoleCommandPermissionWhereInput[]
+    NOT?: RoleCommandPermissionWhereInput | RoleCommandPermissionWhereInput[]
+    guildId?: StringFilter<"RoleCommandPermission"> | string
+    roleId?: StringFilter<"RoleCommandPermission"> | string
+    command?: StringFilter<"RoleCommandPermission"> | string
+    createdAt?: DateTimeFilter<"RoleCommandPermission"> | Date | string
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+  }, "id" | "guildId_roleId_command">
+
+  export type RoleCommandPermissionOrderByWithAggregationInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    roleId?: SortOrder
+    command?: SortOrder
+    createdAt?: SortOrder
+    _count?: RoleCommandPermissionCountOrderByAggregateInput
+    _avg?: RoleCommandPermissionAvgOrderByAggregateInput
+    _max?: RoleCommandPermissionMaxOrderByAggregateInput
+    _min?: RoleCommandPermissionMinOrderByAggregateInput
+    _sum?: RoleCommandPermissionSumOrderByAggregateInput
+  }
+
+  export type RoleCommandPermissionScalarWhereWithAggregatesInput = {
+    AND?: RoleCommandPermissionScalarWhereWithAggregatesInput | RoleCommandPermissionScalarWhereWithAggregatesInput[]
+    OR?: RoleCommandPermissionScalarWhereWithAggregatesInput[]
+    NOT?: RoleCommandPermissionScalarWhereWithAggregatesInput | RoleCommandPermissionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"RoleCommandPermission"> | number
+    guildId?: StringWithAggregatesFilter<"RoleCommandPermission"> | string
+    roleId?: StringWithAggregatesFilter<"RoleCommandPermission"> | string
+    command?: StringWithAggregatesFilter<"RoleCommandPermission"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"RoleCommandPermission"> | Date | string
+  }
+
+  export type RuleWhereInput = {
+    AND?: RuleWhereInput | RuleWhereInput[]
+    OR?: RuleWhereInput[]
+    NOT?: RuleWhereInput | RuleWhereInput[]
+    id?: IntFilter<"Rule"> | number
+    guildId?: StringFilter<"Rule"> | string
+    content?: StringFilter<"Rule"> | string
+    createdAt?: DateTimeFilter<"Rule"> | Date | string
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+  }
+
+  export type RuleOrderByWithRelationInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    guild?: GuildOrderByWithRelationInput
+  }
+
+  export type RuleWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: RuleWhereInput | RuleWhereInput[]
+    OR?: RuleWhereInput[]
+    NOT?: RuleWhereInput | RuleWhereInput[]
+    guildId?: StringFilter<"Rule"> | string
+    content?: StringFilter<"Rule"> | string
+    createdAt?: DateTimeFilter<"Rule"> | Date | string
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+  }, "id">
+
+  export type RuleOrderByWithAggregationInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    _count?: RuleCountOrderByAggregateInput
+    _avg?: RuleAvgOrderByAggregateInput
+    _max?: RuleMaxOrderByAggregateInput
+    _min?: RuleMinOrderByAggregateInput
+    _sum?: RuleSumOrderByAggregateInput
+  }
+
+  export type RuleScalarWhereWithAggregatesInput = {
+    AND?: RuleScalarWhereWithAggregatesInput | RuleScalarWhereWithAggregatesInput[]
+    OR?: RuleScalarWhereWithAggregatesInput[]
+    NOT?: RuleScalarWhereWithAggregatesInput | RuleScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Rule"> | number
+    guildId?: StringWithAggregatesFilter<"Rule"> | string
+    content?: StringWithAggregatesFilter<"Rule"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Rule"> | Date | string
+  }
+
+  export type AfkStatusWhereInput = {
+    AND?: AfkStatusWhereInput | AfkStatusWhereInput[]
+    OR?: AfkStatusWhereInput[]
+    NOT?: AfkStatusWhereInput | AfkStatusWhereInput[]
+    userId?: StringFilter<"AfkStatus"> | string
+    reason?: StringNullableFilter<"AfkStatus"> | string | null
+    startedAt?: DateTimeFilter<"AfkStatus"> | Date | string
+  }
+
+  export type AfkStatusOrderByWithRelationInput = {
+    userId?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    startedAt?: SortOrder
+  }
+
+  export type AfkStatusWhereUniqueInput = Prisma.AtLeast<{
+    userId?: string
+    AND?: AfkStatusWhereInput | AfkStatusWhereInput[]
+    OR?: AfkStatusWhereInput[]
+    NOT?: AfkStatusWhereInput | AfkStatusWhereInput[]
+    reason?: StringNullableFilter<"AfkStatus"> | string | null
+    startedAt?: DateTimeFilter<"AfkStatus"> | Date | string
+  }, "userId">
+
+  export type AfkStatusOrderByWithAggregationInput = {
+    userId?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    startedAt?: SortOrder
+    _count?: AfkStatusCountOrderByAggregateInput
+    _max?: AfkStatusMaxOrderByAggregateInput
+    _min?: AfkStatusMinOrderByAggregateInput
+  }
+
+  export type AfkStatusScalarWhereWithAggregatesInput = {
+    AND?: AfkStatusScalarWhereWithAggregatesInput | AfkStatusScalarWhereWithAggregatesInput[]
+    OR?: AfkStatusScalarWhereWithAggregatesInput[]
+    NOT?: AfkStatusScalarWhereWithAggregatesInput | AfkStatusScalarWhereWithAggregatesInput[]
+    userId?: StringWithAggregatesFilter<"AfkStatus"> | string
+    reason?: StringNullableWithAggregatesFilter<"AfkStatus"> | string | null
+    startedAt?: DateTimeWithAggregatesFilter<"AfkStatus"> | Date | string
+  }
+
+  export type DashboardAuditLogWhereInput = {
+    AND?: DashboardAuditLogWhereInput | DashboardAuditLogWhereInput[]
+    OR?: DashboardAuditLogWhereInput[]
+    NOT?: DashboardAuditLogWhereInput | DashboardAuditLogWhereInput[]
+    id?: IntFilter<"DashboardAuditLog"> | number
+    guildId?: StringFilter<"DashboardAuditLog"> | string
+    actorUserId?: StringFilter<"DashboardAuditLog"> | string
+    action?: StringFilter<"DashboardAuditLog"> | string
+    targetType?: StringNullableFilter<"DashboardAuditLog"> | string | null
+    targetId?: StringNullableFilter<"DashboardAuditLog"> | string | null
+    metadata?: JsonNullableFilter<"DashboardAuditLog">
+    createdAt?: DateTimeFilter<"DashboardAuditLog"> | Date | string
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type DashboardAuditLogOrderByWithRelationInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    actorUserId?: SortOrder
+    action?: SortOrder
+    targetType?: SortOrderInput | SortOrder
+    targetId?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    guild?: GuildOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type DashboardAuditLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: DashboardAuditLogWhereInput | DashboardAuditLogWhereInput[]
+    OR?: DashboardAuditLogWhereInput[]
+    NOT?: DashboardAuditLogWhereInput | DashboardAuditLogWhereInput[]
+    guildId?: StringFilter<"DashboardAuditLog"> | string
+    actorUserId?: StringFilter<"DashboardAuditLog"> | string
+    action?: StringFilter<"DashboardAuditLog"> | string
+    targetType?: StringNullableFilter<"DashboardAuditLog"> | string | null
+    targetId?: StringNullableFilter<"DashboardAuditLog"> | string | null
+    metadata?: JsonNullableFilter<"DashboardAuditLog">
+    createdAt?: DateTimeFilter<"DashboardAuditLog"> | Date | string
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type DashboardAuditLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    actorUserId?: SortOrder
+    action?: SortOrder
+    targetType?: SortOrderInput | SortOrder
+    targetId?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: DashboardAuditLogCountOrderByAggregateInput
+    _avg?: DashboardAuditLogAvgOrderByAggregateInput
+    _max?: DashboardAuditLogMaxOrderByAggregateInput
+    _min?: DashboardAuditLogMinOrderByAggregateInput
+    _sum?: DashboardAuditLogSumOrderByAggregateInput
+  }
+
+  export type DashboardAuditLogScalarWhereWithAggregatesInput = {
+    AND?: DashboardAuditLogScalarWhereWithAggregatesInput | DashboardAuditLogScalarWhereWithAggregatesInput[]
+    OR?: DashboardAuditLogScalarWhereWithAggregatesInput[]
+    NOT?: DashboardAuditLogScalarWhereWithAggregatesInput | DashboardAuditLogScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"DashboardAuditLog"> | number
+    guildId?: StringWithAggregatesFilter<"DashboardAuditLog"> | string
+    actorUserId?: StringWithAggregatesFilter<"DashboardAuditLog"> | string
+    action?: StringWithAggregatesFilter<"DashboardAuditLog"> | string
+    targetType?: StringNullableWithAggregatesFilter<"DashboardAuditLog"> | string | null
+    targetId?: StringNullableWithAggregatesFilter<"DashboardAuditLog"> | string | null
+    metadata?: JsonNullableWithAggregatesFilter<"DashboardAuditLog">
+    createdAt?: DateTimeWithAggregatesFilter<"DashboardAuditLog"> | Date | string
+  }
+
   export type UserCreateInput = {
     id: string
     username: string
+    globalName?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
     cases?: ModerationCaseCreateNestedManyWithoutUserInput
     moderated?: ModerationCaseCreateNestedManyWithoutModeratorInput
     warnings?: WarningCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id: string
     username: string
+    globalName?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
     cases?: ModerationCaseUncheckedCreateNestedManyWithoutUserInput
     moderated?: ModerationCaseUncheckedCreateNestedManyWithoutModeratorInput
     warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cases?: ModerationCaseUpdateManyWithoutUserNestedInput
     moderated?: ModerationCaseUpdateManyWithoutModeratorNestedInput
     warnings?: WarningUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cases?: ModerationCaseUncheckedUpdateManyWithoutUserNestedInput
     moderated?: ModerationCaseUncheckedUpdateManyWithoutModeratorNestedInput
     warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id: string
     username: string
+    globalName?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SessionCreateInput = {
+    id?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+    user: UserCreateNestedOneWithoutSessionsInput
+  }
+
+  export type SessionUncheckedCreateInput = {
+    id?: string
+    userId: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+  }
+
+  export type SessionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSessionsNestedInput
+  }
+
+  export type SessionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionCreateManyInput = {
+    id?: string
+    userId: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+  }
+
+  export type SessionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GuildCreateInput = {
@@ -13724,6 +19673,9 @@ export namespace Prisma {
     raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateInput = {
@@ -13739,6 +19691,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUpdateInput = {
@@ -13754,6 +19709,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateInput = {
@@ -13769,6 +19727,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateManyInput = {
@@ -13809,6 +19770,11 @@ export namespace Prisma {
     aiActionThreshold?: number
     modLogChannelId?: string | null
     securityLogChannelId?: string | null
+    modRole?: string | null
+    seniorModRole?: string | null
+    adminRole?: string | null
+    mutedRole?: string | null
+    prefix?: string
     guild: GuildCreateNestedOneWithoutSettingsInput
   }
 
@@ -13827,6 +19793,11 @@ export namespace Prisma {
     aiActionThreshold?: number
     modLogChannelId?: string | null
     securityLogChannelId?: string | null
+    modRole?: string | null
+    seniorModRole?: string | null
+    adminRole?: string | null
+    mutedRole?: string | null
+    prefix?: string
   }
 
   export type GuildSettingUpdateInput = {
@@ -13843,6 +19814,11 @@ export namespace Prisma {
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
     modLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     securityLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
+    modRole?: NullableStringFieldUpdateOperationsInput | string | null
+    seniorModRole?: NullableStringFieldUpdateOperationsInput | string | null
+    adminRole?: NullableStringFieldUpdateOperationsInput | string | null
+    mutedRole?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix?: StringFieldUpdateOperationsInput | string
     guild?: GuildUpdateOneRequiredWithoutSettingsNestedInput
   }
 
@@ -13861,6 +19837,11 @@ export namespace Prisma {
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
     modLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     securityLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
+    modRole?: NullableStringFieldUpdateOperationsInput | string | null
+    seniorModRole?: NullableStringFieldUpdateOperationsInput | string | null
+    adminRole?: NullableStringFieldUpdateOperationsInput | string | null
+    mutedRole?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix?: StringFieldUpdateOperationsInput | string
   }
 
   export type GuildSettingCreateManyInput = {
@@ -13878,6 +19859,11 @@ export namespace Prisma {
     aiActionThreshold?: number
     modLogChannelId?: string | null
     securityLogChannelId?: string | null
+    modRole?: string | null
+    seniorModRole?: string | null
+    adminRole?: string | null
+    mutedRole?: string | null
+    prefix?: string
   }
 
   export type GuildSettingUpdateManyMutationInput = {
@@ -13894,6 +19880,11 @@ export namespace Prisma {
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
     modLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     securityLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
+    modRole?: NullableStringFieldUpdateOperationsInput | string | null
+    seniorModRole?: NullableStringFieldUpdateOperationsInput | string | null
+    adminRole?: NullableStringFieldUpdateOperationsInput | string | null
+    mutedRole?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix?: StringFieldUpdateOperationsInput | string
   }
 
   export type GuildSettingUncheckedUpdateManyInput = {
@@ -13911,11 +19902,18 @@ export namespace Prisma {
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
     modLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     securityLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
+    modRole?: NullableStringFieldUpdateOperationsInput | string | null
+    seniorModRole?: NullableStringFieldUpdateOperationsInput | string | null
+    adminRole?: NullableStringFieldUpdateOperationsInput | string | null
+    mutedRole?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix?: StringFieldUpdateOperationsInput | string
   }
 
   export type ModerationCaseCreateInput = {
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
     guild: GuildCreateNestedOneWithoutCasesInput
     user: UserCreateNestedOneWithoutCasesInput
@@ -13929,12 +19927,16 @@ export namespace Prisma {
     moderatorId: string
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
   }
 
   export type ModerationCaseUpdateInput = {
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guild?: GuildUpdateOneRequiredWithoutCasesNestedInput
     user?: UserUpdateOneRequiredWithoutCasesNestedInput
@@ -13948,6 +19950,8 @@ export namespace Prisma {
     moderatorId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13958,12 +19962,16 @@ export namespace Prisma {
     moderatorId: string
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
   }
 
   export type ModerationCaseUpdateManyMutationInput = {
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13974,6 +19982,8 @@ export namespace Prisma {
     moderatorId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14342,6 +20352,217 @@ export namespace Prisma {
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RoleCommandPermissionCreateInput = {
+    roleId: string
+    command: string
+    createdAt?: Date | string
+    guild: GuildCreateNestedOneWithoutRolePermissionsInput
+  }
+
+  export type RoleCommandPermissionUncheckedCreateInput = {
+    id?: number
+    guildId: string
+    roleId: string
+    command: string
+    createdAt?: Date | string
+  }
+
+  export type RoleCommandPermissionUpdateInput = {
+    roleId?: StringFieldUpdateOperationsInput | string
+    command?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guild?: GuildUpdateOneRequiredWithoutRolePermissionsNestedInput
+  }
+
+  export type RoleCommandPermissionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    roleId?: StringFieldUpdateOperationsInput | string
+    command?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleCommandPermissionCreateManyInput = {
+    id?: number
+    guildId: string
+    roleId: string
+    command: string
+    createdAt?: Date | string
+  }
+
+  export type RoleCommandPermissionUpdateManyMutationInput = {
+    roleId?: StringFieldUpdateOperationsInput | string
+    command?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleCommandPermissionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    roleId?: StringFieldUpdateOperationsInput | string
+    command?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RuleCreateInput = {
+    content: string
+    createdAt?: Date | string
+    guild: GuildCreateNestedOneWithoutRulesInput
+  }
+
+  export type RuleUncheckedCreateInput = {
+    id?: number
+    guildId: string
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type RuleUpdateInput = {
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guild?: GuildUpdateOneRequiredWithoutRulesNestedInput
+  }
+
+  export type RuleUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RuleCreateManyInput = {
+    id?: number
+    guildId: string
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type RuleUpdateManyMutationInput = {
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RuleUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AfkStatusCreateInput = {
+    userId: string
+    reason?: string | null
+    startedAt?: Date | string
+  }
+
+  export type AfkStatusUncheckedCreateInput = {
+    userId: string
+    reason?: string | null
+    startedAt?: Date | string
+  }
+
+  export type AfkStatusUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AfkStatusUncheckedUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AfkStatusCreateManyInput = {
+    userId: string
+    reason?: string | null
+    startedAt?: Date | string
+  }
+
+  export type AfkStatusUpdateManyMutationInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AfkStatusUncheckedUpdateManyInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DashboardAuditLogCreateInput = {
+    action: string
+    targetType?: string | null
+    targetId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    guild: GuildCreateNestedOneWithoutDashboardAuditLogInput
+    user: UserCreateNestedOneWithoutDashboardAuditLogInput
+  }
+
+  export type DashboardAuditLogUncheckedCreateInput = {
+    id?: number
+    guildId: string
+    actorUserId: string
+    action: string
+    targetType?: string | null
+    targetId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type DashboardAuditLogUpdateInput = {
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guild?: GuildUpdateOneRequiredWithoutDashboardAuditLogNestedInput
+    user?: UserUpdateOneRequiredWithoutDashboardAuditLogNestedInput
+  }
+
+  export type DashboardAuditLogUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    actorUserId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DashboardAuditLogCreateManyInput = {
+    id?: number
+    guildId: string
+    actorUserId: string
+    action: string
+    targetType?: string | null
+    targetId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type DashboardAuditLogUpdateManyMutationInput = {
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DashboardAuditLogUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    actorUserId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -14357,6 +20578,21 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -14366,6 +20602,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type ModerationCaseListRelationFilter = {
@@ -14380,6 +20627,23 @@ export namespace Prisma {
     none?: WarningWhereInput
   }
 
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
+  }
+
+  export type DashboardAuditLogListRelationFilter = {
+    every?: DashboardAuditLogWhereInput
+    some?: DashboardAuditLogWhereInput
+    none?: DashboardAuditLogWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type ModerationCaseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -14388,25 +20652,42 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DashboardAuditLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     username?: SortOrder
+    globalName?: SortOrder
+    avatar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    lastLoginAt?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     username?: SortOrder
+    globalName?: SortOrder
+    avatar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    lastLoginAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     username?: SortOrder
+    globalName?: SortOrder
+    avatar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    lastLoginAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -14427,6 +20708,24 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -14439,6 +20738,49 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type UserRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type SessionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+  }
+
+  export type SessionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+  }
+
+  export type SessionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -14481,6 +20823,18 @@ export namespace Prisma {
     none?: MessageActivityWhereInput
   }
 
+  export type RoleCommandPermissionListRelationFilter = {
+    every?: RoleCommandPermissionWhereInput
+    some?: RoleCommandPermissionWhereInput
+    none?: RoleCommandPermissionWhereInput
+  }
+
+  export type RuleListRelationFilter = {
+    every?: RuleWhereInput
+    some?: RuleWhereInput
+    none?: RuleWhereInput
+  }
+
   export type SecurityEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -14494,6 +20848,14 @@ export namespace Prisma {
   }
 
   export type MessageActivityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RoleCommandPermissionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RuleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14550,29 +20912,9 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type GuildRelationFilter = {
     is?: GuildWhereInput
     isNot?: GuildWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type GuildSettingCountOrderByAggregateInput = {
@@ -14590,6 +20932,11 @@ export namespace Prisma {
     aiActionThreshold?: SortOrder
     modLogChannelId?: SortOrder
     securityLogChannelId?: SortOrder
+    modRole?: SortOrder
+    seniorModRole?: SortOrder
+    adminRole?: SortOrder
+    mutedRole?: SortOrder
+    prefix?: SortOrder
   }
 
   export type GuildSettingAvgOrderByAggregateInput = {
@@ -14611,6 +20958,11 @@ export namespace Prisma {
     aiActionThreshold?: SortOrder
     modLogChannelId?: SortOrder
     securityLogChannelId?: SortOrder
+    modRole?: SortOrder
+    seniorModRole?: SortOrder
+    adminRole?: SortOrder
+    mutedRole?: SortOrder
+    prefix?: SortOrder
   }
 
   export type GuildSettingMinOrderByAggregateInput = {
@@ -14628,6 +20980,11 @@ export namespace Prisma {
     aiActionThreshold?: SortOrder
     modLogChannelId?: SortOrder
     securityLogChannelId?: SortOrder
+    modRole?: SortOrder
+    seniorModRole?: SortOrder
+    adminRole?: SortOrder
+    mutedRole?: SortOrder
+    prefix?: SortOrder
   }
 
   export type GuildSettingSumOrderByAggregateInput = {
@@ -14642,29 +20999,6 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type UserRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type ModerationCaseCountOrderByAggregateInput = {
     id?: SortOrder
     guildId?: SortOrder
@@ -14672,6 +21006,8 @@ export namespace Prisma {
     moderatorId?: SortOrder
     type?: SortOrder
     reason?: SortOrder
+    duration?: SortOrder
+    expiresAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14686,6 +21022,8 @@ export namespace Prisma {
     moderatorId?: SortOrder
     type?: SortOrder
     reason?: SortOrder
+    duration?: SortOrder
+    expiresAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14696,6 +21034,8 @@ export namespace Prisma {
     moderatorId?: SortOrder
     type?: SortOrder
     reason?: SortOrder
+    duration?: SortOrder
+    expiresAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14770,17 +21110,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type RaidEventCountOrderByAggregateInput = {
     id?: SortOrder
     guildId?: SortOrder
@@ -14811,20 +21140,6 @@ export namespace Prisma {
 
   export type RaidEventSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type MemberSnapshotCountOrderByAggregateInput = {
@@ -14974,6 +21289,177 @@ export namespace Prisma {
     shardCount?: SortOrder
   }
 
+  export type RoleCommandPermissionGuildIdRoleIdCommandCompoundUniqueInput = {
+    guildId: string
+    roleId: string
+    command: string
+  }
+
+  export type RoleCommandPermissionCountOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    roleId?: SortOrder
+    command?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RoleCommandPermissionAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type RoleCommandPermissionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    roleId?: SortOrder
+    command?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RoleCommandPermissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    roleId?: SortOrder
+    command?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RoleCommandPermissionSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type RuleCountOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RuleAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type RuleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RuleMinOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RuleSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AfkStatusCountOrderByAggregateInput = {
+    userId?: SortOrder
+    reason?: SortOrder
+    startedAt?: SortOrder
+  }
+
+  export type AfkStatusMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    reason?: SortOrder
+    startedAt?: SortOrder
+  }
+
+  export type AfkStatusMinOrderByAggregateInput = {
+    userId?: SortOrder
+    reason?: SortOrder
+    startedAt?: SortOrder
+  }
+  export type JsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type DashboardAuditLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    actorUserId?: SortOrder
+    action?: SortOrder
+    targetType?: SortOrder
+    targetId?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DashboardAuditLogAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DashboardAuditLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    actorUserId?: SortOrder
+    action?: SortOrder
+    targetType?: SortOrder
+    targetId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DashboardAuditLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    actorUserId?: SortOrder
+    action?: SortOrder
+    targetType?: SortOrder
+    targetId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DashboardAuditLogSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
   export type ModerationCaseCreateNestedManyWithoutUserInput = {
     create?: XOR<ModerationCaseCreateWithoutUserInput, ModerationCaseUncheckedCreateWithoutUserInput> | ModerationCaseCreateWithoutUserInput[] | ModerationCaseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ModerationCaseCreateOrConnectWithoutUserInput | ModerationCaseCreateOrConnectWithoutUserInput[]
@@ -14993,6 +21479,20 @@ export namespace Prisma {
     connectOrCreate?: WarningCreateOrConnectWithoutUserInput | WarningCreateOrConnectWithoutUserInput[]
     createMany?: WarningCreateManyUserInputEnvelope
     connect?: WarningWhereUniqueInput | WarningWhereUniqueInput[]
+  }
+
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type DashboardAuditLogCreateNestedManyWithoutUserInput = {
+    create?: XOR<DashboardAuditLogCreateWithoutUserInput, DashboardAuditLogUncheckedCreateWithoutUserInput> | DashboardAuditLogCreateWithoutUserInput[] | DashboardAuditLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutUserInput | DashboardAuditLogCreateOrConnectWithoutUserInput[]
+    createMany?: DashboardAuditLogCreateManyUserInputEnvelope
+    connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
   }
 
   export type ModerationCaseUncheckedCreateNestedManyWithoutUserInput = {
@@ -15016,12 +21516,34 @@ export namespace Prisma {
     connect?: WarningWhereUniqueInput | WarningWhereUniqueInput[]
   }
 
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<DashboardAuditLogCreateWithoutUserInput, DashboardAuditLogUncheckedCreateWithoutUserInput> | DashboardAuditLogCreateWithoutUserInput[] | DashboardAuditLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutUserInput | DashboardAuditLogCreateOrConnectWithoutUserInput[]
+    createMany?: DashboardAuditLogCreateManyUserInputEnvelope
+    connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type ModerationCaseUpdateManyWithoutUserNestedInput = {
@@ -15066,6 +21588,34 @@ export namespace Prisma {
     deleteMany?: WarningScalarWhereInput | WarningScalarWhereInput[]
   }
 
+  export type SessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type DashboardAuditLogUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DashboardAuditLogCreateWithoutUserInput, DashboardAuditLogUncheckedCreateWithoutUserInput> | DashboardAuditLogCreateWithoutUserInput[] | DashboardAuditLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutUserInput | DashboardAuditLogCreateOrConnectWithoutUserInput[]
+    upsert?: DashboardAuditLogUpsertWithWhereUniqueWithoutUserInput | DashboardAuditLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DashboardAuditLogCreateManyUserInputEnvelope
+    set?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    disconnect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    delete?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    update?: DashboardAuditLogUpdateWithWhereUniqueWithoutUserInput | DashboardAuditLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DashboardAuditLogUpdateManyWithWhereWithoutUserInput | DashboardAuditLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
+  }
+
   export type ModerationCaseUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ModerationCaseCreateWithoutUserInput, ModerationCaseUncheckedCreateWithoutUserInput> | ModerationCaseCreateWithoutUserInput[] | ModerationCaseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ModerationCaseCreateOrConnectWithoutUserInput | ModerationCaseCreateOrConnectWithoutUserInput[]
@@ -15106,6 +21656,48 @@ export namespace Prisma {
     update?: WarningUpdateWithWhereUniqueWithoutUserInput | WarningUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: WarningUpdateManyWithWhereWithoutUserInput | WarningUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: WarningScalarWhereInput | WarningScalarWhereInput[]
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DashboardAuditLogCreateWithoutUserInput, DashboardAuditLogUncheckedCreateWithoutUserInput> | DashboardAuditLogCreateWithoutUserInput[] | DashboardAuditLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutUserInput | DashboardAuditLogCreateOrConnectWithoutUserInput[]
+    upsert?: DashboardAuditLogUpsertWithWhereUniqueWithoutUserInput | DashboardAuditLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DashboardAuditLogCreateManyUserInputEnvelope
+    set?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    disconnect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    delete?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    update?: DashboardAuditLogUpdateWithWhereUniqueWithoutUserInput | DashboardAuditLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DashboardAuditLogUpdateManyWithWhereWithoutUserInput | DashboardAuditLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSessionsInput = {
+    create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
+    create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
+    upsert?: UserUpsertWithoutSessionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
   }
 
   export type GuildSettingCreateNestedOneWithoutGuildInput = {
@@ -15156,6 +21748,27 @@ export namespace Prisma {
     connect?: MessageActivityWhereUniqueInput | MessageActivityWhereUniqueInput[]
   }
 
+  export type RoleCommandPermissionCreateNestedManyWithoutGuildInput = {
+    create?: XOR<RoleCommandPermissionCreateWithoutGuildInput, RoleCommandPermissionUncheckedCreateWithoutGuildInput> | RoleCommandPermissionCreateWithoutGuildInput[] | RoleCommandPermissionUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: RoleCommandPermissionCreateOrConnectWithoutGuildInput | RoleCommandPermissionCreateOrConnectWithoutGuildInput[]
+    createMany?: RoleCommandPermissionCreateManyGuildInputEnvelope
+    connect?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+  }
+
+  export type RuleCreateNestedManyWithoutGuildInput = {
+    create?: XOR<RuleCreateWithoutGuildInput, RuleUncheckedCreateWithoutGuildInput> | RuleCreateWithoutGuildInput[] | RuleUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: RuleCreateOrConnectWithoutGuildInput | RuleCreateOrConnectWithoutGuildInput[]
+    createMany?: RuleCreateManyGuildInputEnvelope
+    connect?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+  }
+
+  export type DashboardAuditLogCreateNestedManyWithoutGuildInput = {
+    create?: XOR<DashboardAuditLogCreateWithoutGuildInput, DashboardAuditLogUncheckedCreateWithoutGuildInput> | DashboardAuditLogCreateWithoutGuildInput[] | DashboardAuditLogUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutGuildInput | DashboardAuditLogCreateOrConnectWithoutGuildInput[]
+    createMany?: DashboardAuditLogCreateManyGuildInputEnvelope
+    connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+  }
+
   export type GuildSettingUncheckedCreateNestedOneWithoutGuildInput = {
     create?: XOR<GuildSettingCreateWithoutGuildInput, GuildSettingUncheckedCreateWithoutGuildInput>
     connectOrCreate?: GuildSettingCreateOrConnectWithoutGuildInput
@@ -15202,6 +21815,27 @@ export namespace Prisma {
     connectOrCreate?: MessageActivityCreateOrConnectWithoutGuildInput | MessageActivityCreateOrConnectWithoutGuildInput[]
     createMany?: MessageActivityCreateManyGuildInputEnvelope
     connect?: MessageActivityWhereUniqueInput | MessageActivityWhereUniqueInput[]
+  }
+
+  export type RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput = {
+    create?: XOR<RoleCommandPermissionCreateWithoutGuildInput, RoleCommandPermissionUncheckedCreateWithoutGuildInput> | RoleCommandPermissionCreateWithoutGuildInput[] | RoleCommandPermissionUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: RoleCommandPermissionCreateOrConnectWithoutGuildInput | RoleCommandPermissionCreateOrConnectWithoutGuildInput[]
+    createMany?: RoleCommandPermissionCreateManyGuildInputEnvelope
+    connect?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+  }
+
+  export type RuleUncheckedCreateNestedManyWithoutGuildInput = {
+    create?: XOR<RuleCreateWithoutGuildInput, RuleUncheckedCreateWithoutGuildInput> | RuleCreateWithoutGuildInput[] | RuleUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: RuleCreateOrConnectWithoutGuildInput | RuleCreateOrConnectWithoutGuildInput[]
+    createMany?: RuleCreateManyGuildInputEnvelope
+    connect?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+  }
+
+  export type DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput = {
+    create?: XOR<DashboardAuditLogCreateWithoutGuildInput, DashboardAuditLogUncheckedCreateWithoutGuildInput> | DashboardAuditLogCreateWithoutGuildInput[] | DashboardAuditLogUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutGuildInput | DashboardAuditLogCreateOrConnectWithoutGuildInput[]
+    createMany?: DashboardAuditLogCreateManyGuildInputEnvelope
+    connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -15306,6 +21940,48 @@ export namespace Prisma {
     deleteMany?: MessageActivityScalarWhereInput | MessageActivityScalarWhereInput[]
   }
 
+  export type RoleCommandPermissionUpdateManyWithoutGuildNestedInput = {
+    create?: XOR<RoleCommandPermissionCreateWithoutGuildInput, RoleCommandPermissionUncheckedCreateWithoutGuildInput> | RoleCommandPermissionCreateWithoutGuildInput[] | RoleCommandPermissionUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: RoleCommandPermissionCreateOrConnectWithoutGuildInput | RoleCommandPermissionCreateOrConnectWithoutGuildInput[]
+    upsert?: RoleCommandPermissionUpsertWithWhereUniqueWithoutGuildInput | RoleCommandPermissionUpsertWithWhereUniqueWithoutGuildInput[]
+    createMany?: RoleCommandPermissionCreateManyGuildInputEnvelope
+    set?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+    disconnect?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+    delete?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+    connect?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+    update?: RoleCommandPermissionUpdateWithWhereUniqueWithoutGuildInput | RoleCommandPermissionUpdateWithWhereUniqueWithoutGuildInput[]
+    updateMany?: RoleCommandPermissionUpdateManyWithWhereWithoutGuildInput | RoleCommandPermissionUpdateManyWithWhereWithoutGuildInput[]
+    deleteMany?: RoleCommandPermissionScalarWhereInput | RoleCommandPermissionScalarWhereInput[]
+  }
+
+  export type RuleUpdateManyWithoutGuildNestedInput = {
+    create?: XOR<RuleCreateWithoutGuildInput, RuleUncheckedCreateWithoutGuildInput> | RuleCreateWithoutGuildInput[] | RuleUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: RuleCreateOrConnectWithoutGuildInput | RuleCreateOrConnectWithoutGuildInput[]
+    upsert?: RuleUpsertWithWhereUniqueWithoutGuildInput | RuleUpsertWithWhereUniqueWithoutGuildInput[]
+    createMany?: RuleCreateManyGuildInputEnvelope
+    set?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+    disconnect?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+    delete?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+    connect?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+    update?: RuleUpdateWithWhereUniqueWithoutGuildInput | RuleUpdateWithWhereUniqueWithoutGuildInput[]
+    updateMany?: RuleUpdateManyWithWhereWithoutGuildInput | RuleUpdateManyWithWhereWithoutGuildInput[]
+    deleteMany?: RuleScalarWhereInput | RuleScalarWhereInput[]
+  }
+
+  export type DashboardAuditLogUpdateManyWithoutGuildNestedInput = {
+    create?: XOR<DashboardAuditLogCreateWithoutGuildInput, DashboardAuditLogUncheckedCreateWithoutGuildInput> | DashboardAuditLogCreateWithoutGuildInput[] | DashboardAuditLogUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutGuildInput | DashboardAuditLogCreateOrConnectWithoutGuildInput[]
+    upsert?: DashboardAuditLogUpsertWithWhereUniqueWithoutGuildInput | DashboardAuditLogUpsertWithWhereUniqueWithoutGuildInput[]
+    createMany?: DashboardAuditLogCreateManyGuildInputEnvelope
+    set?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    disconnect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    delete?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    update?: DashboardAuditLogUpdateWithWhereUniqueWithoutGuildInput | DashboardAuditLogUpdateWithWhereUniqueWithoutGuildInput[]
+    updateMany?: DashboardAuditLogUpdateManyWithWhereWithoutGuildInput | DashboardAuditLogUpdateManyWithWhereWithoutGuildInput[]
+    deleteMany?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
+  }
+
   export type GuildSettingUncheckedUpdateOneWithoutGuildNestedInput = {
     create?: XOR<GuildSettingCreateWithoutGuildInput, GuildSettingUncheckedCreateWithoutGuildInput>
     connectOrCreate?: GuildSettingCreateOrConnectWithoutGuildInput
@@ -15400,6 +22076,48 @@ export namespace Prisma {
     deleteMany?: MessageActivityScalarWhereInput | MessageActivityScalarWhereInput[]
   }
 
+  export type RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput = {
+    create?: XOR<RoleCommandPermissionCreateWithoutGuildInput, RoleCommandPermissionUncheckedCreateWithoutGuildInput> | RoleCommandPermissionCreateWithoutGuildInput[] | RoleCommandPermissionUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: RoleCommandPermissionCreateOrConnectWithoutGuildInput | RoleCommandPermissionCreateOrConnectWithoutGuildInput[]
+    upsert?: RoleCommandPermissionUpsertWithWhereUniqueWithoutGuildInput | RoleCommandPermissionUpsertWithWhereUniqueWithoutGuildInput[]
+    createMany?: RoleCommandPermissionCreateManyGuildInputEnvelope
+    set?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+    disconnect?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+    delete?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+    connect?: RoleCommandPermissionWhereUniqueInput | RoleCommandPermissionWhereUniqueInput[]
+    update?: RoleCommandPermissionUpdateWithWhereUniqueWithoutGuildInput | RoleCommandPermissionUpdateWithWhereUniqueWithoutGuildInput[]
+    updateMany?: RoleCommandPermissionUpdateManyWithWhereWithoutGuildInput | RoleCommandPermissionUpdateManyWithWhereWithoutGuildInput[]
+    deleteMany?: RoleCommandPermissionScalarWhereInput | RoleCommandPermissionScalarWhereInput[]
+  }
+
+  export type RuleUncheckedUpdateManyWithoutGuildNestedInput = {
+    create?: XOR<RuleCreateWithoutGuildInput, RuleUncheckedCreateWithoutGuildInput> | RuleCreateWithoutGuildInput[] | RuleUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: RuleCreateOrConnectWithoutGuildInput | RuleCreateOrConnectWithoutGuildInput[]
+    upsert?: RuleUpsertWithWhereUniqueWithoutGuildInput | RuleUpsertWithWhereUniqueWithoutGuildInput[]
+    createMany?: RuleCreateManyGuildInputEnvelope
+    set?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+    disconnect?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+    delete?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+    connect?: RuleWhereUniqueInput | RuleWhereUniqueInput[]
+    update?: RuleUpdateWithWhereUniqueWithoutGuildInput | RuleUpdateWithWhereUniqueWithoutGuildInput[]
+    updateMany?: RuleUpdateManyWithWhereWithoutGuildInput | RuleUpdateManyWithWhereWithoutGuildInput[]
+    deleteMany?: RuleScalarWhereInput | RuleScalarWhereInput[]
+  }
+
+  export type DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput = {
+    create?: XOR<DashboardAuditLogCreateWithoutGuildInput, DashboardAuditLogUncheckedCreateWithoutGuildInput> | DashboardAuditLogCreateWithoutGuildInput[] | DashboardAuditLogUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutGuildInput | DashboardAuditLogCreateOrConnectWithoutGuildInput[]
+    upsert?: DashboardAuditLogUpsertWithWhereUniqueWithoutGuildInput | DashboardAuditLogUpsertWithWhereUniqueWithoutGuildInput[]
+    createMany?: DashboardAuditLogCreateManyGuildInputEnvelope
+    set?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    disconnect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    delete?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+    update?: DashboardAuditLogUpdateWithWhereUniqueWithoutGuildInput | DashboardAuditLogUpdateWithWhereUniqueWithoutGuildInput[]
+    updateMany?: DashboardAuditLogUpdateManyWithWhereWithoutGuildInput | DashboardAuditLogUpdateManyWithWhereWithoutGuildInput[]
+    deleteMany?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
+  }
+
   export type GuildCreateNestedOneWithoutSettingsInput = {
     create?: XOR<GuildCreateWithoutSettingsInput, GuildUncheckedCreateWithoutSettingsInput>
     connectOrCreate?: GuildCreateOrConnectWithoutSettingsInput
@@ -15408,10 +22126,6 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type GuildUpdateOneRequiredWithoutSettingsNestedInput = {
@@ -15512,10 +22226,6 @@ export namespace Prisma {
     connect?: GuildWhereUniqueInput
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type GuildUpdateOneRequiredWithoutRaidEventsNestedInput = {
     create?: XOR<GuildCreateWithoutRaidEventsInput, GuildUncheckedCreateWithoutRaidEventsInput>
     connectOrCreate?: GuildCreateOrConnectWithoutRaidEventsInput
@@ -15552,6 +22262,62 @@ export namespace Prisma {
     update?: XOR<XOR<GuildUpdateToOneWithWhereWithoutMessageActivityInput, GuildUpdateWithoutMessageActivityInput>, GuildUncheckedUpdateWithoutMessageActivityInput>
   }
 
+  export type GuildCreateNestedOneWithoutRolePermissionsInput = {
+    create?: XOR<GuildCreateWithoutRolePermissionsInput, GuildUncheckedCreateWithoutRolePermissionsInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutRolePermissionsInput
+    connect?: GuildWhereUniqueInput
+  }
+
+  export type GuildUpdateOneRequiredWithoutRolePermissionsNestedInput = {
+    create?: XOR<GuildCreateWithoutRolePermissionsInput, GuildUncheckedCreateWithoutRolePermissionsInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutRolePermissionsInput
+    upsert?: GuildUpsertWithoutRolePermissionsInput
+    connect?: GuildWhereUniqueInput
+    update?: XOR<XOR<GuildUpdateToOneWithWhereWithoutRolePermissionsInput, GuildUpdateWithoutRolePermissionsInput>, GuildUncheckedUpdateWithoutRolePermissionsInput>
+  }
+
+  export type GuildCreateNestedOneWithoutRulesInput = {
+    create?: XOR<GuildCreateWithoutRulesInput, GuildUncheckedCreateWithoutRulesInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutRulesInput
+    connect?: GuildWhereUniqueInput
+  }
+
+  export type GuildUpdateOneRequiredWithoutRulesNestedInput = {
+    create?: XOR<GuildCreateWithoutRulesInput, GuildUncheckedCreateWithoutRulesInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutRulesInput
+    upsert?: GuildUpsertWithoutRulesInput
+    connect?: GuildWhereUniqueInput
+    update?: XOR<XOR<GuildUpdateToOneWithWhereWithoutRulesInput, GuildUpdateWithoutRulesInput>, GuildUncheckedUpdateWithoutRulesInput>
+  }
+
+  export type GuildCreateNestedOneWithoutDashboardAuditLogInput = {
+    create?: XOR<GuildCreateWithoutDashboardAuditLogInput, GuildUncheckedCreateWithoutDashboardAuditLogInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutDashboardAuditLogInput
+    connect?: GuildWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutDashboardAuditLogInput = {
+    create?: XOR<UserCreateWithoutDashboardAuditLogInput, UserUncheckedCreateWithoutDashboardAuditLogInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDashboardAuditLogInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type GuildUpdateOneRequiredWithoutDashboardAuditLogNestedInput = {
+    create?: XOR<GuildCreateWithoutDashboardAuditLogInput, GuildUncheckedCreateWithoutDashboardAuditLogInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutDashboardAuditLogInput
+    upsert?: GuildUpsertWithoutDashboardAuditLogInput
+    connect?: GuildWhereUniqueInput
+    update?: XOR<XOR<GuildUpdateToOneWithWhereWithoutDashboardAuditLogInput, GuildUpdateWithoutDashboardAuditLogInput>, GuildUncheckedUpdateWithoutDashboardAuditLogInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutDashboardAuditLogNestedInput = {
+    create?: XOR<UserCreateWithoutDashboardAuditLogInput, UserUncheckedCreateWithoutDashboardAuditLogInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDashboardAuditLogInput
+    upsert?: UserUpsertWithoutDashboardAuditLogInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDashboardAuditLogInput, UserUpdateWithoutDashboardAuditLogInput>, UserUncheckedUpdateWithoutDashboardAuditLogInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -15566,6 +22332,20 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -15575,6 +22355,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -15605,6 +22396,34 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -15617,6 +22436,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -15651,20 +22484,6 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
@@ -15672,63 +22491,34 @@ export namespace Prisma {
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type ModerationCaseCreateWithoutUserInput = {
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
     guild: GuildCreateNestedOneWithoutCasesInput
     moderator: UserCreateNestedOneWithoutModeratedInput
@@ -15740,6 +22530,8 @@ export namespace Prisma {
     moderatorId: string
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -15756,6 +22548,8 @@ export namespace Prisma {
   export type ModerationCaseCreateWithoutModeratorInput = {
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
     guild: GuildCreateNestedOneWithoutCasesInput
     user: UserCreateNestedOneWithoutCasesInput
@@ -15767,6 +22561,8 @@ export namespace Prisma {
     userId: string
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -15803,6 +22599,59 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SessionCreateWithoutUserInput = {
+    id?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+  }
+
+  export type SessionUncheckedCreateWithoutUserInput = {
+    id?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+  }
+
+  export type SessionCreateOrConnectWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DashboardAuditLogCreateWithoutUserInput = {
+    action: string
+    targetType?: string | null
+    targetId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    guild: GuildCreateNestedOneWithoutDashboardAuditLogInput
+  }
+
+  export type DashboardAuditLogUncheckedCreateWithoutUserInput = {
+    id?: number
+    guildId: string
+    action: string
+    targetType?: string | null
+    targetId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type DashboardAuditLogCreateOrConnectWithoutUserInput = {
+    where: DashboardAuditLogWhereUniqueInput
+    create: XOR<DashboardAuditLogCreateWithoutUserInput, DashboardAuditLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type DashboardAuditLogCreateManyUserInputEnvelope = {
+    data: DashboardAuditLogCreateManyUserInput | DashboardAuditLogCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ModerationCaseUpsertWithWhereUniqueWithoutUserInput = {
     where: ModerationCaseWhereUniqueInput
     update: XOR<ModerationCaseUpdateWithoutUserInput, ModerationCaseUncheckedUpdateWithoutUserInput>
@@ -15829,6 +22678,8 @@ export namespace Prisma {
     moderatorId?: StringFilter<"ModerationCase"> | string
     type?: StringFilter<"ModerationCase"> | string
     reason?: StringNullableFilter<"ModerationCase"> | string | null
+    duration?: StringNullableFilter<"ModerationCase"> | string | null
+    expiresAt?: DateTimeNullableFilter<"ModerationCase"> | Date | string | null
     createdAt?: DateTimeFilter<"ModerationCase"> | Date | string
   }
 
@@ -15875,6 +22726,135 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Warning"> | Date | string
   }
 
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: StringFilter<"Session"> | string
+    userId?: StringFilter<"Session"> | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastUsedAt?: DateTimeFilter<"Session"> | Date | string
+  }
+
+  export type DashboardAuditLogUpsertWithWhereUniqueWithoutUserInput = {
+    where: DashboardAuditLogWhereUniqueInput
+    update: XOR<DashboardAuditLogUpdateWithoutUserInput, DashboardAuditLogUncheckedUpdateWithoutUserInput>
+    create: XOR<DashboardAuditLogCreateWithoutUserInput, DashboardAuditLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type DashboardAuditLogUpdateWithWhereUniqueWithoutUserInput = {
+    where: DashboardAuditLogWhereUniqueInput
+    data: XOR<DashboardAuditLogUpdateWithoutUserInput, DashboardAuditLogUncheckedUpdateWithoutUserInput>
+  }
+
+  export type DashboardAuditLogUpdateManyWithWhereWithoutUserInput = {
+    where: DashboardAuditLogScalarWhereInput
+    data: XOR<DashboardAuditLogUpdateManyMutationInput, DashboardAuditLogUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type DashboardAuditLogScalarWhereInput = {
+    AND?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
+    OR?: DashboardAuditLogScalarWhereInput[]
+    NOT?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
+    id?: IntFilter<"DashboardAuditLog"> | number
+    guildId?: StringFilter<"DashboardAuditLog"> | string
+    actorUserId?: StringFilter<"DashboardAuditLog"> | string
+    action?: StringFilter<"DashboardAuditLog"> | string
+    targetType?: StringNullableFilter<"DashboardAuditLog"> | string | null
+    targetId?: StringNullableFilter<"DashboardAuditLog"> | string | null
+    metadata?: JsonNullableFilter<"DashboardAuditLog">
+    createdAt?: DateTimeFilter<"DashboardAuditLog"> | Date | string
+  }
+
+  export type UserCreateWithoutSessionsInput = {
+    id: string
+    username: string
+    globalName?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    cases?: ModerationCaseCreateNestedManyWithoutUserInput
+    moderated?: ModerationCaseCreateNestedManyWithoutModeratorInput
+    warnings?: WarningCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSessionsInput = {
+    id: string
+    username: string
+    globalName?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    cases?: ModerationCaseUncheckedCreateNestedManyWithoutUserInput
+    moderated?: ModerationCaseUncheckedCreateNestedManyWithoutModeratorInput
+    warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSessionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type UserUpsertWithoutSessionsInput = {
+    update: XOR<UserUpdateWithoutSessionsInput, UserUncheckedUpdateWithoutSessionsInput>
+    create: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSessionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSessionsInput, UserUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type UserUpdateWithoutSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cases?: ModerationCaseUpdateManyWithoutUserNestedInput
+    moderated?: ModerationCaseUpdateManyWithoutModeratorNestedInput
+    warnings?: WarningUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cases?: ModerationCaseUncheckedUpdateManyWithoutUserNestedInput
+    moderated?: ModerationCaseUncheckedUpdateManyWithoutModeratorNestedInput
+    warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type GuildSettingCreateWithoutGuildInput = {
     antiRaidEnabled?: boolean
     antiNukeEnabled?: boolean
@@ -15889,6 +22869,11 @@ export namespace Prisma {
     aiActionThreshold?: number
     modLogChannelId?: string | null
     securityLogChannelId?: string | null
+    modRole?: string | null
+    seniorModRole?: string | null
+    adminRole?: string | null
+    mutedRole?: string | null
+    prefix?: string
   }
 
   export type GuildSettingUncheckedCreateWithoutGuildInput = {
@@ -15905,6 +22890,11 @@ export namespace Prisma {
     aiActionThreshold?: number
     modLogChannelId?: string | null
     securityLogChannelId?: string | null
+    modRole?: string | null
+    seniorModRole?: string | null
+    adminRole?: string | null
+    mutedRole?: string | null
+    prefix?: string
   }
 
   export type GuildSettingCreateOrConnectWithoutGuildInput = {
@@ -15915,6 +22905,8 @@ export namespace Prisma {
   export type ModerationCaseCreateWithoutGuildInput = {
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutCasesInput
     moderator: UserCreateNestedOneWithoutModeratedInput
@@ -15926,6 +22918,8 @@ export namespace Prisma {
     moderatorId: string
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -16054,6 +23048,79 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RoleCommandPermissionCreateWithoutGuildInput = {
+    roleId: string
+    command: string
+    createdAt?: Date | string
+  }
+
+  export type RoleCommandPermissionUncheckedCreateWithoutGuildInput = {
+    id?: number
+    roleId: string
+    command: string
+    createdAt?: Date | string
+  }
+
+  export type RoleCommandPermissionCreateOrConnectWithoutGuildInput = {
+    where: RoleCommandPermissionWhereUniqueInput
+    create: XOR<RoleCommandPermissionCreateWithoutGuildInput, RoleCommandPermissionUncheckedCreateWithoutGuildInput>
+  }
+
+  export type RoleCommandPermissionCreateManyGuildInputEnvelope = {
+    data: RoleCommandPermissionCreateManyGuildInput | RoleCommandPermissionCreateManyGuildInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RuleCreateWithoutGuildInput = {
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type RuleUncheckedCreateWithoutGuildInput = {
+    id?: number
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type RuleCreateOrConnectWithoutGuildInput = {
+    where: RuleWhereUniqueInput
+    create: XOR<RuleCreateWithoutGuildInput, RuleUncheckedCreateWithoutGuildInput>
+  }
+
+  export type RuleCreateManyGuildInputEnvelope = {
+    data: RuleCreateManyGuildInput | RuleCreateManyGuildInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DashboardAuditLogCreateWithoutGuildInput = {
+    action: string
+    targetType?: string | null
+    targetId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutDashboardAuditLogInput
+  }
+
+  export type DashboardAuditLogUncheckedCreateWithoutGuildInput = {
+    id?: number
+    actorUserId: string
+    action: string
+    targetType?: string | null
+    targetId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type DashboardAuditLogCreateOrConnectWithoutGuildInput = {
+    where: DashboardAuditLogWhereUniqueInput
+    create: XOR<DashboardAuditLogCreateWithoutGuildInput, DashboardAuditLogUncheckedCreateWithoutGuildInput>
+  }
+
+  export type DashboardAuditLogCreateManyGuildInputEnvelope = {
+    data: DashboardAuditLogCreateManyGuildInput | DashboardAuditLogCreateManyGuildInput[]
+    skipDuplicates?: boolean
+  }
+
   export type GuildSettingUpsertWithoutGuildInput = {
     update: XOR<GuildSettingUpdateWithoutGuildInput, GuildSettingUncheckedUpdateWithoutGuildInput>
     create: XOR<GuildSettingCreateWithoutGuildInput, GuildSettingUncheckedCreateWithoutGuildInput>
@@ -16079,6 +23146,11 @@ export namespace Prisma {
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
     modLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     securityLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
+    modRole?: NullableStringFieldUpdateOperationsInput | string | null
+    seniorModRole?: NullableStringFieldUpdateOperationsInput | string | null
+    adminRole?: NullableStringFieldUpdateOperationsInput | string | null
+    mutedRole?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix?: StringFieldUpdateOperationsInput | string
   }
 
   export type GuildSettingUncheckedUpdateWithoutGuildInput = {
@@ -16095,6 +23167,11 @@ export namespace Prisma {
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
     modLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     securityLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
+    modRole?: NullableStringFieldUpdateOperationsInput | string | null
+    seniorModRole?: NullableStringFieldUpdateOperationsInput | string | null
+    adminRole?: NullableStringFieldUpdateOperationsInput | string | null
+    mutedRole?: NullableStringFieldUpdateOperationsInput | string | null
+    prefix?: StringFieldUpdateOperationsInput | string
   }
 
   export type ModerationCaseUpsertWithWhereUniqueWithoutGuildInput = {
@@ -16237,6 +23314,75 @@ export namespace Prisma {
     timestamp?: DateTimeFilter<"MessageActivity"> | Date | string
   }
 
+  export type RoleCommandPermissionUpsertWithWhereUniqueWithoutGuildInput = {
+    where: RoleCommandPermissionWhereUniqueInput
+    update: XOR<RoleCommandPermissionUpdateWithoutGuildInput, RoleCommandPermissionUncheckedUpdateWithoutGuildInput>
+    create: XOR<RoleCommandPermissionCreateWithoutGuildInput, RoleCommandPermissionUncheckedCreateWithoutGuildInput>
+  }
+
+  export type RoleCommandPermissionUpdateWithWhereUniqueWithoutGuildInput = {
+    where: RoleCommandPermissionWhereUniqueInput
+    data: XOR<RoleCommandPermissionUpdateWithoutGuildInput, RoleCommandPermissionUncheckedUpdateWithoutGuildInput>
+  }
+
+  export type RoleCommandPermissionUpdateManyWithWhereWithoutGuildInput = {
+    where: RoleCommandPermissionScalarWhereInput
+    data: XOR<RoleCommandPermissionUpdateManyMutationInput, RoleCommandPermissionUncheckedUpdateManyWithoutGuildInput>
+  }
+
+  export type RoleCommandPermissionScalarWhereInput = {
+    AND?: RoleCommandPermissionScalarWhereInput | RoleCommandPermissionScalarWhereInput[]
+    OR?: RoleCommandPermissionScalarWhereInput[]
+    NOT?: RoleCommandPermissionScalarWhereInput | RoleCommandPermissionScalarWhereInput[]
+    id?: IntFilter<"RoleCommandPermission"> | number
+    guildId?: StringFilter<"RoleCommandPermission"> | string
+    roleId?: StringFilter<"RoleCommandPermission"> | string
+    command?: StringFilter<"RoleCommandPermission"> | string
+    createdAt?: DateTimeFilter<"RoleCommandPermission"> | Date | string
+  }
+
+  export type RuleUpsertWithWhereUniqueWithoutGuildInput = {
+    where: RuleWhereUniqueInput
+    update: XOR<RuleUpdateWithoutGuildInput, RuleUncheckedUpdateWithoutGuildInput>
+    create: XOR<RuleCreateWithoutGuildInput, RuleUncheckedCreateWithoutGuildInput>
+  }
+
+  export type RuleUpdateWithWhereUniqueWithoutGuildInput = {
+    where: RuleWhereUniqueInput
+    data: XOR<RuleUpdateWithoutGuildInput, RuleUncheckedUpdateWithoutGuildInput>
+  }
+
+  export type RuleUpdateManyWithWhereWithoutGuildInput = {
+    where: RuleScalarWhereInput
+    data: XOR<RuleUpdateManyMutationInput, RuleUncheckedUpdateManyWithoutGuildInput>
+  }
+
+  export type RuleScalarWhereInput = {
+    AND?: RuleScalarWhereInput | RuleScalarWhereInput[]
+    OR?: RuleScalarWhereInput[]
+    NOT?: RuleScalarWhereInput | RuleScalarWhereInput[]
+    id?: IntFilter<"Rule"> | number
+    guildId?: StringFilter<"Rule"> | string
+    content?: StringFilter<"Rule"> | string
+    createdAt?: DateTimeFilter<"Rule"> | Date | string
+  }
+
+  export type DashboardAuditLogUpsertWithWhereUniqueWithoutGuildInput = {
+    where: DashboardAuditLogWhereUniqueInput
+    update: XOR<DashboardAuditLogUpdateWithoutGuildInput, DashboardAuditLogUncheckedUpdateWithoutGuildInput>
+    create: XOR<DashboardAuditLogCreateWithoutGuildInput, DashboardAuditLogUncheckedCreateWithoutGuildInput>
+  }
+
+  export type DashboardAuditLogUpdateWithWhereUniqueWithoutGuildInput = {
+    where: DashboardAuditLogWhereUniqueInput
+    data: XOR<DashboardAuditLogUpdateWithoutGuildInput, DashboardAuditLogUncheckedUpdateWithoutGuildInput>
+  }
+
+  export type DashboardAuditLogUpdateManyWithWhereWithoutGuildInput = {
+    where: DashboardAuditLogScalarWhereInput
+    data: XOR<DashboardAuditLogUpdateManyMutationInput, DashboardAuditLogUncheckedUpdateManyWithoutGuildInput>
+  }
+
   export type GuildCreateWithoutSettingsInput = {
     id: string
     name: string
@@ -16249,6 +23395,9 @@ export namespace Prisma {
     raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutSettingsInput = {
@@ -16263,6 +23412,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutSettingsInput = {
@@ -16293,6 +23445,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutSettingsInput = {
@@ -16307,6 +23462,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutCasesInput = {
@@ -16321,6 +23479,9 @@ export namespace Prisma {
     raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutCasesInput = {
@@ -16335,6 +23496,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutCasesInput = {
@@ -16345,19 +23509,29 @@ export namespace Prisma {
   export type UserCreateWithoutCasesInput = {
     id: string
     username: string
+    globalName?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
     moderated?: ModerationCaseCreateNestedManyWithoutModeratorInput
     warnings?: WarningCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCasesInput = {
     id: string
     username: string
+    globalName?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
     moderated?: ModerationCaseUncheckedCreateNestedManyWithoutModeratorInput
     warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCasesInput = {
@@ -16368,19 +23542,29 @@ export namespace Prisma {
   export type UserCreateWithoutModeratedInput = {
     id: string
     username: string
+    globalName?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
     cases?: ModerationCaseCreateNestedManyWithoutUserInput
     warnings?: WarningCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutModeratedInput = {
     id: string
     username: string
+    globalName?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
     cases?: ModerationCaseUncheckedCreateNestedManyWithoutUserInput
     warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutModeratedInput = {
@@ -16411,6 +23595,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutCasesInput = {
@@ -16425,6 +23612,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type UserUpsertWithoutCasesInput = {
@@ -16441,19 +23631,29 @@ export namespace Prisma {
   export type UserUpdateWithoutCasesInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     moderated?: ModerationCaseUpdateManyWithoutModeratorNestedInput
     warnings?: WarningUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCasesInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     moderated?: ModerationCaseUncheckedUpdateManyWithoutModeratorNestedInput
     warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutModeratedInput = {
@@ -16470,19 +23670,29 @@ export namespace Prisma {
   export type UserUpdateWithoutModeratedInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cases?: ModerationCaseUpdateManyWithoutUserNestedInput
     warnings?: WarningUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutModeratedInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cases?: ModerationCaseUncheckedUpdateManyWithoutUserNestedInput
     warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GuildCreateWithoutWarningsInput = {
@@ -16497,6 +23707,9 @@ export namespace Prisma {
     raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutWarningsInput = {
@@ -16511,6 +23724,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutWarningsInput = {
@@ -16521,19 +23737,29 @@ export namespace Prisma {
   export type UserCreateWithoutWarningsInput = {
     id: string
     username: string
+    globalName?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
     cases?: ModerationCaseCreateNestedManyWithoutUserInput
     moderated?: ModerationCaseCreateNestedManyWithoutModeratorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWarningsInput = {
     id: string
     username: string
+    globalName?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
     cases?: ModerationCaseUncheckedCreateNestedManyWithoutUserInput
     moderated?: ModerationCaseUncheckedCreateNestedManyWithoutModeratorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWarningsInput = {
@@ -16564,6 +23790,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutWarningsInput = {
@@ -16578,6 +23807,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type UserUpsertWithoutWarningsInput = {
@@ -16594,19 +23826,29 @@ export namespace Prisma {
   export type UserUpdateWithoutWarningsInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cases?: ModerationCaseUpdateManyWithoutUserNestedInput
     moderated?: ModerationCaseUpdateManyWithoutModeratorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWarningsInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cases?: ModerationCaseUncheckedUpdateManyWithoutUserNestedInput
     moderated?: ModerationCaseUncheckedUpdateManyWithoutModeratorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GuildCreateWithoutSecurityEventsInput = {
@@ -16621,6 +23863,9 @@ export namespace Prisma {
     raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutSecurityEventsInput = {
@@ -16635,6 +23880,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutSecurityEventsInput = {
@@ -16665,6 +23913,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutSecurityEventsInput = {
@@ -16679,6 +23930,9 @@ export namespace Prisma {
     raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutRaidEventsInput = {
@@ -16693,6 +23947,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutRaidEventsInput = {
@@ -16707,6 +23964,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutRaidEventsInput = {
@@ -16737,6 +23997,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutRaidEventsInput = {
@@ -16751,6 +24014,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutMemberSnapshotsInput = {
@@ -16765,6 +24031,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutGuildInput
     raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutMemberSnapshotsInput = {
@@ -16779,6 +24048,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutGuildInput
     raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutMemberSnapshotsInput = {
@@ -16809,6 +24081,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutGuildNestedInput
     raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutMemberSnapshotsInput = {
@@ -16823,6 +24098,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutGuildNestedInput
     raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutMessageActivityInput = {
@@ -16837,6 +24115,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutGuildInput
     raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutMessageActivityInput = {
@@ -16851,6 +24132,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutGuildInput
     raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
     memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutMessageActivityInput = {
@@ -16881,6 +24165,9 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutGuildNestedInput
     raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutMessageActivityInput = {
@@ -16895,6 +24182,333 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutGuildNestedInput
     raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
     memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+  }
+
+  export type GuildCreateWithoutRolePermissionsInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseCreateNestedManyWithoutGuildInput
+    warnings?: WarningCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+  }
+
+  export type GuildUncheckedCreateWithoutRolePermissionsInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingUncheckedCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseUncheckedCreateNestedManyWithoutGuildInput
+    warnings?: WarningUncheckedCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+  }
+
+  export type GuildCreateOrConnectWithoutRolePermissionsInput = {
+    where: GuildWhereUniqueInput
+    create: XOR<GuildCreateWithoutRolePermissionsInput, GuildUncheckedCreateWithoutRolePermissionsInput>
+  }
+
+  export type GuildUpsertWithoutRolePermissionsInput = {
+    update: XOR<GuildUpdateWithoutRolePermissionsInput, GuildUncheckedUpdateWithoutRolePermissionsInput>
+    create: XOR<GuildCreateWithoutRolePermissionsInput, GuildUncheckedCreateWithoutRolePermissionsInput>
+    where?: GuildWhereInput
+  }
+
+  export type GuildUpdateToOneWithWhereWithoutRolePermissionsInput = {
+    where?: GuildWhereInput
+    data: XOR<GuildUpdateWithoutRolePermissionsInput, GuildUncheckedUpdateWithoutRolePermissionsInput>
+  }
+
+  export type GuildUpdateWithoutRolePermissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+  }
+
+  export type GuildUncheckedUpdateWithoutRolePermissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUncheckedUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUncheckedUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUncheckedUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+  }
+
+  export type GuildCreateWithoutRulesInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseCreateNestedManyWithoutGuildInput
+    warnings?: WarningCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+  }
+
+  export type GuildUncheckedCreateWithoutRulesInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingUncheckedCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseUncheckedCreateNestedManyWithoutGuildInput
+    warnings?: WarningUncheckedCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+  }
+
+  export type GuildCreateOrConnectWithoutRulesInput = {
+    where: GuildWhereUniqueInput
+    create: XOR<GuildCreateWithoutRulesInput, GuildUncheckedCreateWithoutRulesInput>
+  }
+
+  export type GuildUpsertWithoutRulesInput = {
+    update: XOR<GuildUpdateWithoutRulesInput, GuildUncheckedUpdateWithoutRulesInput>
+    create: XOR<GuildCreateWithoutRulesInput, GuildUncheckedCreateWithoutRulesInput>
+    where?: GuildWhereInput
+  }
+
+  export type GuildUpdateToOneWithWhereWithoutRulesInput = {
+    where?: GuildWhereInput
+    data: XOR<GuildUpdateWithoutRulesInput, GuildUncheckedUpdateWithoutRulesInput>
+  }
+
+  export type GuildUpdateWithoutRulesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+  }
+
+  export type GuildUncheckedUpdateWithoutRulesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUncheckedUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUncheckedUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUncheckedUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+  }
+
+  export type GuildCreateWithoutDashboardAuditLogInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseCreateNestedManyWithoutGuildInput
+    warnings?: WarningCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+  }
+
+  export type GuildUncheckedCreateWithoutDashboardAuditLogInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingUncheckedCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseUncheckedCreateNestedManyWithoutGuildInput
+    warnings?: WarningUncheckedCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+  }
+
+  export type GuildCreateOrConnectWithoutDashboardAuditLogInput = {
+    where: GuildWhereUniqueInput
+    create: XOR<GuildCreateWithoutDashboardAuditLogInput, GuildUncheckedCreateWithoutDashboardAuditLogInput>
+  }
+
+  export type UserCreateWithoutDashboardAuditLogInput = {
+    id: string
+    username: string
+    globalName?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    cases?: ModerationCaseCreateNestedManyWithoutUserInput
+    moderated?: ModerationCaseCreateNestedManyWithoutModeratorInput
+    warnings?: WarningCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDashboardAuditLogInput = {
+    id: string
+    username: string
+    globalName?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    cases?: ModerationCaseUncheckedCreateNestedManyWithoutUserInput
+    moderated?: ModerationCaseUncheckedCreateNestedManyWithoutModeratorInput
+    warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDashboardAuditLogInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDashboardAuditLogInput, UserUncheckedCreateWithoutDashboardAuditLogInput>
+  }
+
+  export type GuildUpsertWithoutDashboardAuditLogInput = {
+    update: XOR<GuildUpdateWithoutDashboardAuditLogInput, GuildUncheckedUpdateWithoutDashboardAuditLogInput>
+    create: XOR<GuildCreateWithoutDashboardAuditLogInput, GuildUncheckedCreateWithoutDashboardAuditLogInput>
+    where?: GuildWhereInput
+  }
+
+  export type GuildUpdateToOneWithWhereWithoutDashboardAuditLogInput = {
+    where?: GuildWhereInput
+    data: XOR<GuildUpdateWithoutDashboardAuditLogInput, GuildUncheckedUpdateWithoutDashboardAuditLogInput>
+  }
+
+  export type GuildUpdateWithoutDashboardAuditLogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+  }
+
+  export type GuildUncheckedUpdateWithoutDashboardAuditLogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUncheckedUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUncheckedUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUncheckedUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+  }
+
+  export type UserUpsertWithoutDashboardAuditLogInput = {
+    update: XOR<UserUpdateWithoutDashboardAuditLogInput, UserUncheckedUpdateWithoutDashboardAuditLogInput>
+    create: XOR<UserCreateWithoutDashboardAuditLogInput, UserUncheckedCreateWithoutDashboardAuditLogInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDashboardAuditLogInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDashboardAuditLogInput, UserUncheckedUpdateWithoutDashboardAuditLogInput>
+  }
+
+  export type UserUpdateWithoutDashboardAuditLogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cases?: ModerationCaseUpdateManyWithoutUserNestedInput
+    moderated?: ModerationCaseUpdateManyWithoutModeratorNestedInput
+    warnings?: WarningUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDashboardAuditLogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cases?: ModerationCaseUncheckedUpdateManyWithoutUserNestedInput
+    moderated?: ModerationCaseUncheckedUpdateManyWithoutModeratorNestedInput
+    warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ModerationCaseCreateManyUserInput = {
@@ -16903,6 +24517,8 @@ export namespace Prisma {
     moderatorId: string
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -16912,6 +24528,8 @@ export namespace Prisma {
     userId: string
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -16922,9 +24540,28 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type SessionCreateManyUserInput = {
+    id?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+  }
+
+  export type DashboardAuditLogCreateManyUserInput = {
+    id?: number
+    guildId: string
+    action: string
+    targetType?: string | null
+    targetId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
   export type ModerationCaseUpdateWithoutUserInput = {
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guild?: GuildUpdateOneRequiredWithoutCasesNestedInput
     moderator?: UserUpdateOneRequiredWithoutModeratedNestedInput
@@ -16936,6 +24573,8 @@ export namespace Prisma {
     moderatorId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16945,12 +24584,16 @@ export namespace Prisma {
     moderatorId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ModerationCaseUpdateWithoutModeratorInput = {
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guild?: GuildUpdateOneRequiredWithoutCasesNestedInput
     user?: UserUpdateOneRequiredWithoutCasesNestedInput
@@ -16962,6 +24605,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16971,6 +24616,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16994,12 +24641,64 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DashboardAuditLogUpdateWithoutUserInput = {
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guild?: GuildUpdateOneRequiredWithoutDashboardAuditLogNestedInput
+  }
+
+  export type DashboardAuditLogUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DashboardAuditLogUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ModerationCaseCreateManyGuildInput = {
     id?: number
     userId: string
     moderatorId: string
     type: string
     reason?: string | null
+    duration?: string | null
+    expiresAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -17038,9 +24737,34 @@ export namespace Prisma {
     timestamp?: Date | string
   }
 
+  export type RoleCommandPermissionCreateManyGuildInput = {
+    id?: number
+    roleId: string
+    command: string
+    createdAt?: Date | string
+  }
+
+  export type RuleCreateManyGuildInput = {
+    id?: number
+    content: string
+    createdAt?: Date | string
+  }
+
+  export type DashboardAuditLogCreateManyGuildInput = {
+    id?: number
+    actorUserId: string
+    action: string
+    targetType?: string | null
+    targetId?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
   export type ModerationCaseUpdateWithoutGuildInput = {
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCasesNestedInput
     moderator?: UserUpdateOneRequiredWithoutModeratedNestedInput
@@ -17052,6 +24776,8 @@ export namespace Prisma {
     moderatorId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -17061,6 +24787,8 @@ export namespace Prisma {
     moderatorId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -17164,6 +24892,72 @@ export namespace Prisma {
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RoleCommandPermissionUpdateWithoutGuildInput = {
+    roleId?: StringFieldUpdateOperationsInput | string
+    command?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleCommandPermissionUncheckedUpdateWithoutGuildInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    roleId?: StringFieldUpdateOperationsInput | string
+    command?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleCommandPermissionUncheckedUpdateManyWithoutGuildInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    roleId?: StringFieldUpdateOperationsInput | string
+    command?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RuleUpdateWithoutGuildInput = {
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RuleUncheckedUpdateWithoutGuildInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RuleUncheckedUpdateManyWithoutGuildInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DashboardAuditLogUpdateWithoutGuildInput = {
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDashboardAuditLogNestedInput
+  }
+
+  export type DashboardAuditLogUncheckedUpdateWithoutGuildInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    actorUserId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DashboardAuditLogUncheckedUpdateManyWithoutGuildInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    actorUserId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    targetId?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
 
 
   /**
@@ -17181,6 +24975,10 @@ export namespace Prisma {
      * @deprecated Use UserDefaultArgs instead
      */
     export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SessionDefaultArgs instead
+     */
+    export type SessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SessionDefaultArgs<ExtArgs>
     /**
      * @deprecated Use GuildDefaultArgs instead
      */
@@ -17221,6 +25019,22 @@ export namespace Prisma {
      * @deprecated Use BotStatHistoryDefaultArgs instead
      */
     export type BotStatHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = BotStatHistoryDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RoleCommandPermissionDefaultArgs instead
+     */
+    export type RoleCommandPermissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RoleCommandPermissionDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RuleDefaultArgs instead
+     */
+    export type RuleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RuleDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AfkStatusDefaultArgs instead
+     */
+    export type AfkStatusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AfkStatusDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use DashboardAuditLogDefaultArgs instead
+     */
+    export type DashboardAuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DashboardAuditLogDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

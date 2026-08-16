@@ -1,11 +1,11 @@
 'use server';
 
-import { PrismaClient } from '@niko/db';
+import { prisma } from "@niko/db";
 import { getSession } from '@/lib/session';
-import { hasManageGuildPermission, getDiscordUserGuilds } from '@/lib/discord';
-import { cookies } from 'next/headers';
+import { authorizeGuildAction } from '@/lib/auth';
+import { logDashboardAction } from '@/lib/audit';
 
-const prisma = new PrismaClient();
+
 
 export interface DiscordRole {
   id: string;
@@ -47,52 +47,34 @@ export async function getRoleSettings(guildId: string) {
     where: { guildId }
   });
 
-  const cmdPerms = await (prisma as any).roleCommandPermission.findMany({
+  const cmdPerms = await prisma.roleCommandPermission.findMany({
     where: { guildId }
   });
 
   return { setting, cmdPerms };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function saveRoleSettings(guildId: string, data: any) {
-  const session = await getSession();
-  const cookieStore = await cookies();
-  const discordToken = cookieStore.get('discord_token')?.value;
+  const { session } = await authorizeGuildAction(guildId);
 
-  if (!session || !discordToken) throw new Error('Unauthorized');
-
-  const guilds = await getDiscordUserGuilds(discordToken);
-  const targetGuild = guilds.find(g => g.id === guildId);
-
-  if (!targetGuild || (!targetGuild.owner && !hasManageGuildPermission(targetGuild.permissions))) {
-    throw new Error('You do not have permission to manage this server.');
-  }
-
-  // Update base guild settings
-  await (prisma as any).guildSetting.upsert({
+  await prisma.guildSetting.upsert({
     where: { guildId },
     update: {
-      modRole: data.modRole || null,
-      seniorModRole: data.seniorModRole || null,
-      adminRole: data.adminRole || null,
       mutedRole: data.mutedRole || null,
     },
     create: {
       guildId,
-      modRole: data.modRole || null,
-      seniorModRole: data.seniorModRole || null,
-      adminRole: data.adminRole || null,
       mutedRole: data.mutedRole || null,
     }
   });
 
-  // Recreate command permissions
-  await (prisma as any).roleCommandPermission.deleteMany({
+  await prisma.roleCommandPermission.deleteMany({
     where: { guildId }
   });
 
   const createData = [];
-  const commands = ['warn', 'timeout', 'kick', 'ban', 'purge', 'security'];
+  const commands = ['warn', 'mute', 'kick', 'ban', 'unban', 'purge', 'security', 'rules', 'muterole', 'permissions'];
   for (const cmd of commands) {
     if (data.commandRoles && Array.isArray(data.commandRoles[cmd])) {
       for (const roleId of data.commandRoles[cmd]) {
@@ -102,11 +84,25 @@ export async function saveRoleSettings(guildId: string, data: any) {
   }
 
   if (createData.length > 0) {
-    await (prisma as any).roleCommandPermission.createMany({
+    await prisma.roleCommandPermission.createMany({
       data: createData,
       skipDuplicates: true
     });
   }
+
+  await prisma.$executeRawUnsafe(`NOTIFY cache_invalidate, 'guildSettings:${guildId}'`);
+
+  await logDashboardAction({
+    guildId,
+    actorUserId: session.userId,
+    action: 'UPDATE_ROLE_PERMISSIONS',
+    targetType: 'PERMISSIONS',
+    targetId: 'rolePermissions',
+    metadata: {
+      mutedRole: data.mutedRole,
+      commandsUpdated: createData.length
+    }
+  });
 
   return { success: true };
 }

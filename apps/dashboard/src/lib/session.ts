@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@niko/db';
+import { prisma } from "@niko/db";
 import crypto from 'crypto';
 
-const prisma = new PrismaClient();
+
 
 export async function createSession(userId: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);

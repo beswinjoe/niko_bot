@@ -4,19 +4,37 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id        String   @id // Discord User ID
-  username  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String    @id // Discord User ID
+  username    String
+  globalName  String?
+  avatar      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  lastLoginAt DateTime?
 
-  cases     ModerationCase[] @relation("UserCases")
-  moderated ModerationCase[] @relation("ModeratorCases")
-  warnings  Warning[]
+  cases             ModerationCase[]    @relation("UserCases")
+  moderated         ModerationCase[]    @relation("ModeratorCases")
+  warnings          Warning[]
+  sessions          Session[]
+  DashboardAuditLog DashboardAuditLog[]
+}
+
+model Session {
+  id         String   @id @default(uuid())
+  userId     String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  lastUsedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model Guild {
@@ -26,13 +44,16 @@ model Guild {
   joinedAt    DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  settings        GuildSetting?
-  cases           ModerationCase[]
-  warnings        Warning[]
-  securityEvents  SecurityEvent[]
-  raidEvents      RaidEvent[]
-  memberSnapshots MemberSnapshot[]
-  messageActivity MessageActivity[]
+  settings          GuildSetting?
+  cases             ModerationCase[]
+  warnings          Warning[]
+  securityEvents    SecurityEvent[]
+  raidEvents        RaidEvent[]
+  memberSnapshots   MemberSnapshot[]
+  messageActivity   MessageActivity[]
+  rolePermissions   RoleCommandPermission[]
+  rules             Rule[]
+  DashboardAuditLog DashboardAuditLog[]
 }
 
 model GuildSetting {
@@ -57,16 +78,26 @@ model GuildSetting {
   // Channels
   modLogChannelId      String?
   securityLogChannelId String?
+
+  // Role Configurations
+  modRole       String?
+  seniorModRole String?
+  adminRole     String?
+  mutedRole     String?
+
+  prefix String @default("!")
 }
 
 model ModerationCase {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   guildId     String
   userId      String
   moderatorId String
   type        String // BAN, KICK, TIMEOUT, WARN, UNWARN, PURGE, LOCK
   reason      String?
-  createdAt   DateTime @default(now())
+  duration    String?
+  expiresAt   DateTime?
+  createdAt   DateTime  @default(now())
 
   guild     Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
   user      User  @relation("UserCases", fields: [userId], references: [id], onDelete: Cascade)
@@ -150,4 +181,51 @@ model BotStatHistory {
   userCount   Int
   shardCount  Int
   timestamp   DateTime @default(now())
+}
+
+model RoleCommandPermission {
+  id        Int      @id @default(autoincrement())
+  guildId   String
+  roleId    String
+  command   String
+  createdAt DateTime @default(now())
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  @@unique([guildId, roleId, command])
+  @@index([guildId, command])
+}
+
+model Rule {
+  id        Int      @id @default(autoincrement())
+  guildId   String
+  content   String
+  createdAt DateTime @default(now())
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  @@index([guildId])
+}
+
+model AfkStatus {
+  userId    String   @id
+  reason    String?
+  startedAt DateTime @default(now())
+}
+
+model DashboardAuditLog {
+  id          Int      @id @default(autoincrement())
+  guildId     String
+  actorUserId String
+  action      String // e.g., "GRANTED_PERMISSION", "TOGGLED_SETTING"
+  targetType  String? // e.g., "ROLE", "SETTING"
+  targetId    String? // e.g., "1234567890", "antiRaidEnabled"
+  metadata    Json? // Any extra contextual data
+  createdAt   DateTime @default(now())
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [actorUserId], references: [id], onDelete: Cascade)
+
+  @@index([guildId])
+  @@index([actorUserId])
 }

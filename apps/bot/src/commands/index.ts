@@ -4,4 +4,3 @@ export interface Command {
   data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | SlashCommandOptionsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | any;
   execute: (interaction: ChatInputCommandInteraction) => Promise<any>;
 }
-

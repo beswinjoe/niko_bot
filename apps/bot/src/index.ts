@@ -1,11 +1,6 @@
 import 'dotenv/config';
 import { client, commands } from './client';
 import { Events, REST, Routes } from 'discord.js';
-import { nikoCommand } from './commands/niko';
-import { securityCommand } from './commands/security';
-import { moderationCommand } from './commands/moderation';
-import { configCommand } from './commands/config';
-import { analyticsCommand } from './commands/analytics';
 import { sentinel } from './services/sentinel';
 import { intelligence } from './services/intelligence';
 import { startWorker, boss } from './worker';
@@ -13,18 +8,32 @@ import { initAIModerationWorker } from './worker/aiModeration';
 import { initUnbanWorker } from './worker/unbanWorker';
 import { handlePrefixCommand } from './handlers/prefixCommandHandler';
 
+// Import slash commands
+import { moderationCommand } from './commands/moderation';
+import { rulesCommand } from './commands/rules';
+import { afkCommand } from './commands/afk';
+import { permissionsCommand } from './commands/permissions';
+import { nikoCommand } from './commands/niko';
+import { muteroleCommand } from './commands/muterole';
+
 async function bootstrap() {
   const token = process.env.DISCORD_TOKEN;
   if (!token) {
     throw new Error('DISCORD_TOKEN is not defined in the environment variables.');
   }
 
-  // Load events and commands here...
-  commands.set(nikoCommand.data.name, nikoCommand);
-  commands.set(securityCommand.data.name, securityCommand);
-  commands.set(moderationCommand.data.name, moderationCommand);
-  commands.set(configCommand.data.name, configCommand);
-  commands.set(analyticsCommand.data.name, analyticsCommand);
+  // Load slash commands into collection
+  const slashCommands = [
+    moderationCommand,
+    rulesCommand,
+    afkCommand,
+    permissionsCommand,
+    nikoCommand,
+    muteroleCommand
+  ];
+  for (const cmd of slashCommands) {
+    commands.set(cmd.data.name, cmd);
+  }
 
   // Initialize background workers (pg-boss via PostgreSQL)
   await startWorker();
@@ -35,9 +44,9 @@ async function bootstrap() {
     console.log(`[Niko] Logged in as ${readyClient.user.tag}`);
     const rest = new REST().setToken(token);
     try {
-      console.log(`[Niko] Started refreshing ${commands.size} application (/) commands.`);
+      console.log(`[Niko] Started refreshing application (/) commands.`);
       
-      const body = commands.map(cmd => cmd.data.toJSON());
+      const body = slashCommands.map(c => c.data.toJSON());
       const devGuildId = process.env.DEV_GUILD_ID;
 
       if (process.env.NODE_ENV === 'development' && devGuildId) {
@@ -58,38 +67,7 @@ async function bootstrap() {
     }
   });
 
-  client.on(Events.GuildMemberAdd, async (member) => {
-    await sentinel.evaluateJoin(member);
-  });
-
-  client.on(Events.MessageCreate, async (message) => {
-    if (message.author.bot) return;
-    
-    // Process prefix commands (includes AFK check/mention handling inside)
-    await handlePrefixCommand(message);
-    
-    await sentinel.evaluateMessage(message);
-    
-    if (message.guild) {
-      // Enqueue AI moderation job to pg-boss (idempotent, retries enabled)
-      await boss.send('ai-moderation', {
-        messageId: message.id,
-        channelId: message.channel.id,
-        guildId: message.guild.id,
-        content: message.content,
-        authorId: message.author.id,
-        authorTag: message.author.tag,
-      }, {
-        retryLimit: 3,
-        retryBackoff: true,
-        singletonKey: message.id // Ensure we don't duplicate analysis for the exact same message
-      });
-
-      await intelligence.trackMessageActivity(message.guild.id, message.channel.id);
-    }
-  });
-
-  client.on(Events.InteractionCreate, async (interaction) => {
+  client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
     const command = commands.get(interaction.commandName);
@@ -107,6 +85,41 @@ async function bootstrap() {
       } else {
         await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
       }
+    }
+  });
+
+  client.on(Events.GuildMemberAdd, async (member) => {
+    await sentinel.evaluateJoin(member);
+  });
+
+  client.on(Events.MessageCreate, async (message) => {
+    if (message.author.bot) return;
+    
+    try {
+      // Process prefix commands (includes AFK check/mention handling inside)
+      await handlePrefixCommand(message);
+      
+      await sentinel.evaluateMessage(message);
+      
+      if (message.guild) {
+        // Enqueue AI moderation job to pg-boss (idempotent, retries enabled)
+        await boss.send('ai-moderation', {
+          messageId: message.id,
+          channelId: message.channel.id,
+          guildId: message.guild.id,
+          content: message.content,
+          authorId: message.author.id,
+          authorTag: message.author.tag,
+        }, {
+          retryLimit: 3,
+          retryBackoff: true,
+          singletonKey: message.id
+        });
+
+        await intelligence.trackMessageActivity(message.guild.id, message.channel.id);
+      }
+    } catch (error) {
+      console.error('[MessageCreate Error]', error);
     }
   });
 

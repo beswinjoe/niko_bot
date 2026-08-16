@@ -9,23 +9,23 @@ export default async function PermissionsPage({ params }: { params: Promise<{ gu
 
   const { guildId } = await params;
 
-  try {
-    const roles = await getGuildRoles(guildId);
-    const data = await getRoleSettings(guildId);
+  const roles = await getGuildRoles(guildId).catch(() => []);
+  const data = await getRoleSettings(guildId).catch(() => ({ setting: null, cmdPerms: [] }));
 
-    return (
-      <PermissionsClient
-        guildId={guildId}
-        roles={roles}
-        initialData={data}
-      />
-    );
-  } catch (err: any) {
+  if (roles.length === 0) {
     return (
       <div className="p-8 text-center">
         <h1 className="text-2xl font-bold text-red-500 mb-4">Error Loading Permissions</h1>
-        <p className="text-neutral-400">{err.message}</p>
+        <p className="text-neutral-400">Failed to fetch Discord roles.</p>
       </div>
     );
   }
+
+  return (
+    <PermissionsClient
+      guildId={guildId}
+      roles={roles}
+      initialData={data}
+    />
+  );
 }

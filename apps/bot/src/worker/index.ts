@@ -1,7 +1,8 @@
 import { PgBoss } from 'pg-boss';
 
 export const boss = new PgBoss({
-  connectionString: process.env.DATABASE_URL as string
+  connectionString: process.env.DATABASE_URL as string,
+  maintenanceIntervalSeconds: 600
 });
 
 boss.on('error', (error: Error) => console.error('pg-boss error:', error));

@@ -125,8 +125,19 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
+  globalName: 'globalName',
+  avatar: 'avatar',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  lastLoginAt: 'lastLoginAt'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  lastUsedAt: 'lastUsedAt'
 };
 
 exports.Prisma.GuildScalarFieldEnum = {
@@ -151,7 +162,12 @@ exports.Prisma.GuildSettingScalarFieldEnum = {
   aiLogChannelId: 'aiLogChannelId',
   aiActionThreshold: 'aiActionThreshold',
   modLogChannelId: 'modLogChannelId',
-  securityLogChannelId: 'securityLogChannelId'
+  securityLogChannelId: 'securityLogChannelId',
+  modRole: 'modRole',
+  seniorModRole: 'seniorModRole',
+  adminRole: 'adminRole',
+  mutedRole: 'mutedRole',
+  prefix: 'prefix'
 };
 
 exports.Prisma.ModerationCaseScalarFieldEnum = {
@@ -161,6 +177,8 @@ exports.Prisma.ModerationCaseScalarFieldEnum = {
   moderatorId: 'moderatorId',
   type: 'type',
   reason: 'reason',
+  duration: 'duration',
+  expiresAt: 'expiresAt',
   createdAt: 'createdAt'
 };
 
@@ -220,9 +238,46 @@ exports.Prisma.BotStatHistoryScalarFieldEnum = {
   timestamp: 'timestamp'
 };
 
+exports.Prisma.RoleCommandPermissionScalarFieldEnum = {
+  id: 'id',
+  guildId: 'guildId',
+  roleId: 'roleId',
+  command: 'command',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.RuleScalarFieldEnum = {
+  id: 'id',
+  guildId: 'guildId',
+  content: 'content',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.AfkStatusScalarFieldEnum = {
+  userId: 'userId',
+  reason: 'reason',
+  startedAt: 'startedAt'
+};
+
+exports.Prisma.DashboardAuditLogScalarFieldEnum = {
+  id: 'id',
+  guildId: 'guildId',
+  actorUserId: 'actorUserId',
+  action: 'action',
+  targetType: 'targetType',
+  targetId: 'targetId',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -235,9 +290,16 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Session: 'Session',
   Guild: 'Guild',
   GuildSetting: 'GuildSetting',
   ModerationCase: 'ModerationCase',
@@ -247,7 +309,11 @@ exports.Prisma.ModelName = {
   MemberSnapshot: 'MemberSnapshot',
   MessageActivity: 'MessageActivity',
   BotStat: 'BotStat',
-  BotStatHistory: 'BotStatHistory'
+  BotStatHistory: 'BotStatHistory',
+  RoleCommandPermission: 'RoleCommandPermission',
+  Rule: 'Rule',
+  AfkStatus: 'AfkStatus',
+  DashboardAuditLog: 'DashboardAuditLog'
 };
 
 /**

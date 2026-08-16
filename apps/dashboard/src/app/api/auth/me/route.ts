@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getSession } from '@/lib/session';
-import { PrismaClient } from '@niko/db';
+import { prisma } from "@niko/db";
 
-const prisma = new PrismaClient();
+
 
 export async function GET() {
   const session = await getSession();

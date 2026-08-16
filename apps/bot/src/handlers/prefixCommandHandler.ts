@@ -1,21 +1,23 @@
 import { Message, EmbedBuilder } from 'discord.js';
 import { prisma } from '@niko/db';
 import { moderationService, ModerationAction } from '../services/moderationService';
+import { rulesService } from '../services/rulesService';
+import { afkService } from '../services/afkService';
+import { permissionsService } from '../services/permissionsService';
+import { helpService } from '../services/helpService';
+import { muteroleService } from '../services/muteroleService';
+import { intelligence } from '../services/intelligence';
 import { parseDuration } from '../utils/duration';
-import { handleRulesCommand } from '../commands/rules';
-import { handleAfkCommand, removeAfkIfActive, checkAfkMentions } from '../commands/afk';
-import { handlePermissionsCommand } from '../commands/permissions';
-import { handleHelpCommand } from '../commands/help';
+import { cache } from '../cache/CacheManager';
 
 export async function handlePrefixCommand(message: Message) {
   if (!message.guild || !message.member || !message.client.user || message.author.bot) return;
 
-  const settings = await (prisma as any).guildSetting.findUnique({ where: { guildId: message.guild.id } });
-  const prefix = settings?.prefix || '!';
+  const settings = await cache.getGuildSettings(message.guild.id);
+  const prefix = settings?.prefix || '$';
 
-  // AFK check & mentions handling (runs on every message, not just commands)
-  await removeAfkIfActive(message, prefix);
-  await checkAfkMentions(message);
+  // AFK check & mentions handling
+  await afkService.handleMessage(message, prefix);
 
   if (!message.content.startsWith(prefix)) return;
 
@@ -25,11 +27,11 @@ export async function handlePrefixCommand(message: Message) {
 
   if (!command) return;
 
-  if (command === 'rules') return handleRulesCommand(message, args);
-  if (command === 'afk') return handleAfkCommand(message, args);
-  if (command === 'permissions') return handlePermissionsCommand(message, args);
-  if (command === 'help') return handleHelpCommand(message, prefix);
-  
+  if (command === 'help') {
+    const res = helpService.getHelp(prefix);
+    return message.reply({ embeds: [res.embed!] });
+  }
+
   if (command === 'config' && args[0] === 'prefix') {
     if (message.member.id !== message.guild.ownerId && !message.member.permissions.has('ManageGuild')) {
       return message.reply('You do not have permission to change the prefix.');
@@ -43,7 +45,95 @@ export async function handlePrefixCommand(message: Message) {
       update: { prefix: newPrefix } as any,
       create: { guildId: message.guild.id, prefix: newPrefix } as any
     });
+    cache.invalidateGuildSettings(message.guild.id);
     return message.reply(`Prefix updated to \`${newPrefix}\``);
+  }
+
+  if (command === 'rules') {
+    const sub = args[0]?.toLowerCase();
+    if (sub === 'add') {
+      const content = args.slice(1).join(' ');
+      const res = await rulesService.addRule(message.guild, message.member, content);
+      return message.reply(res.success ? res.message! : res.error!);
+    } else if (sub === 'remove') {
+      const index = parseInt(args[1]);
+      const res = await rulesService.removeRule(message.guild, message.member, index);
+      return message.reply(res.success ? res.message! : res.error!);
+    } else {
+      const res = await rulesService.listRules(message.guild);
+      return res.success ? message.reply({ embeds: [res.embed!] }) : message.reply(res.error!);
+    }
+  }
+
+  if (command === 'afk') {
+    const sub = args[0]?.toLowerCase();
+    if (sub === 'remove') {
+      const res = await afkService.removeAfk(message.author.id);
+      return message.reply(res.success ? res.message! : res.error!);
+    } else if (sub === 'status') {
+      const res = await afkService.getStatus(message.author.id);
+      return message.reply(res.success ? res.message! : res.error!);
+    } else {
+      const reason = args.join(' ') || 'AFK';
+      const res = await afkService.setAfk(message.author.id, reason);
+      return message.reply(res.message!);
+    }
+  }
+
+  if (command === 'permissions') {
+    const sub = args[0]?.toLowerCase();
+    if (sub === 'add' || sub === 'remove') {
+      const roleArg = args[1];
+      const roleId = roleArg?.match(/^<@&(\d+)>$/)?.[1] || roleArg;
+      const cmdName = args[2]?.toLowerCase();
+      
+      const res = sub === 'add' 
+        ? await permissionsService.addPermission(message.guild, message.member, roleId, cmdName)
+        : await permissionsService.removePermission(message.guild, message.member, roleId, cmdName);
+      return message.reply(res.success ? res.message! : res.error!);
+    } else if (sub === 'list' || !sub) {
+      const res = await permissionsService.listPermissions(message.guild);
+      return message.reply(res.success ? { content: res.message!, allowedMentions: { parse: [] } } : res.error!);
+    }
+  }
+
+  if (command === 'muterole') {
+    const sub = args[0]?.toLowerCase();
+    if (sub === 'create') {
+      const name = args.slice(1).join(' ') || 'Muted';
+      const res = await muteroleService.createMuteRole(message.guild, message.member, name);
+      return message.reply(res.success ? res.message! : res.error!);
+    } else if (sub === 'remove') {
+      const res = await muteroleService.removeMuteRole(message.guild, message.member);
+      return message.reply(res.success ? res.message! : res.error!);
+    } else if (args[0]) {
+      const roleId = args[0].match(/^<@&(\d+)>$/)?.[1] || args[0];
+      const res = await muteroleService.setMuteRole(message.guild, message.member, roleId);
+      return message.reply(res.success ? res.message! : res.error!);
+    } else {
+      const res = await muteroleService.getMuteRole(message.guild, prefix);
+      return message.reply(res.success ? res.message! : res.error!);
+    }
+  }
+
+  if (command === 'why' || command === 'history') {
+    const targetArg = args[0];
+    if (!targetArg) return message.reply('Please provide a user.');
+    const targetIdMatch = targetArg.match(/^<@!?(\d+)>$/);
+    const targetId = targetIdMatch ? targetIdMatch[1] : targetArg;
+    
+    if (command === 'why') {
+      const res = await intelligence.getWhyContext(message.guild.id, targetId);
+      return res.success ? message.reply({ embeds: [res.embed!] }) : message.reply(res.error!);
+    } else {
+      const res = await intelligence.getHistory(message.guild.id, targetId);
+      return res.success ? message.reply({ embeds: [res.embed!] }) : message.reply(res.error!);
+    }
+  }
+
+  if (command === 'recommend') {
+    const res = await intelligence.getRecommendation(message.guild.id);
+    return message.reply({ embeds: [res.embed!] });
   }
 
   // Moderation commands
@@ -51,45 +141,21 @@ export async function handlePrefixCommand(message: Message) {
   if (!validModCommands.includes(command)) return;
 
   if (command === 'purge') {
-     const rolePerms = await (prisma as any).roleCommandPermission.findMany({ where: { guildId: message.guild.id } });
-     const cmdPerms = rolePerms.filter((p: any) => p.command === 'purge');
-     const hasPerm = message.member.id === message.guild.ownerId || 
-       (cmdPerms.length > 0 ? cmdPerms.some((p: any) => message.member!.roles.cache.has(p.roleId)) : true); // allow via Discord perms if no roles set
-
-     if (!hasPerm) return message.reply('You lack the configured role required for this command.');
-     if (!message.member.permissions.has('ManageMessages')) return message.reply('You do not have permission to use this command.');
-     
      const amount = parseInt(args[0]);
-     if (isNaN(amount) || amount < 1 || amount > 100) return message.reply('Please provide a valid amount between 1 and 100.');
-     
-     if (message.channel.isTextBased() && 'bulkDelete' in message.channel) {
-       const deleted = await message.channel.bulkDelete(amount, true).catch(() => null);
-       if (deleted) return message.channel.send(`Successfully purged ${deleted.size} messages.`).then(m => setTimeout(() => m.delete().catch(() => {}), 3000));
+     const res = await moderationService.purge(message.client, message.guild, message.member, message.channel, amount);
+     if (res.success && res.embed) {
+       const m = await message.reply({ embeds: [res.embed] });
+       setTimeout(() => m.delete().catch(() => {}), 3000);
+     } else {
+       return message.reply(res.error!);
      }
-     return message.reply('Failed to purge messages.');
+     return;
   }
 
   if (command === 'cases') {
-    // !cases [@user]
-    const filterUserId = args[0] ? args[0].match(/^<@!?(\d+)>$/)?.[1] || args[0] : null;
-    const where: any = { guildId: message.guild.id };
-    if (filterUserId) where.userId = filterUserId;
-
-    const cases = await (prisma as any).moderationCase.findMany({
-      where,
-      orderBy: { createdAt: 'desc' },
-      take: 10
-    });
-
-    const embed = new EmbedBuilder().setColor('#3B82F6').setTitle(`Moderation Cases`);
-    if (cases.length === 0) embed.setDescription('No cases found.');
-    else {
-      embed.setDescription(cases.map((c: any) => 
-        `\`#${c.id}\` **${c.type}** | Target: <@${c.userId}> | Mod: <@${c.moderatorId}> | Reason: ${c.reason || 'None'}` + 
-        (c.duration ? ` | Duration: ${c.duration}` : '')
-      ).join('\n'));
-    }
-    return message.reply({ embeds: [embed] });
+    const filterUserId = args[0] ? args[0].match(/^<@!?(\d+)>$/)?.[1] || args[0] : undefined;
+    const res = await moderationService.getCases(message.guild, filterUserId);
+    return res.success ? message.reply({ embeds: [res.embed!] }) : message.reply(res.error!);
   }
 
   if (args.length < 1) {
@@ -105,31 +171,9 @@ export async function handlePrefixCommand(message: Message) {
   }
 
   if (command === 'unban') {
-     const rolePerms = await (prisma as any).roleCommandPermission.findMany({ where: { guildId: message.guild.id } });
-     const cmdPerms = rolePerms.filter((p: any) => p.command === 'unban' || p.command === 'ban');
-     const hasPerm = message.member.id === message.guild.ownerId || 
-       (cmdPerms.length > 0 ? cmdPerms.some((p: any) => message.member!.roles.cache.has(p.roleId)) : true);
-
-     if (!hasPerm) return message.reply('You lack the configured role required for this command.');
-     if (!message.member.permissions.has('BanMembers')) return message.reply('You do not have permission to unban members.');
-
      const reason = args.join(' ') || 'No reason provided';
-     
-     try {
-       await message.guild.members.unban(targetId, reason);
-       await (prisma as any).moderationCase.create({
-         data: {
-           guildId: message.guild.id,
-           userId: targetId,
-           moderatorId: message.member.id,
-           type: 'UNBAN',
-           reason
-         } as any
-       });
-       return message.reply(`Successfully unbanned <@${targetId}>.`);
-     } catch (e: any) {
-       return message.reply(`Failed to unban user: ${e.message}`);
-     }
+     const res = await moderationService.unban(message.client, message.guild, message.member, targetId, reason);
+     return res.success ? message.reply({ embeds: [res.embed!] }) : message.reply(res.error!);
   }
 
   const targetUser = await message.client.users.fetch(targetId).catch(() => null);

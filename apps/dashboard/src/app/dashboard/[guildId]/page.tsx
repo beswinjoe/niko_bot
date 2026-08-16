@@ -1,12 +1,14 @@
 import { getSession } from '@/lib/session';
 import { getDiscordUserGuilds, hasManageGuildPermission, getGuildIconUrl } from '@/lib/discord';
-import { PrismaClient } from '@niko/db';
+import { prisma } from "@niko/db";
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { ShieldCheck, AlertTriangle, Users, Activity } from 'lucide-react';
+import IntelligenceClient from './IntelligenceClient';
+import { getHealthAndRecommendations } from './intelligenceActions';
 
-const prisma = new PrismaClient();
+
 
 export default async function GuildDashboard({ params }: { params: Promise<{ guildId: string }> }) {
   const { guildId } = await params;
@@ -16,7 +18,12 @@ export default async function GuildDashboard({ params }: { params: Promise<{ gui
 
   if (!session || !discordToken) redirect('/login');
 
-  const guilds = await getDiscordUserGuilds(discordToken);
+  let guilds;
+  try {
+    guilds = await getDiscordUserGuilds(discordToken);
+  } catch (e) {
+    redirect('/login');
+  }
   const targetGuild = guilds.find(g => g.id === guildId);
 
   if (!targetGuild || (!targetGuild.owner && !hasManageGuildPermission(targetGuild.permissions))) {
@@ -55,6 +62,7 @@ export default async function GuildDashboard({ params }: { params: Promise<{ gui
   }
 
   const iconUrl = getGuildIconUrl(targetGuild.id, targetGuild.icon);
+  const healthData = await getHealthAndRecommendations(guildId);
 
   return (
     <div>
@@ -71,8 +79,8 @@ export default async function GuildDashboard({ params }: { params: Promise<{ gui
           <div>
             <h1 className="text-3xl font-extrabold text-white mb-2">{targetGuild.name}</h1>
             <p className="text-neutral-400 flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-emerald-400" />
-              Security Score: <span className="text-emerald-400 font-semibold">95/100</span>
+              <ShieldCheck className={`w-5 h-5 ${healthData.score >= 80 ? 'text-emerald-400' : (healthData.score >= 50 ? 'text-amber-400' : 'text-red-400')}`} />
+              Security Score: <span className={`font-semibold ${healthData.score >= 80 ? 'text-emerald-400' : (healthData.score >= 50 ? 'text-amber-400' : 'text-red-400')}`}>{healthData.score}/100</span>
             </p>
           </div>
         </div>
@@ -80,11 +88,20 @@ export default async function GuildDashboard({ params }: { params: Promise<{ gui
 
       <div className="flex gap-2 border-b border-white/5 mb-8 overflow-x-auto pb-px">
         {['Overview', 'Security', 'Moderation', 'Analytics', 'Logs', 'Settings'].map((tab, i) => (
-          <button key={tab} className={`px-5 py-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${i === 0 ? 'border-accent text-white' : 'border-transparent text-neutral-400 hover:text-white'}`}>
+          <Link 
+            key={tab} 
+            href={tab === 'Settings' ? `/dashboard/${guildId}/settings/permissions` : tab === 'Logs' ? `/dashboard/${guildId}/logs` : `/dashboard/${guildId}`}
+            className={`px-5 py-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${i === 0 ? 'border-accent text-white' : 'border-transparent text-neutral-400 hover:text-white'}`}>
             {tab}
-          </button>
+          </Link>
         ))}
       </div>
+
+      <IntelligenceClient 
+        guildId={guildId} 
+        initialScore={healthData.score} 
+        initialRecommendations={healthData.recommendations} 
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         <div className="bg-black/20 border border-white/5 rounded-2xl p-6 backdrop-blur-sm">

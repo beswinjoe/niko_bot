@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { Shield, Zap, Activity, ChevronRight, Server } from 'lucide-react';
-import { PrismaClient } from '@niko/db';
+import { prisma } from "@niko/db";
 
-const prisma = new PrismaClient();
+
 
 export default async function Home() {
   // Try to fetch real stats, fallback to 0 if it fails during build

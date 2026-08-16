@@ -1,10 +1,10 @@
 import { getSession } from '@/lib/session';
-import { PrismaClient } from '@niko/db';
+import { prisma } from "@niko/db";
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { LayoutDashboard, Settings, LogOut, ShieldAlert } from 'lucide-react';
 
-const prisma = new PrismaClient();
+
 
 interface ExtendedUser {
   id: string;

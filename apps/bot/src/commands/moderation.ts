@@ -1,12 +1,11 @@
-import { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, ChatInputCommandInteraction, GuildMember } from 'discord.js';
+import { SlashCommandBuilder, ChatInputCommandInteraction, GuildMember } from 'discord.js';
 import { Command } from './index';
-import { prisma } from '@niko/db';
 import { moderationService, ModerationAction } from '../services/moderationService';
 
 export const moderationCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('moderation')
-    .setDescription('Moderation commands (Warn, Timeout, Kick, Ban, Cases, Purge)')
+    .setDescription('Moderation commands (Warn, Timeout, Kick, Ban, Unban, Purge, Cases)')
     .addSubcommand(subcommand =>
       subcommand.setName('warn')
         .setDescription('Warn a user')
@@ -14,9 +13,9 @@ export const moderationCommand: Command = {
         .addStringOption(opt => opt.setName('reason').setDescription('Reason for warning').setRequired(true))
     )
     .addSubcommand(subcommand =>
-      subcommand.setName('timeout')
+      subcommand.setName('mute')
         .setDescription('Timeout a user')
-        .addUserOption(opt => opt.setName('user').setDescription('User to timeout').setRequired(true))
+        .addUserOption(opt => opt.setName('user').setDescription('User to mute').setRequired(true))
         .addStringOption(opt => opt.setName('duration').setDescription('Duration (e.g. 10m, 1h, 1d)').setRequired(true))
         .addStringOption(opt => opt.setName('reason').setDescription('Reason').setRequired(true))
     )
@@ -34,6 +33,12 @@ export const moderationCommand: Command = {
         .addStringOption(opt => opt.setName('duration').setDescription('Duration (leave empty for permanent)').setRequired(false))
     )
     .addSubcommand(subcommand =>
+      subcommand.setName('unban')
+        .setDescription('Unban a user')
+        .addStringOption(opt => opt.setName('userid').setDescription('ID of the user to unban').setRequired(true))
+        .addStringOption(opt => opt.setName('reason').setDescription('Reason').setRequired(true))
+    )
+    .addSubcommand(subcommand =>
       subcommand.setName('purge')
         .setDescription('Purge messages')
         .addIntegerOption(opt => opt.setName('amount').setDescription('Number of messages to delete (1-100)').setRequired(true))
@@ -47,7 +52,8 @@ export const moderationCommand: Command = {
             { name: 'Warn', value: 'WARN' },
             { name: 'Timeout', value: 'TIMEOUT' },
             { name: 'Kick', value: 'KICK' },
-            { name: 'Ban', value: 'BAN' }
+            { name: 'Ban', value: 'BAN' },
+            { name: 'Unban', value: 'UNBAN' }
           )
         )
     ),
@@ -56,65 +62,27 @@ export const moderationCommand: Command = {
     if (!interaction.guild || !interaction.member || !interaction.channel) return;
     const subcommand = interaction.options.getSubcommand(true);
     const member = interaction.member as GuildMember;
+    await interaction.deferReply();
 
     try {
       if (subcommand === 'purge') {
-        const purgePerms = await (prisma as any).roleCommandPermission.findMany({
-          where: { guildId: interaction.guild.id, command: 'purge' }
-        });
-        
-        let hasConfiguredRole = member.id === interaction.guild.ownerId;
-        if (!hasConfiguredRole) {
-          hasConfiguredRole = purgePerms.length === 0 || purgePerms.some((p: any) => member.roles.cache.has(p.roleId));
-        }
-        
-        if (!hasConfiguredRole) {
-          return interaction.reply({ content: 'You lack the configured role required for this command.', ephemeral: true });
-        }
-        
-        if (!member.permissions.has(PermissionFlagsBits.ManageMessages)) {
-          return interaction.reply({ content: 'You do not have permission to use this command.', ephemeral: true });
-        }
         const amount = interaction.options.getInteger('amount', true);
-        if (amount < 1 || amount > 100) {
-          return interaction.reply({ content: 'Amount must be between 1 and 100.', ephemeral: true });
-        }
-        await interaction.deferReply({ ephemeral: true });
-        if (interaction.channel.isTextBased() && 'bulkDelete' in interaction.channel) {
-          const messages = await interaction.channel.bulkDelete(amount, true).catch(() => null);
-          if (!messages) return interaction.followUp({ content: 'Failed to purge messages.' });
-          return interaction.followUp({ content: `Successfully purged ${messages.size} messages.` });
-        }
-        return interaction.followUp({ content: 'Cannot purge in this channel type.' });
+        const res = await moderationService.purge(interaction.client, interaction.guild, member, interaction.channel, amount);
+        return res.success ? interaction.editReply({ embeds: [res.embed!] }) : interaction.editReply({ content: res.error });
       }
 
       if (subcommand === 'cases') {
         const filterUser = interaction.options.getUser('user');
-        const filterAction = interaction.options.getString('action');
-        
-        const where: any = { guildId: interaction.guild.id };
-        if (filterUser) where.userId = filterUser.id;
-        if (filterAction) where.type = filterAction;
+        const filterAction = interaction.options.getString('action') as ModerationAction | 'UNBAN' | undefined;
+        const res = await moderationService.getCases(interaction.guild, filterUser?.id, filterAction);
+        return res.success ? interaction.editReply({ embeds: [res.embed!] }) : interaction.editReply({ content: res.error });
+      }
 
-        const cases = await prisma.moderationCase.findMany({
-          where,
-          orderBy: { createdAt: 'desc' },
-          take: 10,
-          include: {
-            user: true,
-            moderator: true
-          }
-        });
-
-        const embed = new EmbedBuilder().setColor('#3B82F6').setTitle(`Moderation Cases`);
-        if (cases.length === 0) embed.setDescription('No cases found.');
-        else {
-          embed.setDescription(cases.map((c: any) => 
-            `\`#${c.id}\` **${c.type}** | Target: <@${c.userId}> | Mod: <@${c.moderatorId}> | Reason: ${c.reason || 'None'}` + 
-            (c.duration ? ` | Duration: ${c.duration}` : '')
-          ).join('\n'));
-        }
-        return interaction.reply({ embeds: [embed] });
+      if (subcommand === 'unban') {
+        const targetId = interaction.options.getString('userid', true);
+        const reason = interaction.options.getString('reason', true);
+        const res = await moderationService.unban(interaction.client, interaction.guild, member, targetId, reason);
+        return res.success ? interaction.editReply({ embeds: [res.embed!] }) : interaction.editReply({ content: res.error });
       }
 
       const targetUser = interaction.options.getUser('user', true);
@@ -123,7 +91,7 @@ export const moderationCommand: Command = {
 
       let action: ModerationAction | null = null;
       if (subcommand === 'warn') action = 'WARN';
-      else if (subcommand === 'timeout') action = 'TIMEOUT';
+      else if (subcommand === 'mute') action = 'TIMEOUT';
       else if (subcommand === 'kick') action = 'KICK';
       else if (subcommand === 'ban') action = 'BAN';
 
@@ -140,18 +108,17 @@ export const moderationCommand: Command = {
       );
 
       if (!result.success) {
-        return interaction.reply({ content: result.error, ephemeral: true });
+        return interaction.editReply({ content: result.error });
       }
 
       if (result.embed) {
-        await interaction.reply({ embeds: [result.embed] });
+        await interaction.editReply({ embeds: [result.embed] });
       }
 
     } catch (error: any) {
       console.error(error);
       const content = error.message || 'There was an error while executing the moderation command.';
-      if (interaction.replied || interaction.deferred) await interaction.followUp({ content, ephemeral: true });
-      else await interaction.reply({ content, ephemeral: true });
+      await interaction.editReply({ content });
     }
   }
 };

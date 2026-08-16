@@ -1,81 +1,53 @@
-import { Message } from 'discord.js';
-import { prisma } from '@niko/db';
+import { SlashCommandBuilder, ChatInputCommandInteraction, GuildMember } from 'discord.js';
+import { Command } from './index';
+import { permissionsService } from '../services/permissionsService';
 
-export async function handlePermissionsCommand(message: Message, args: string[]) {
-  if (!message.guild || !message.member) return;
+export const permissionsCommand: Command = {
+  data: new SlashCommandBuilder()
+    .setName('permissions')
+    .setDescription('Manage Niko role permissions')
+    .addSubcommand(subcommand =>
+      subcommand.setName('list')
+        .setDescription('List all configured role permissions')
+    )
+    .addSubcommand(subcommand =>
+      subcommand.setName('add')
+        .setDescription('Add a permission to a role')
+        .addRoleOption(opt => opt.setName('role').setDescription('Role to grant permission to').setRequired(true))
+        .addStringOption(opt => opt.setName('command').setDescription('Command to allow (e.g. ban, warn, *)').setRequired(true))
+    )
+    .addSubcommand(subcommand =>
+      subcommand.setName('remove')
+        .setDescription('Remove a permission from a role')
+        .addRoleOption(opt => opt.setName('role').setDescription('Role to remove permission from').setRequired(true))
+        .addStringOption(opt => opt.setName('command').setDescription('Command to disallow').setRequired(true))
+    ),
 
-  if (message.author.id !== message.guild.ownerId && !message.member.permissions.has('ManageGuild')) {
-    return message.reply('You do not have permission to manage bot permissions.');
-  }
+  async execute(interaction: ChatInputCommandInteraction) {
+    if (!interaction.guild || !interaction.member) return;
+    const subcommand = interaction.options.getSubcommand(true);
+    const member = interaction.member as GuildMember;
+    await interaction.deferReply();
 
-  const sub = args[0]?.toLowerCase();
-
-  if (sub === 'add' || sub === 'remove') {
-    const roleArg = args[1];
-    const roleId = roleArg?.match(/^<@&(\d+)>$/)?.[1] || roleArg;
-    
-    if (!roleId || !/^\d{17,19}$/.test(roleId)) {
-      return message.reply('Please mention a valid role or provide a valid role ID.');
-    }
-
-    const commandName = args[2]?.toLowerCase();
-    if (!commandName) {
-      return message.reply('Please provide the command name to assign to this role (e.g. `ban`, `*`).');
-    }
-
-    const commandsToApply = commandName === '*' 
-      ? ['warn', 'mute', 'tempmute', 'kick', 'ban', 'tempban', 'unban', 'purge', 'security']
-      : [commandName];
-
-    if (sub === 'add') {
-      for (const cmd of commandsToApply) {
-        await (prisma as any).roleCommandPermission.upsert({
-          where: { guildId_roleId_command: { guildId: message.guild.id, roleId, command: cmd } },
-          update: {},
-          create: { guildId: message.guild.id, roleId, command: cmd }
-        });
+    try {
+      if (subcommand === 'list') {
+        const res = await permissionsService.listPermissions(interaction.guild);
+        return interaction.editReply({ content: res.success ? res.message : res.error, allowedMentions: { parse: [] } });
+      } else if (subcommand === 'add') {
+        const roleId = interaction.options.getRole('role', true).id;
+        const commandName = interaction.options.getString('command', true);
+        const res = await permissionsService.addPermission(interaction.guild, member, roleId, commandName);
+        return interaction.editReply({ content: res.success ? res.message : res.error });
+      } else if (subcommand === 'remove') {
+        const roleId = interaction.options.getRole('role', true).id;
+        const commandName = interaction.options.getString('command', true);
+        const res = await permissionsService.removePermission(interaction.guild, member, roleId, commandName);
+        return interaction.editReply({ content: res.success ? res.message : res.error });
       }
-      return message.reply(`Successfully added permission(s) for <@&${roleId}>.`);
-    } else {
-      for (const cmd of commandsToApply) {
-        await (prisma as any).roleCommandPermission.deleteMany({
-          where: { guildId: message.guild.id, roleId, command: cmd }
-        });
-      }
-      return message.reply(`Successfully removed permission(s) for <@&${roleId}>.`);
+    } catch (error: any) {
+      console.error(error);
+      const content = error.message || 'There was an error while executing the permissions command.';
+      await interaction.editReply({ content });
     }
   }
-
-  if (sub === 'list' || !sub) {
-    const perms = await (prisma as any).roleCommandPermission.findMany({
-      where: { guildId: message.guild.id },
-      orderBy: { roleId: 'asc' }
-    });
-
-    if (perms.length === 0) {
-      return message.reply('No role permissions have been configured for this server. Use `!permissions add @Role <command>` to set them up.');
-    }
-
-    // Group by Role
-    const roleMap: Record<string, string[]> = {};
-    for (const p of perms) {
-      if (!roleMap[p.roleId]) roleMap[p.roleId] = [];
-      roleMap[p.roleId].push(p.command);
-    }
-
-    let output = '**NIKO PERMISSIONS**\n\n';
-    for (const [rId, cmds] of Object.entries(roleMap)) {
-      output += `<@&${rId}>\n`;
-      // Check if all commands
-      const isAll = cmds.length >= 9 || cmds.includes('*');
-      if (isAll) {
-        output += `✓ *\n\n`;
-      } else {
-        cmds.forEach(c => output += `✓ ${c}\n`);
-        output += '\n';
-      }
-    }
-
-    return message.reply({ content: output, allowedMentions: { parse: [] } }); // Prevent mass ping
-  }
-}
+};

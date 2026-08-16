@@ -10,18 +10,19 @@ datasource db {
 }
 
 model User {
-  id          String   @id // Discord User ID
+  id          String    @id // Discord User ID
   username    String
   globalName  String?
   avatar      String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   lastLoginAt DateTime?
 
-  cases     ModerationCase[] @relation("UserCases")
-  moderated ModerationCase[] @relation("ModeratorCases")
-  warnings  Warning[]
-  sessions  Session[]
+  cases             ModerationCase[]    @relation("UserCases")
+  moderated         ModerationCase[]    @relation("ModeratorCases")
+  warnings          Warning[]
+  sessions          Session[]
+  DashboardAuditLog DashboardAuditLog[]
 }
 
 model Session {
@@ -43,15 +44,16 @@ model Guild {
   joinedAt    DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  settings         GuildSetting?
-  cases            ModerationCase[]
-  warnings         Warning[]
-  securityEvents   SecurityEvent[]
-  raidEvents       RaidEvent[]
-  memberSnapshots  MemberSnapshot[]
-  messageActivity  MessageActivity[]
-  rolePermissions  RoleCommandPermission[]
-  rules            Rule[]
+  settings          GuildSetting?
+  cases             ModerationCase[]
+  warnings          Warning[]
+  securityEvents    SecurityEvent[]
+  raidEvents        RaidEvent[]
+  memberSnapshots   MemberSnapshot[]
+  messageActivity   MessageActivity[]
+  rolePermissions   RoleCommandPermission[]
+  rules             Rule[]
+  DashboardAuditLog DashboardAuditLog[]
 }
 
 model GuildSetting {
@@ -72,31 +74,31 @@ model GuildSetting {
   aiModerationEnabled Boolean @default(true)
   aiLogChannelId      String?
   aiActionThreshold   Int     @default(80) // 0-100 confidence
-  
+
   // Channels
-  modLogChannelId     String?
+  modLogChannelId      String?
   securityLogChannelId String?
 
   // Role Configurations
-  modRole           String?
-  seniorModRole     String?
-  adminRole         String?
-  mutedRole         String?
+  modRole       String?
+  seniorModRole String?
+  adminRole     String?
+  mutedRole     String?
 
-  prefix            String @default("!")
+  prefix String @default("!")
 }
 
 model ModerationCase {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   guildId     String
   userId      String
   moderatorId String
-  type        String   // BAN, KICK, TIMEOUT, WARN, UNWARN, PURGE, LOCK
+  type        String // BAN, KICK, TIMEOUT, WARN, UNWARN, PURGE, LOCK
   reason      String?
   duration    String?
   expiresAt   DateTime?
-  createdAt   DateTime @default(now())
-  
+  createdAt   DateTime  @default(now())
+
   guild     Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
   user      User  @relation("UserCases", fields: [userId], references: [id], onDelete: Cascade)
   moderator User  @relation("ModeratorCases", fields: [moderatorId], references: [id], onDelete: Cascade)
@@ -121,8 +123,8 @@ model Warning {
 model SecurityEvent {
   id          Int      @id @default(autoincrement())
   guildId     String
-  type        String   // SPAM, RAID_JOIN, NUKE_ATTEMPT, SCAM_LINK
-  severity    String   // LOW, MEDIUM, HIGH, CRITICAL
+  type        String // SPAM, RAID_JOIN, NUKE_ATTEMPT, SCAM_LINK
+  severity    String // LOW, MEDIUM, HIGH, CRITICAL
   description String
   createdAt   DateTime @default(now())
 
@@ -133,10 +135,10 @@ model SecurityEvent {
 }
 
 model RaidEvent {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   guildId   String
-  status    String   // ACTIVE, MITIGATED, RESOLVED
-  startedAt DateTime @default(now())
+  status    String // ACTIVE, MITIGATED, RESOLVED
+  startedAt DateTime  @default(now())
   endedAt   DateTime?
 
   guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
@@ -188,7 +190,7 @@ model RoleCommandPermission {
   command   String
   createdAt DateTime @default(now())
 
-  guild     Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 
   @@unique([guildId, roleId, command])
   @@index([guildId, command])
@@ -200,7 +202,7 @@ model Rule {
   content   String
   createdAt DateTime @default(now())
 
-  guild     Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 
   @@index([guildId])
 }
@@ -209,4 +211,21 @@ model AfkStatus {
   userId    String   @id
   reason    String?
   startedAt DateTime @default(now())
+}
+
+model DashboardAuditLog {
+  id          Int      @id @default(autoincrement())
+  guildId     String
+  actorUserId String
+  action      String // e.g., "GRANTED_PERMISSION", "TOGGLED_SETTING"
+  targetType  String? // e.g., "ROLE", "SETTING"
+  targetId    String? // e.g., "1234567890", "antiRaidEnabled"
+  metadata    Json? // Any extra contextual data
+  createdAt   DateTime @default(now())
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [actorUserId], references: [id], onDelete: Cascade)
+
+  @@index([guildId])
+  @@index([actorUserId])
 }

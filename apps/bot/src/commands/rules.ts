@@ -1,47 +1,48 @@
-import { Message, EmbedBuilder } from 'discord.js';
-import { prisma } from '@niko/db';
+import { SlashCommandBuilder, ChatInputCommandInteraction, GuildMember } from 'discord.js';
+import { Command } from './index';
+import { rulesService } from '../services/rulesService';
 
-export async function handleRulesCommand(message: Message, args: string[]) {
-  if (!message.guild) return;
+export const rulesCommand: Command = {
+  data: new SlashCommandBuilder()
+    .setName('rules')
+    .setDescription('Manage server rules')
+    .addSubcommand(subcommand =>
+      subcommand.setName('list').setDescription('List all server rules')
+    )
+    .addSubcommand(subcommand =>
+      subcommand.setName('add')
+        .setDescription('Add a new rule')
+        .addStringOption(opt => opt.setName('rule').setDescription('The rule text').setRequired(true))
+    )
+    .addSubcommand(subcommand =>
+      subcommand.setName('remove')
+        .setDescription('Remove a rule')
+        .addIntegerOption(opt => opt.setName('number').setDescription('The rule number').setRequired(true))
+    ),
 
-  const sub = args[0]?.toLowerCase();
+  async execute(interaction: ChatInputCommandInteraction) {
+    if (!interaction.guild || !interaction.member) return;
+    const subcommand = interaction.options.getSubcommand(true);
+    const member = interaction.member as GuildMember;
+    await interaction.deferReply();
 
-  if (sub === 'add') {
-    if (!message.member?.permissions.has('ManageGuild') && message.author.id !== message.guild.ownerId) {
-      return message.reply('You need Manage Server permission to add rules.');
+    try {
+      if (subcommand === 'list') {
+        const res = await rulesService.listRules(interaction.guild);
+        return res.success ? interaction.editReply({ embeds: [res.embed!] }) : interaction.editReply({ content: res.error });
+      } else if (subcommand === 'add') {
+        const rule = interaction.options.getString('rule', true);
+        const res = await rulesService.addRule(interaction.guild, member, rule);
+        return interaction.editReply({ content: res.success ? res.message : res.error });
+      } else if (subcommand === 'remove') {
+        const number = interaction.options.getInteger('number', true);
+        const res = await rulesService.removeRule(interaction.guild, member, number);
+        return interaction.editReply({ content: res.success ? res.message : res.error });
+      }
+    } catch (error: any) {
+      console.error(error);
+      const content = error.message || 'There was an error while executing the rules command.';
+      await interaction.editReply({ content });
     }
-    const content = args.slice(1).join(' ');
-    if (!content) return message.reply('Please provide the rule content.');
-    
-    await (prisma as any).rule.create({
-      data: { guildId: message.guild.id, content }
-    });
-    return message.reply('Rule added successfully.');
-  } 
-  
-  if (sub === 'remove') {
-    if (!message.member?.permissions.has('ManageGuild') && message.author.id !== message.guild.ownerId) {
-      return message.reply('You need Manage Server permission to remove rules.');
-    }
-    const index = parseInt(args[1]);
-    if (isNaN(index) || index < 1) return message.reply('Please provide a valid rule number.');
-
-    const rules = await (prisma as any).rule.findMany({ where: { guildId: message.guild.id }, orderBy: { id: 'asc' } });
-    if (index > rules.length) return message.reply('Rule number not found.');
-
-    const ruleToDelete = rules[index - 1];
-    await (prisma as any).rule.delete({ where: { id: ruleToDelete.id } });
-    return message.reply(`Rule ${index} removed.`);
   }
-
-  // list rules
-  const rules = await (prisma as any).rule.findMany({ where: { guildId: message.guild.id }, orderBy: { id: 'asc' } });
-  if (rules.length === 0) return message.reply('No rules have been set for this server.');
-
-  const embed = new EmbedBuilder()
-    .setColor('#5865F2')
-    .setTitle('SERVER RULES')
-    .setDescription(rules.map((r: any, i: number) => `**${i + 1}.** ${r.content}`).join('\n'));
-
-  return message.reply({ embeds: [embed] });
-}
+};
