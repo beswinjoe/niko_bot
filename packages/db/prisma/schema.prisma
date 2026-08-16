@@ -23,6 +23,7 @@ model User {
   warnings          Warning[]
   sessions          Session[]
   DashboardAuditLog DashboardAuditLog[]
+  dmPromotion       UserDMPromotion?
 }
 
 model Session {
@@ -54,6 +55,8 @@ model Guild {
   rolePermissions   RoleCommandPermission[]
   rules             Rule[]
   DashboardAuditLog DashboardAuditLog[]
+  serverListing     ServerListing?
+  featuredPromotions FeaturedPromotion[]
 }
 
 model GuildSetting {
@@ -229,4 +232,54 @@ model DashboardAuditLog {
 
   @@index([guildId])
   @@index([actorUserId])
+}
+
+model ServerListing {
+  guildId     String   @id
+  guild       Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  description String?
+  iconUrl     String?
+  inviteUrl   String?
+  category    String?
+  tags        String[] @default([])
+  language    String   @default("en")
+  isPublic    Boolean  @default(false)
+  views       Int      @default(0)
+  clicks      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isPublic])
+  @@index([category])
+  @@index([language])
+}
+
+model FeaturedPromotion {
+  id                 Int      @id @default(autoincrement())
+  guildId            String
+  guild              Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  promotionType      String   // FEATURED_PLACEMENT, DM_PROMOTION
+  status             String   // ACTIVE, PAUSED, EXPIRED
+  startAt            DateTime @default(now())
+  expiresAt          DateTime
+  promotionalMessage String?
+  impressions        Int      @default(0)
+  clicks             Int      @default(0)
+  dmSent             Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  approvedBy         String?
+
+  @@index([guildId])
+  @@index([status])
+  @@index([expiresAt])
+}
+
+model UserDMPromotion {
+  userId          String    @id
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastPromotionAt DateTime?
+  optOut          Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 }

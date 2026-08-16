@@ -271,6 +271,45 @@ exports.Prisma.DashboardAuditLogScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ServerListingScalarFieldEnum = {
+  guildId: 'guildId',
+  description: 'description',
+  iconUrl: 'iconUrl',
+  inviteUrl: 'inviteUrl',
+  category: 'category',
+  tags: 'tags',
+  language: 'language',
+  isPublic: 'isPublic',
+  views: 'views',
+  clicks: 'clicks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FeaturedPromotionScalarFieldEnum = {
+  id: 'id',
+  guildId: 'guildId',
+  promotionType: 'promotionType',
+  status: 'status',
+  startAt: 'startAt',
+  expiresAt: 'expiresAt',
+  promotionalMessage: 'promotionalMessage',
+  impressions: 'impressions',
+  clicks: 'clicks',
+  dmSent: 'dmSent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  approvedBy: 'approvedBy'
+};
+
+exports.Prisma.UserDMPromotionScalarFieldEnum = {
+  userId: 'userId',
+  lastPromotionAt: 'lastPromotionAt',
+  optOut: 'optOut',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -314,7 +353,10 @@ exports.Prisma.ModelName = {
   RoleCommandPermission: 'RoleCommandPermission',
   Rule: 'Rule',
   AfkStatus: 'AfkStatus',
-  DashboardAuditLog: 'DashboardAuditLog'
+  DashboardAuditLog: 'DashboardAuditLog',
+  ServerListing: 'ServerListing',
+  FeaturedPromotion: 'FeaturedPromotion',
+  UserDMPromotion: 'UserDMPromotion'
 };
 
 /**

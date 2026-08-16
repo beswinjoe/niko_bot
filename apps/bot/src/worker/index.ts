@@ -9,7 +9,7 @@ export const boss = new PgBoss({
   // Pass keepAlive config for the underlying pg-pool to prevent Supabase idle timeouts
   keepAlive: true,
   keepAliveInitialDelayMillis: 10000,
-});
+} as any);
 
 boss.on('error', (error: Error) => console.error('pg-boss error:', error));
 

@@ -93,6 +93,21 @@ export type AfkStatus = $Result.DefaultSelection<Prisma.$AfkStatusPayload>
  * 
  */
 export type DashboardAuditLog = $Result.DefaultSelection<Prisma.$DashboardAuditLogPayload>
+/**
+ * Model ServerListing
+ * 
+ */
+export type ServerListing = $Result.DefaultSelection<Prisma.$ServerListingPayload>
+/**
+ * Model FeaturedPromotion
+ * 
+ */
+export type FeaturedPromotion = $Result.DefaultSelection<Prisma.$FeaturedPromotionPayload>
+/**
+ * Model UserDMPromotion
+ * 
+ */
+export type UserDMPromotion = $Result.DefaultSelection<Prisma.$UserDMPromotionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -376,6 +391,36 @@ export class PrismaClient<
     * ```
     */
   get dashboardAuditLog(): Prisma.DashboardAuditLogDelegate<ExtArgs>;
+
+  /**
+   * `prisma.serverListing`: Exposes CRUD operations for the **ServerListing** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ServerListings
+    * const serverListings = await prisma.serverListing.findMany()
+    * ```
+    */
+  get serverListing(): Prisma.ServerListingDelegate<ExtArgs>;
+
+  /**
+   * `prisma.featuredPromotion`: Exposes CRUD operations for the **FeaturedPromotion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FeaturedPromotions
+    * const featuredPromotions = await prisma.featuredPromotion.findMany()
+    * ```
+    */
+  get featuredPromotion(): Prisma.FeaturedPromotionDelegate<ExtArgs>;
+
+  /**
+   * `prisma.userDMPromotion`: Exposes CRUD operations for the **UserDMPromotion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserDMPromotions
+    * const userDMPromotions = await prisma.userDMPromotion.findMany()
+    * ```
+    */
+  get userDMPromotion(): Prisma.UserDMPromotionDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -832,7 +877,10 @@ export namespace Prisma {
     RoleCommandPermission: 'RoleCommandPermission',
     Rule: 'Rule',
     AfkStatus: 'AfkStatus',
-    DashboardAuditLog: 'DashboardAuditLog'
+    DashboardAuditLog: 'DashboardAuditLog',
+    ServerListing: 'ServerListing',
+    FeaturedPromotion: 'FeaturedPromotion',
+    UserDMPromotion: 'UserDMPromotion'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -848,7 +896,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "session" | "guild" | "guildSetting" | "moderationCase" | "warning" | "securityEvent" | "raidEvent" | "memberSnapshot" | "messageActivity" | "botStat" | "botStatHistory" | "roleCommandPermission" | "rule" | "afkStatus" | "dashboardAuditLog"
+      modelProps: "user" | "session" | "guild" | "guildSetting" | "moderationCase" | "warning" | "securityEvent" | "raidEvent" | "memberSnapshot" | "messageActivity" | "botStat" | "botStatHistory" | "roleCommandPermission" | "rule" | "afkStatus" | "dashboardAuditLog" | "serverListing" | "featuredPromotion" | "userDMPromotion"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1972,6 +2020,216 @@ export namespace Prisma {
           }
         }
       }
+      ServerListing: {
+        payload: Prisma.$ServerListingPayload<ExtArgs>
+        fields: Prisma.ServerListingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ServerListingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ServerListingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload>
+          }
+          findFirst: {
+            args: Prisma.ServerListingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ServerListingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload>
+          }
+          findMany: {
+            args: Prisma.ServerListingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload>[]
+          }
+          create: {
+            args: Prisma.ServerListingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload>
+          }
+          createMany: {
+            args: Prisma.ServerListingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ServerListingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload>[]
+          }
+          delete: {
+            args: Prisma.ServerListingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload>
+          }
+          update: {
+            args: Prisma.ServerListingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload>
+          }
+          deleteMany: {
+            args: Prisma.ServerListingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ServerListingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ServerListingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServerListingPayload>
+          }
+          aggregate: {
+            args: Prisma.ServerListingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateServerListing>
+          }
+          groupBy: {
+            args: Prisma.ServerListingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ServerListingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ServerListingCountArgs<ExtArgs>
+            result: $Utils.Optional<ServerListingCountAggregateOutputType> | number
+          }
+        }
+      }
+      FeaturedPromotion: {
+        payload: Prisma.$FeaturedPromotionPayload<ExtArgs>
+        fields: Prisma.FeaturedPromotionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FeaturedPromotionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FeaturedPromotionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload>
+          }
+          findFirst: {
+            args: Prisma.FeaturedPromotionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FeaturedPromotionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload>
+          }
+          findMany: {
+            args: Prisma.FeaturedPromotionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload>[]
+          }
+          create: {
+            args: Prisma.FeaturedPromotionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload>
+          }
+          createMany: {
+            args: Prisma.FeaturedPromotionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FeaturedPromotionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload>[]
+          }
+          delete: {
+            args: Prisma.FeaturedPromotionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload>
+          }
+          update: {
+            args: Prisma.FeaturedPromotionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload>
+          }
+          deleteMany: {
+            args: Prisma.FeaturedPromotionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FeaturedPromotionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.FeaturedPromotionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FeaturedPromotionPayload>
+          }
+          aggregate: {
+            args: Prisma.FeaturedPromotionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFeaturedPromotion>
+          }
+          groupBy: {
+            args: Prisma.FeaturedPromotionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FeaturedPromotionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FeaturedPromotionCountArgs<ExtArgs>
+            result: $Utils.Optional<FeaturedPromotionCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserDMPromotion: {
+        payload: Prisma.$UserDMPromotionPayload<ExtArgs>
+        fields: Prisma.UserDMPromotionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserDMPromotionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserDMPromotionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload>
+          }
+          findFirst: {
+            args: Prisma.UserDMPromotionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserDMPromotionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload>
+          }
+          findMany: {
+            args: Prisma.UserDMPromotionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload>[]
+          }
+          create: {
+            args: Prisma.UserDMPromotionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload>
+          }
+          createMany: {
+            args: Prisma.UserDMPromotionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserDMPromotionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload>[]
+          }
+          delete: {
+            args: Prisma.UserDMPromotionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload>
+          }
+          update: {
+            args: Prisma.UserDMPromotionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserDMPromotionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserDMPromotionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserDMPromotionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDMPromotionPayload>
+          }
+          aggregate: {
+            args: Prisma.UserDMPromotionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserDMPromotion>
+          }
+          groupBy: {
+            args: Prisma.UserDMPromotionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserDMPromotionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserDMPromotionCountArgs<ExtArgs>
+            result: $Utils.Optional<UserDMPromotionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2209,6 +2467,7 @@ export namespace Prisma {
     rolePermissions: number
     rules: number
     DashboardAuditLog: number
+    featuredPromotions: number
   }
 
   export type GuildCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2221,6 +2480,7 @@ export namespace Prisma {
     rolePermissions?: boolean | GuildCountOutputTypeCountRolePermissionsArgs
     rules?: boolean | GuildCountOutputTypeCountRulesArgs
     DashboardAuditLog?: boolean | GuildCountOutputTypeCountDashboardAuditLogArgs
+    featuredPromotions?: boolean | GuildCountOutputTypeCountFeaturedPromotionsArgs
   }
 
   // Custom InputTypes
@@ -2295,6 +2555,13 @@ export namespace Prisma {
    */
   export type GuildCountOutputTypeCountDashboardAuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DashboardAuditLogWhereInput
+  }
+
+  /**
+   * GuildCountOutputType without action
+   */
+  export type GuildCountOutputTypeCountFeaturedPromotionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FeaturedPromotionWhereInput
   }
 
 
@@ -2487,6 +2754,7 @@ export namespace Prisma {
     warnings?: boolean | User$warningsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     DashboardAuditLog?: boolean | User$DashboardAuditLogArgs<ExtArgs>
+    dmPromotion?: boolean | User$dmPromotionArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2516,6 +2784,7 @@ export namespace Prisma {
     warnings?: boolean | User$warningsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     DashboardAuditLog?: boolean | User$DashboardAuditLogArgs<ExtArgs>
+    dmPromotion?: boolean | User$dmPromotionArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2528,6 +2797,7 @@ export namespace Prisma {
       warnings: Prisma.$WarningPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       DashboardAuditLog: Prisma.$DashboardAuditLogPayload<ExtArgs>[]
+      dmPromotion: Prisma.$UserDMPromotionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2906,6 +3176,7 @@ export namespace Prisma {
     warnings<T extends User$warningsArgs<ExtArgs> = {}>(args?: Subset<T, User$warningsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WarningPayload<ExtArgs>, T, "findMany"> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany"> | Null>
     DashboardAuditLog<T extends User$DashboardAuditLogArgs<ExtArgs> = {}>(args?: Subset<T, User$DashboardAuditLogArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "findMany"> | Null>
+    dmPromotion<T extends User$dmPromotionArgs<ExtArgs> = {}>(args?: Subset<T, User$dmPromotionArgs<ExtArgs>>): Prisma__UserDMPromotionClient<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3353,6 +3624,21 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DashboardAuditLogScalarFieldEnum | DashboardAuditLogScalarFieldEnum[]
+  }
+
+  /**
+   * User.dmPromotion
+   */
+  export type User$dmPromotionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    where?: UserDMPromotionWhereInput
   }
 
   /**
@@ -4511,6 +4797,8 @@ export namespace Prisma {
     rolePermissions?: boolean | Guild$rolePermissionsArgs<ExtArgs>
     rules?: boolean | Guild$rulesArgs<ExtArgs>
     DashboardAuditLog?: boolean | Guild$DashboardAuditLogArgs<ExtArgs>
+    serverListing?: boolean | Guild$serverListingArgs<ExtArgs>
+    featuredPromotions?: boolean | Guild$featuredPromotionsArgs<ExtArgs>
     _count?: boolean | GuildCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["guild"]>
 
@@ -4541,6 +4829,8 @@ export namespace Prisma {
     rolePermissions?: boolean | Guild$rolePermissionsArgs<ExtArgs>
     rules?: boolean | Guild$rulesArgs<ExtArgs>
     DashboardAuditLog?: boolean | Guild$DashboardAuditLogArgs<ExtArgs>
+    serverListing?: boolean | Guild$serverListingArgs<ExtArgs>
+    featuredPromotions?: boolean | Guild$featuredPromotionsArgs<ExtArgs>
     _count?: boolean | GuildCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type GuildIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4558,6 +4848,8 @@ export namespace Prisma {
       rolePermissions: Prisma.$RoleCommandPermissionPayload<ExtArgs>[]
       rules: Prisma.$RulePayload<ExtArgs>[]
       DashboardAuditLog: Prisma.$DashboardAuditLogPayload<ExtArgs>[]
+      serverListing: Prisma.$ServerListingPayload<ExtArgs> | null
+      featuredPromotions: Prisma.$FeaturedPromotionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4939,6 +5231,8 @@ export namespace Prisma {
     rolePermissions<T extends Guild$rolePermissionsArgs<ExtArgs> = {}>(args?: Subset<T, Guild$rolePermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoleCommandPermissionPayload<ExtArgs>, T, "findMany"> | Null>
     rules<T extends Guild$rulesArgs<ExtArgs> = {}>(args?: Subset<T, Guild$rulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "findMany"> | Null>
     DashboardAuditLog<T extends Guild$DashboardAuditLogArgs<ExtArgs> = {}>(args?: Subset<T, Guild$DashboardAuditLogArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DashboardAuditLogPayload<ExtArgs>, T, "findMany"> | Null>
+    serverListing<T extends Guild$serverListingArgs<ExtArgs> = {}>(args?: Subset<T, Guild$serverListingArgs<ExtArgs>>): Prisma__ServerListingClient<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    featuredPromotions<T extends Guild$featuredPromotionsArgs<ExtArgs> = {}>(args?: Subset<T, Guild$featuredPromotionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5479,6 +5773,41 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DashboardAuditLogScalarFieldEnum | DashboardAuditLogScalarFieldEnum[]
+  }
+
+  /**
+   * Guild.serverListing
+   */
+  export type Guild$serverListingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    where?: ServerListingWhereInput
+  }
+
+  /**
+   * Guild.featuredPromotions
+   */
+  export type Guild$featuredPromotionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    where?: FeaturedPromotionWhereInput
+    orderBy?: FeaturedPromotionOrderByWithRelationInput | FeaturedPromotionOrderByWithRelationInput[]
+    cursor?: FeaturedPromotionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FeaturedPromotionScalarFieldEnum | FeaturedPromotionScalarFieldEnum[]
   }
 
   /**
@@ -18149,6 +18478,3065 @@ export namespace Prisma {
 
 
   /**
+   * Model ServerListing
+   */
+
+  export type AggregateServerListing = {
+    _count: ServerListingCountAggregateOutputType | null
+    _avg: ServerListingAvgAggregateOutputType | null
+    _sum: ServerListingSumAggregateOutputType | null
+    _min: ServerListingMinAggregateOutputType | null
+    _max: ServerListingMaxAggregateOutputType | null
+  }
+
+  export type ServerListingAvgAggregateOutputType = {
+    views: number | null
+    clicks: number | null
+  }
+
+  export type ServerListingSumAggregateOutputType = {
+    views: number | null
+    clicks: number | null
+  }
+
+  export type ServerListingMinAggregateOutputType = {
+    guildId: string | null
+    description: string | null
+    iconUrl: string | null
+    inviteUrl: string | null
+    category: string | null
+    language: string | null
+    isPublic: boolean | null
+    views: number | null
+    clicks: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ServerListingMaxAggregateOutputType = {
+    guildId: string | null
+    description: string | null
+    iconUrl: string | null
+    inviteUrl: string | null
+    category: string | null
+    language: string | null
+    isPublic: boolean | null
+    views: number | null
+    clicks: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ServerListingCountAggregateOutputType = {
+    guildId: number
+    description: number
+    iconUrl: number
+    inviteUrl: number
+    category: number
+    tags: number
+    language: number
+    isPublic: number
+    views: number
+    clicks: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ServerListingAvgAggregateInputType = {
+    views?: true
+    clicks?: true
+  }
+
+  export type ServerListingSumAggregateInputType = {
+    views?: true
+    clicks?: true
+  }
+
+  export type ServerListingMinAggregateInputType = {
+    guildId?: true
+    description?: true
+    iconUrl?: true
+    inviteUrl?: true
+    category?: true
+    language?: true
+    isPublic?: true
+    views?: true
+    clicks?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ServerListingMaxAggregateInputType = {
+    guildId?: true
+    description?: true
+    iconUrl?: true
+    inviteUrl?: true
+    category?: true
+    language?: true
+    isPublic?: true
+    views?: true
+    clicks?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ServerListingCountAggregateInputType = {
+    guildId?: true
+    description?: true
+    iconUrl?: true
+    inviteUrl?: true
+    category?: true
+    tags?: true
+    language?: true
+    isPublic?: true
+    views?: true
+    clicks?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ServerListingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ServerListing to aggregate.
+     */
+    where?: ServerListingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ServerListings to fetch.
+     */
+    orderBy?: ServerListingOrderByWithRelationInput | ServerListingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ServerListingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ServerListings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ServerListings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ServerListings
+    **/
+    _count?: true | ServerListingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ServerListingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ServerListingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ServerListingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ServerListingMaxAggregateInputType
+  }
+
+  export type GetServerListingAggregateType<T extends ServerListingAggregateArgs> = {
+        [P in keyof T & keyof AggregateServerListing]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateServerListing[P]>
+      : GetScalarType<T[P], AggregateServerListing[P]>
+  }
+
+
+
+
+  export type ServerListingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ServerListingWhereInput
+    orderBy?: ServerListingOrderByWithAggregationInput | ServerListingOrderByWithAggregationInput[]
+    by: ServerListingScalarFieldEnum[] | ServerListingScalarFieldEnum
+    having?: ServerListingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ServerListingCountAggregateInputType | true
+    _avg?: ServerListingAvgAggregateInputType
+    _sum?: ServerListingSumAggregateInputType
+    _min?: ServerListingMinAggregateInputType
+    _max?: ServerListingMaxAggregateInputType
+  }
+
+  export type ServerListingGroupByOutputType = {
+    guildId: string
+    description: string | null
+    iconUrl: string | null
+    inviteUrl: string | null
+    category: string | null
+    tags: string[]
+    language: string
+    isPublic: boolean
+    views: number
+    clicks: number
+    createdAt: Date
+    updatedAt: Date
+    _count: ServerListingCountAggregateOutputType | null
+    _avg: ServerListingAvgAggregateOutputType | null
+    _sum: ServerListingSumAggregateOutputType | null
+    _min: ServerListingMinAggregateOutputType | null
+    _max: ServerListingMaxAggregateOutputType | null
+  }
+
+  type GetServerListingGroupByPayload<T extends ServerListingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ServerListingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ServerListingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ServerListingGroupByOutputType[P]>
+            : GetScalarType<T[P], ServerListingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ServerListingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    guildId?: boolean
+    description?: boolean
+    iconUrl?: boolean
+    inviteUrl?: boolean
+    category?: boolean
+    tags?: boolean
+    language?: boolean
+    isPublic?: boolean
+    views?: boolean
+    clicks?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["serverListing"]>
+
+  export type ServerListingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    guildId?: boolean
+    description?: boolean
+    iconUrl?: boolean
+    inviteUrl?: boolean
+    category?: boolean
+    tags?: boolean
+    language?: boolean
+    isPublic?: boolean
+    views?: boolean
+    clicks?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["serverListing"]>
+
+  export type ServerListingSelectScalar = {
+    guildId?: boolean
+    description?: boolean
+    iconUrl?: boolean
+    inviteUrl?: boolean
+    category?: boolean
+    tags?: boolean
+    language?: boolean
+    isPublic?: boolean
+    views?: boolean
+    clicks?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ServerListingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }
+  export type ServerListingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }
+
+  export type $ServerListingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ServerListing"
+    objects: {
+      guild: Prisma.$GuildPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      guildId: string
+      description: string | null
+      iconUrl: string | null
+      inviteUrl: string | null
+      category: string | null
+      tags: string[]
+      language: string
+      isPublic: boolean
+      views: number
+      clicks: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["serverListing"]>
+    composites: {}
+  }
+
+  type ServerListingGetPayload<S extends boolean | null | undefined | ServerListingDefaultArgs> = $Result.GetResult<Prisma.$ServerListingPayload, S>
+
+  type ServerListingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ServerListingFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ServerListingCountAggregateInputType | true
+    }
+
+  export interface ServerListingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ServerListing'], meta: { name: 'ServerListing' } }
+    /**
+     * Find zero or one ServerListing that matches the filter.
+     * @param {ServerListingFindUniqueArgs} args - Arguments to find a ServerListing
+     * @example
+     * // Get one ServerListing
+     * const serverListing = await prisma.serverListing.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ServerListingFindUniqueArgs>(args: SelectSubset<T, ServerListingFindUniqueArgs<ExtArgs>>): Prisma__ServerListingClient<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ServerListing that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ServerListingFindUniqueOrThrowArgs} args - Arguments to find a ServerListing
+     * @example
+     * // Get one ServerListing
+     * const serverListing = await prisma.serverListing.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ServerListingFindUniqueOrThrowArgs>(args: SelectSubset<T, ServerListingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ServerListingClient<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ServerListing that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServerListingFindFirstArgs} args - Arguments to find a ServerListing
+     * @example
+     * // Get one ServerListing
+     * const serverListing = await prisma.serverListing.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ServerListingFindFirstArgs>(args?: SelectSubset<T, ServerListingFindFirstArgs<ExtArgs>>): Prisma__ServerListingClient<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ServerListing that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServerListingFindFirstOrThrowArgs} args - Arguments to find a ServerListing
+     * @example
+     * // Get one ServerListing
+     * const serverListing = await prisma.serverListing.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ServerListingFindFirstOrThrowArgs>(args?: SelectSubset<T, ServerListingFindFirstOrThrowArgs<ExtArgs>>): Prisma__ServerListingClient<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ServerListings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServerListingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ServerListings
+     * const serverListings = await prisma.serverListing.findMany()
+     * 
+     * // Get first 10 ServerListings
+     * const serverListings = await prisma.serverListing.findMany({ take: 10 })
+     * 
+     * // Only select the `guildId`
+     * const serverListingWithGuildIdOnly = await prisma.serverListing.findMany({ select: { guildId: true } })
+     * 
+     */
+    findMany<T extends ServerListingFindManyArgs>(args?: SelectSubset<T, ServerListingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ServerListing.
+     * @param {ServerListingCreateArgs} args - Arguments to create a ServerListing.
+     * @example
+     * // Create one ServerListing
+     * const ServerListing = await prisma.serverListing.create({
+     *   data: {
+     *     // ... data to create a ServerListing
+     *   }
+     * })
+     * 
+     */
+    create<T extends ServerListingCreateArgs>(args: SelectSubset<T, ServerListingCreateArgs<ExtArgs>>): Prisma__ServerListingClient<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ServerListings.
+     * @param {ServerListingCreateManyArgs} args - Arguments to create many ServerListings.
+     * @example
+     * // Create many ServerListings
+     * const serverListing = await prisma.serverListing.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ServerListingCreateManyArgs>(args?: SelectSubset<T, ServerListingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ServerListings and returns the data saved in the database.
+     * @param {ServerListingCreateManyAndReturnArgs} args - Arguments to create many ServerListings.
+     * @example
+     * // Create many ServerListings
+     * const serverListing = await prisma.serverListing.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ServerListings and only return the `guildId`
+     * const serverListingWithGuildIdOnly = await prisma.serverListing.createManyAndReturn({ 
+     *   select: { guildId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ServerListingCreateManyAndReturnArgs>(args?: SelectSubset<T, ServerListingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a ServerListing.
+     * @param {ServerListingDeleteArgs} args - Arguments to delete one ServerListing.
+     * @example
+     * // Delete one ServerListing
+     * const ServerListing = await prisma.serverListing.delete({
+     *   where: {
+     *     // ... filter to delete one ServerListing
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ServerListingDeleteArgs>(args: SelectSubset<T, ServerListingDeleteArgs<ExtArgs>>): Prisma__ServerListingClient<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ServerListing.
+     * @param {ServerListingUpdateArgs} args - Arguments to update one ServerListing.
+     * @example
+     * // Update one ServerListing
+     * const serverListing = await prisma.serverListing.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ServerListingUpdateArgs>(args: SelectSubset<T, ServerListingUpdateArgs<ExtArgs>>): Prisma__ServerListingClient<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ServerListings.
+     * @param {ServerListingDeleteManyArgs} args - Arguments to filter ServerListings to delete.
+     * @example
+     * // Delete a few ServerListings
+     * const { count } = await prisma.serverListing.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ServerListingDeleteManyArgs>(args?: SelectSubset<T, ServerListingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ServerListings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServerListingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ServerListings
+     * const serverListing = await prisma.serverListing.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ServerListingUpdateManyArgs>(args: SelectSubset<T, ServerListingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ServerListing.
+     * @param {ServerListingUpsertArgs} args - Arguments to update or create a ServerListing.
+     * @example
+     * // Update or create a ServerListing
+     * const serverListing = await prisma.serverListing.upsert({
+     *   create: {
+     *     // ... data to create a ServerListing
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ServerListing we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ServerListingUpsertArgs>(args: SelectSubset<T, ServerListingUpsertArgs<ExtArgs>>): Prisma__ServerListingClient<$Result.GetResult<Prisma.$ServerListingPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of ServerListings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServerListingCountArgs} args - Arguments to filter ServerListings to count.
+     * @example
+     * // Count the number of ServerListings
+     * const count = await prisma.serverListing.count({
+     *   where: {
+     *     // ... the filter for the ServerListings we want to count
+     *   }
+     * })
+    **/
+    count<T extends ServerListingCountArgs>(
+      args?: Subset<T, ServerListingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ServerListingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ServerListing.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServerListingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ServerListingAggregateArgs>(args: Subset<T, ServerListingAggregateArgs>): Prisma.PrismaPromise<GetServerListingAggregateType<T>>
+
+    /**
+     * Group by ServerListing.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServerListingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ServerListingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ServerListingGroupByArgs['orderBy'] }
+        : { orderBy?: ServerListingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ServerListingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetServerListingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ServerListing model
+   */
+  readonly fields: ServerListingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ServerListing.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ServerListingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    guild<T extends GuildDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GuildDefaultArgs<ExtArgs>>): Prisma__GuildClient<$Result.GetResult<Prisma.$GuildPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ServerListing model
+   */ 
+  interface ServerListingFieldRefs {
+    readonly guildId: FieldRef<"ServerListing", 'String'>
+    readonly description: FieldRef<"ServerListing", 'String'>
+    readonly iconUrl: FieldRef<"ServerListing", 'String'>
+    readonly inviteUrl: FieldRef<"ServerListing", 'String'>
+    readonly category: FieldRef<"ServerListing", 'String'>
+    readonly tags: FieldRef<"ServerListing", 'String[]'>
+    readonly language: FieldRef<"ServerListing", 'String'>
+    readonly isPublic: FieldRef<"ServerListing", 'Boolean'>
+    readonly views: FieldRef<"ServerListing", 'Int'>
+    readonly clicks: FieldRef<"ServerListing", 'Int'>
+    readonly createdAt: FieldRef<"ServerListing", 'DateTime'>
+    readonly updatedAt: FieldRef<"ServerListing", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ServerListing findUnique
+   */
+  export type ServerListingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    /**
+     * Filter, which ServerListing to fetch.
+     */
+    where: ServerListingWhereUniqueInput
+  }
+
+  /**
+   * ServerListing findUniqueOrThrow
+   */
+  export type ServerListingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    /**
+     * Filter, which ServerListing to fetch.
+     */
+    where: ServerListingWhereUniqueInput
+  }
+
+  /**
+   * ServerListing findFirst
+   */
+  export type ServerListingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    /**
+     * Filter, which ServerListing to fetch.
+     */
+    where?: ServerListingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ServerListings to fetch.
+     */
+    orderBy?: ServerListingOrderByWithRelationInput | ServerListingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ServerListings.
+     */
+    cursor?: ServerListingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ServerListings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ServerListings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ServerListings.
+     */
+    distinct?: ServerListingScalarFieldEnum | ServerListingScalarFieldEnum[]
+  }
+
+  /**
+   * ServerListing findFirstOrThrow
+   */
+  export type ServerListingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    /**
+     * Filter, which ServerListing to fetch.
+     */
+    where?: ServerListingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ServerListings to fetch.
+     */
+    orderBy?: ServerListingOrderByWithRelationInput | ServerListingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ServerListings.
+     */
+    cursor?: ServerListingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ServerListings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ServerListings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ServerListings.
+     */
+    distinct?: ServerListingScalarFieldEnum | ServerListingScalarFieldEnum[]
+  }
+
+  /**
+   * ServerListing findMany
+   */
+  export type ServerListingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    /**
+     * Filter, which ServerListings to fetch.
+     */
+    where?: ServerListingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ServerListings to fetch.
+     */
+    orderBy?: ServerListingOrderByWithRelationInput | ServerListingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ServerListings.
+     */
+    cursor?: ServerListingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ServerListings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ServerListings.
+     */
+    skip?: number
+    distinct?: ServerListingScalarFieldEnum | ServerListingScalarFieldEnum[]
+  }
+
+  /**
+   * ServerListing create
+   */
+  export type ServerListingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ServerListing.
+     */
+    data: XOR<ServerListingCreateInput, ServerListingUncheckedCreateInput>
+  }
+
+  /**
+   * ServerListing createMany
+   */
+  export type ServerListingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ServerListings.
+     */
+    data: ServerListingCreateManyInput | ServerListingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ServerListing createManyAndReturn
+   */
+  export type ServerListingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many ServerListings.
+     */
+    data: ServerListingCreateManyInput | ServerListingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ServerListing update
+   */
+  export type ServerListingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ServerListing.
+     */
+    data: XOR<ServerListingUpdateInput, ServerListingUncheckedUpdateInput>
+    /**
+     * Choose, which ServerListing to update.
+     */
+    where: ServerListingWhereUniqueInput
+  }
+
+  /**
+   * ServerListing updateMany
+   */
+  export type ServerListingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ServerListings.
+     */
+    data: XOR<ServerListingUpdateManyMutationInput, ServerListingUncheckedUpdateManyInput>
+    /**
+     * Filter which ServerListings to update
+     */
+    where?: ServerListingWhereInput
+  }
+
+  /**
+   * ServerListing upsert
+   */
+  export type ServerListingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ServerListing to update in case it exists.
+     */
+    where: ServerListingWhereUniqueInput
+    /**
+     * In case the ServerListing found by the `where` argument doesn't exist, create a new ServerListing with this data.
+     */
+    create: XOR<ServerListingCreateInput, ServerListingUncheckedCreateInput>
+    /**
+     * In case the ServerListing was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ServerListingUpdateInput, ServerListingUncheckedUpdateInput>
+  }
+
+  /**
+   * ServerListing delete
+   */
+  export type ServerListingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+    /**
+     * Filter which ServerListing to delete.
+     */
+    where: ServerListingWhereUniqueInput
+  }
+
+  /**
+   * ServerListing deleteMany
+   */
+  export type ServerListingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ServerListings to delete
+     */
+    where?: ServerListingWhereInput
+  }
+
+  /**
+   * ServerListing without action
+   */
+  export type ServerListingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServerListing
+     */
+    select?: ServerListingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServerListingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FeaturedPromotion
+   */
+
+  export type AggregateFeaturedPromotion = {
+    _count: FeaturedPromotionCountAggregateOutputType | null
+    _avg: FeaturedPromotionAvgAggregateOutputType | null
+    _sum: FeaturedPromotionSumAggregateOutputType | null
+    _min: FeaturedPromotionMinAggregateOutputType | null
+    _max: FeaturedPromotionMaxAggregateOutputType | null
+  }
+
+  export type FeaturedPromotionAvgAggregateOutputType = {
+    id: number | null
+    impressions: number | null
+    clicks: number | null
+    dmSent: number | null
+  }
+
+  export type FeaturedPromotionSumAggregateOutputType = {
+    id: number | null
+    impressions: number | null
+    clicks: number | null
+    dmSent: number | null
+  }
+
+  export type FeaturedPromotionMinAggregateOutputType = {
+    id: number | null
+    guildId: string | null
+    promotionType: string | null
+    status: string | null
+    startAt: Date | null
+    expiresAt: Date | null
+    promotionalMessage: string | null
+    impressions: number | null
+    clicks: number | null
+    dmSent: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    approvedBy: string | null
+  }
+
+  export type FeaturedPromotionMaxAggregateOutputType = {
+    id: number | null
+    guildId: string | null
+    promotionType: string | null
+    status: string | null
+    startAt: Date | null
+    expiresAt: Date | null
+    promotionalMessage: string | null
+    impressions: number | null
+    clicks: number | null
+    dmSent: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    approvedBy: string | null
+  }
+
+  export type FeaturedPromotionCountAggregateOutputType = {
+    id: number
+    guildId: number
+    promotionType: number
+    status: number
+    startAt: number
+    expiresAt: number
+    promotionalMessage: number
+    impressions: number
+    clicks: number
+    dmSent: number
+    createdAt: number
+    updatedAt: number
+    approvedBy: number
+    _all: number
+  }
+
+
+  export type FeaturedPromotionAvgAggregateInputType = {
+    id?: true
+    impressions?: true
+    clicks?: true
+    dmSent?: true
+  }
+
+  export type FeaturedPromotionSumAggregateInputType = {
+    id?: true
+    impressions?: true
+    clicks?: true
+    dmSent?: true
+  }
+
+  export type FeaturedPromotionMinAggregateInputType = {
+    id?: true
+    guildId?: true
+    promotionType?: true
+    status?: true
+    startAt?: true
+    expiresAt?: true
+    promotionalMessage?: true
+    impressions?: true
+    clicks?: true
+    dmSent?: true
+    createdAt?: true
+    updatedAt?: true
+    approvedBy?: true
+  }
+
+  export type FeaturedPromotionMaxAggregateInputType = {
+    id?: true
+    guildId?: true
+    promotionType?: true
+    status?: true
+    startAt?: true
+    expiresAt?: true
+    promotionalMessage?: true
+    impressions?: true
+    clicks?: true
+    dmSent?: true
+    createdAt?: true
+    updatedAt?: true
+    approvedBy?: true
+  }
+
+  export type FeaturedPromotionCountAggregateInputType = {
+    id?: true
+    guildId?: true
+    promotionType?: true
+    status?: true
+    startAt?: true
+    expiresAt?: true
+    promotionalMessage?: true
+    impressions?: true
+    clicks?: true
+    dmSent?: true
+    createdAt?: true
+    updatedAt?: true
+    approvedBy?: true
+    _all?: true
+  }
+
+  export type FeaturedPromotionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FeaturedPromotion to aggregate.
+     */
+    where?: FeaturedPromotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FeaturedPromotions to fetch.
+     */
+    orderBy?: FeaturedPromotionOrderByWithRelationInput | FeaturedPromotionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FeaturedPromotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FeaturedPromotions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FeaturedPromotions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FeaturedPromotions
+    **/
+    _count?: true | FeaturedPromotionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FeaturedPromotionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FeaturedPromotionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FeaturedPromotionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FeaturedPromotionMaxAggregateInputType
+  }
+
+  export type GetFeaturedPromotionAggregateType<T extends FeaturedPromotionAggregateArgs> = {
+        [P in keyof T & keyof AggregateFeaturedPromotion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFeaturedPromotion[P]>
+      : GetScalarType<T[P], AggregateFeaturedPromotion[P]>
+  }
+
+
+
+
+  export type FeaturedPromotionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FeaturedPromotionWhereInput
+    orderBy?: FeaturedPromotionOrderByWithAggregationInput | FeaturedPromotionOrderByWithAggregationInput[]
+    by: FeaturedPromotionScalarFieldEnum[] | FeaturedPromotionScalarFieldEnum
+    having?: FeaturedPromotionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FeaturedPromotionCountAggregateInputType | true
+    _avg?: FeaturedPromotionAvgAggregateInputType
+    _sum?: FeaturedPromotionSumAggregateInputType
+    _min?: FeaturedPromotionMinAggregateInputType
+    _max?: FeaturedPromotionMaxAggregateInputType
+  }
+
+  export type FeaturedPromotionGroupByOutputType = {
+    id: number
+    guildId: string
+    promotionType: string
+    status: string
+    startAt: Date
+    expiresAt: Date
+    promotionalMessage: string | null
+    impressions: number
+    clicks: number
+    dmSent: number
+    createdAt: Date
+    updatedAt: Date
+    approvedBy: string | null
+    _count: FeaturedPromotionCountAggregateOutputType | null
+    _avg: FeaturedPromotionAvgAggregateOutputType | null
+    _sum: FeaturedPromotionSumAggregateOutputType | null
+    _min: FeaturedPromotionMinAggregateOutputType | null
+    _max: FeaturedPromotionMaxAggregateOutputType | null
+  }
+
+  type GetFeaturedPromotionGroupByPayload<T extends FeaturedPromotionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FeaturedPromotionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FeaturedPromotionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FeaturedPromotionGroupByOutputType[P]>
+            : GetScalarType<T[P], FeaturedPromotionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FeaturedPromotionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guildId?: boolean
+    promotionType?: boolean
+    status?: boolean
+    startAt?: boolean
+    expiresAt?: boolean
+    promotionalMessage?: boolean
+    impressions?: boolean
+    clicks?: boolean
+    dmSent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    approvedBy?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["featuredPromotion"]>
+
+  export type FeaturedPromotionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guildId?: boolean
+    promotionType?: boolean
+    status?: boolean
+    startAt?: boolean
+    expiresAt?: boolean
+    promotionalMessage?: boolean
+    impressions?: boolean
+    clicks?: boolean
+    dmSent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    approvedBy?: boolean
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["featuredPromotion"]>
+
+  export type FeaturedPromotionSelectScalar = {
+    id?: boolean
+    guildId?: boolean
+    promotionType?: boolean
+    status?: boolean
+    startAt?: boolean
+    expiresAt?: boolean
+    promotionalMessage?: boolean
+    impressions?: boolean
+    clicks?: boolean
+    dmSent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    approvedBy?: boolean
+  }
+
+  export type FeaturedPromotionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }
+  export type FeaturedPromotionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guild?: boolean | GuildDefaultArgs<ExtArgs>
+  }
+
+  export type $FeaturedPromotionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FeaturedPromotion"
+    objects: {
+      guild: Prisma.$GuildPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      guildId: string
+      promotionType: string
+      status: string
+      startAt: Date
+      expiresAt: Date
+      promotionalMessage: string | null
+      impressions: number
+      clicks: number
+      dmSent: number
+      createdAt: Date
+      updatedAt: Date
+      approvedBy: string | null
+    }, ExtArgs["result"]["featuredPromotion"]>
+    composites: {}
+  }
+
+  type FeaturedPromotionGetPayload<S extends boolean | null | undefined | FeaturedPromotionDefaultArgs> = $Result.GetResult<Prisma.$FeaturedPromotionPayload, S>
+
+  type FeaturedPromotionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<FeaturedPromotionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: FeaturedPromotionCountAggregateInputType | true
+    }
+
+  export interface FeaturedPromotionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FeaturedPromotion'], meta: { name: 'FeaturedPromotion' } }
+    /**
+     * Find zero or one FeaturedPromotion that matches the filter.
+     * @param {FeaturedPromotionFindUniqueArgs} args - Arguments to find a FeaturedPromotion
+     * @example
+     * // Get one FeaturedPromotion
+     * const featuredPromotion = await prisma.featuredPromotion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FeaturedPromotionFindUniqueArgs>(args: SelectSubset<T, FeaturedPromotionFindUniqueArgs<ExtArgs>>): Prisma__FeaturedPromotionClient<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one FeaturedPromotion that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {FeaturedPromotionFindUniqueOrThrowArgs} args - Arguments to find a FeaturedPromotion
+     * @example
+     * // Get one FeaturedPromotion
+     * const featuredPromotion = await prisma.featuredPromotion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FeaturedPromotionFindUniqueOrThrowArgs>(args: SelectSubset<T, FeaturedPromotionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FeaturedPromotionClient<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first FeaturedPromotion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeaturedPromotionFindFirstArgs} args - Arguments to find a FeaturedPromotion
+     * @example
+     * // Get one FeaturedPromotion
+     * const featuredPromotion = await prisma.featuredPromotion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FeaturedPromotionFindFirstArgs>(args?: SelectSubset<T, FeaturedPromotionFindFirstArgs<ExtArgs>>): Prisma__FeaturedPromotionClient<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first FeaturedPromotion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeaturedPromotionFindFirstOrThrowArgs} args - Arguments to find a FeaturedPromotion
+     * @example
+     * // Get one FeaturedPromotion
+     * const featuredPromotion = await prisma.featuredPromotion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FeaturedPromotionFindFirstOrThrowArgs>(args?: SelectSubset<T, FeaturedPromotionFindFirstOrThrowArgs<ExtArgs>>): Prisma__FeaturedPromotionClient<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more FeaturedPromotions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeaturedPromotionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FeaturedPromotions
+     * const featuredPromotions = await prisma.featuredPromotion.findMany()
+     * 
+     * // Get first 10 FeaturedPromotions
+     * const featuredPromotions = await prisma.featuredPromotion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const featuredPromotionWithIdOnly = await prisma.featuredPromotion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FeaturedPromotionFindManyArgs>(args?: SelectSubset<T, FeaturedPromotionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a FeaturedPromotion.
+     * @param {FeaturedPromotionCreateArgs} args - Arguments to create a FeaturedPromotion.
+     * @example
+     * // Create one FeaturedPromotion
+     * const FeaturedPromotion = await prisma.featuredPromotion.create({
+     *   data: {
+     *     // ... data to create a FeaturedPromotion
+     *   }
+     * })
+     * 
+     */
+    create<T extends FeaturedPromotionCreateArgs>(args: SelectSubset<T, FeaturedPromotionCreateArgs<ExtArgs>>): Prisma__FeaturedPromotionClient<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many FeaturedPromotions.
+     * @param {FeaturedPromotionCreateManyArgs} args - Arguments to create many FeaturedPromotions.
+     * @example
+     * // Create many FeaturedPromotions
+     * const featuredPromotion = await prisma.featuredPromotion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FeaturedPromotionCreateManyArgs>(args?: SelectSubset<T, FeaturedPromotionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FeaturedPromotions and returns the data saved in the database.
+     * @param {FeaturedPromotionCreateManyAndReturnArgs} args - Arguments to create many FeaturedPromotions.
+     * @example
+     * // Create many FeaturedPromotions
+     * const featuredPromotion = await prisma.featuredPromotion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FeaturedPromotions and only return the `id`
+     * const featuredPromotionWithIdOnly = await prisma.featuredPromotion.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FeaturedPromotionCreateManyAndReturnArgs>(args?: SelectSubset<T, FeaturedPromotionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a FeaturedPromotion.
+     * @param {FeaturedPromotionDeleteArgs} args - Arguments to delete one FeaturedPromotion.
+     * @example
+     * // Delete one FeaturedPromotion
+     * const FeaturedPromotion = await prisma.featuredPromotion.delete({
+     *   where: {
+     *     // ... filter to delete one FeaturedPromotion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FeaturedPromotionDeleteArgs>(args: SelectSubset<T, FeaturedPromotionDeleteArgs<ExtArgs>>): Prisma__FeaturedPromotionClient<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one FeaturedPromotion.
+     * @param {FeaturedPromotionUpdateArgs} args - Arguments to update one FeaturedPromotion.
+     * @example
+     * // Update one FeaturedPromotion
+     * const featuredPromotion = await prisma.featuredPromotion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FeaturedPromotionUpdateArgs>(args: SelectSubset<T, FeaturedPromotionUpdateArgs<ExtArgs>>): Prisma__FeaturedPromotionClient<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more FeaturedPromotions.
+     * @param {FeaturedPromotionDeleteManyArgs} args - Arguments to filter FeaturedPromotions to delete.
+     * @example
+     * // Delete a few FeaturedPromotions
+     * const { count } = await prisma.featuredPromotion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FeaturedPromotionDeleteManyArgs>(args?: SelectSubset<T, FeaturedPromotionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FeaturedPromotions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeaturedPromotionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FeaturedPromotions
+     * const featuredPromotion = await prisma.featuredPromotion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FeaturedPromotionUpdateManyArgs>(args: SelectSubset<T, FeaturedPromotionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one FeaturedPromotion.
+     * @param {FeaturedPromotionUpsertArgs} args - Arguments to update or create a FeaturedPromotion.
+     * @example
+     * // Update or create a FeaturedPromotion
+     * const featuredPromotion = await prisma.featuredPromotion.upsert({
+     *   create: {
+     *     // ... data to create a FeaturedPromotion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FeaturedPromotion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FeaturedPromotionUpsertArgs>(args: SelectSubset<T, FeaturedPromotionUpsertArgs<ExtArgs>>): Prisma__FeaturedPromotionClient<$Result.GetResult<Prisma.$FeaturedPromotionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of FeaturedPromotions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeaturedPromotionCountArgs} args - Arguments to filter FeaturedPromotions to count.
+     * @example
+     * // Count the number of FeaturedPromotions
+     * const count = await prisma.featuredPromotion.count({
+     *   where: {
+     *     // ... the filter for the FeaturedPromotions we want to count
+     *   }
+     * })
+    **/
+    count<T extends FeaturedPromotionCountArgs>(
+      args?: Subset<T, FeaturedPromotionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FeaturedPromotionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FeaturedPromotion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeaturedPromotionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FeaturedPromotionAggregateArgs>(args: Subset<T, FeaturedPromotionAggregateArgs>): Prisma.PrismaPromise<GetFeaturedPromotionAggregateType<T>>
+
+    /**
+     * Group by FeaturedPromotion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FeaturedPromotionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FeaturedPromotionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FeaturedPromotionGroupByArgs['orderBy'] }
+        : { orderBy?: FeaturedPromotionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FeaturedPromotionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFeaturedPromotionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FeaturedPromotion model
+   */
+  readonly fields: FeaturedPromotionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FeaturedPromotion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FeaturedPromotionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    guild<T extends GuildDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GuildDefaultArgs<ExtArgs>>): Prisma__GuildClient<$Result.GetResult<Prisma.$GuildPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FeaturedPromotion model
+   */ 
+  interface FeaturedPromotionFieldRefs {
+    readonly id: FieldRef<"FeaturedPromotion", 'Int'>
+    readonly guildId: FieldRef<"FeaturedPromotion", 'String'>
+    readonly promotionType: FieldRef<"FeaturedPromotion", 'String'>
+    readonly status: FieldRef<"FeaturedPromotion", 'String'>
+    readonly startAt: FieldRef<"FeaturedPromotion", 'DateTime'>
+    readonly expiresAt: FieldRef<"FeaturedPromotion", 'DateTime'>
+    readonly promotionalMessage: FieldRef<"FeaturedPromotion", 'String'>
+    readonly impressions: FieldRef<"FeaturedPromotion", 'Int'>
+    readonly clicks: FieldRef<"FeaturedPromotion", 'Int'>
+    readonly dmSent: FieldRef<"FeaturedPromotion", 'Int'>
+    readonly createdAt: FieldRef<"FeaturedPromotion", 'DateTime'>
+    readonly updatedAt: FieldRef<"FeaturedPromotion", 'DateTime'>
+    readonly approvedBy: FieldRef<"FeaturedPromotion", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FeaturedPromotion findUnique
+   */
+  export type FeaturedPromotionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which FeaturedPromotion to fetch.
+     */
+    where: FeaturedPromotionWhereUniqueInput
+  }
+
+  /**
+   * FeaturedPromotion findUniqueOrThrow
+   */
+  export type FeaturedPromotionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which FeaturedPromotion to fetch.
+     */
+    where: FeaturedPromotionWhereUniqueInput
+  }
+
+  /**
+   * FeaturedPromotion findFirst
+   */
+  export type FeaturedPromotionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which FeaturedPromotion to fetch.
+     */
+    where?: FeaturedPromotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FeaturedPromotions to fetch.
+     */
+    orderBy?: FeaturedPromotionOrderByWithRelationInput | FeaturedPromotionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FeaturedPromotions.
+     */
+    cursor?: FeaturedPromotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FeaturedPromotions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FeaturedPromotions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FeaturedPromotions.
+     */
+    distinct?: FeaturedPromotionScalarFieldEnum | FeaturedPromotionScalarFieldEnum[]
+  }
+
+  /**
+   * FeaturedPromotion findFirstOrThrow
+   */
+  export type FeaturedPromotionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which FeaturedPromotion to fetch.
+     */
+    where?: FeaturedPromotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FeaturedPromotions to fetch.
+     */
+    orderBy?: FeaturedPromotionOrderByWithRelationInput | FeaturedPromotionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FeaturedPromotions.
+     */
+    cursor?: FeaturedPromotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FeaturedPromotions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FeaturedPromotions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FeaturedPromotions.
+     */
+    distinct?: FeaturedPromotionScalarFieldEnum | FeaturedPromotionScalarFieldEnum[]
+  }
+
+  /**
+   * FeaturedPromotion findMany
+   */
+  export type FeaturedPromotionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which FeaturedPromotions to fetch.
+     */
+    where?: FeaturedPromotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FeaturedPromotions to fetch.
+     */
+    orderBy?: FeaturedPromotionOrderByWithRelationInput | FeaturedPromotionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FeaturedPromotions.
+     */
+    cursor?: FeaturedPromotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FeaturedPromotions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FeaturedPromotions.
+     */
+    skip?: number
+    distinct?: FeaturedPromotionScalarFieldEnum | FeaturedPromotionScalarFieldEnum[]
+  }
+
+  /**
+   * FeaturedPromotion create
+   */
+  export type FeaturedPromotionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FeaturedPromotion.
+     */
+    data: XOR<FeaturedPromotionCreateInput, FeaturedPromotionUncheckedCreateInput>
+  }
+
+  /**
+   * FeaturedPromotion createMany
+   */
+  export type FeaturedPromotionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FeaturedPromotions.
+     */
+    data: FeaturedPromotionCreateManyInput | FeaturedPromotionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FeaturedPromotion createManyAndReturn
+   */
+  export type FeaturedPromotionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many FeaturedPromotions.
+     */
+    data: FeaturedPromotionCreateManyInput | FeaturedPromotionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FeaturedPromotion update
+   */
+  export type FeaturedPromotionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FeaturedPromotion.
+     */
+    data: XOR<FeaturedPromotionUpdateInput, FeaturedPromotionUncheckedUpdateInput>
+    /**
+     * Choose, which FeaturedPromotion to update.
+     */
+    where: FeaturedPromotionWhereUniqueInput
+  }
+
+  /**
+   * FeaturedPromotion updateMany
+   */
+  export type FeaturedPromotionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FeaturedPromotions.
+     */
+    data: XOR<FeaturedPromotionUpdateManyMutationInput, FeaturedPromotionUncheckedUpdateManyInput>
+    /**
+     * Filter which FeaturedPromotions to update
+     */
+    where?: FeaturedPromotionWhereInput
+  }
+
+  /**
+   * FeaturedPromotion upsert
+   */
+  export type FeaturedPromotionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FeaturedPromotion to update in case it exists.
+     */
+    where: FeaturedPromotionWhereUniqueInput
+    /**
+     * In case the FeaturedPromotion found by the `where` argument doesn't exist, create a new FeaturedPromotion with this data.
+     */
+    create: XOR<FeaturedPromotionCreateInput, FeaturedPromotionUncheckedCreateInput>
+    /**
+     * In case the FeaturedPromotion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FeaturedPromotionUpdateInput, FeaturedPromotionUncheckedUpdateInput>
+  }
+
+  /**
+   * FeaturedPromotion delete
+   */
+  export type FeaturedPromotionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+    /**
+     * Filter which FeaturedPromotion to delete.
+     */
+    where: FeaturedPromotionWhereUniqueInput
+  }
+
+  /**
+   * FeaturedPromotion deleteMany
+   */
+  export type FeaturedPromotionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FeaturedPromotions to delete
+     */
+    where?: FeaturedPromotionWhereInput
+  }
+
+  /**
+   * FeaturedPromotion without action
+   */
+  export type FeaturedPromotionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeaturedPromotion
+     */
+    select?: FeaturedPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeaturedPromotionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserDMPromotion
+   */
+
+  export type AggregateUserDMPromotion = {
+    _count: UserDMPromotionCountAggregateOutputType | null
+    _min: UserDMPromotionMinAggregateOutputType | null
+    _max: UserDMPromotionMaxAggregateOutputType | null
+  }
+
+  export type UserDMPromotionMinAggregateOutputType = {
+    userId: string | null
+    lastPromotionAt: Date | null
+    optOut: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserDMPromotionMaxAggregateOutputType = {
+    userId: string | null
+    lastPromotionAt: Date | null
+    optOut: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserDMPromotionCountAggregateOutputType = {
+    userId: number
+    lastPromotionAt: number
+    optOut: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserDMPromotionMinAggregateInputType = {
+    userId?: true
+    lastPromotionAt?: true
+    optOut?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserDMPromotionMaxAggregateInputType = {
+    userId?: true
+    lastPromotionAt?: true
+    optOut?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserDMPromotionCountAggregateInputType = {
+    userId?: true
+    lastPromotionAt?: true
+    optOut?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserDMPromotionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserDMPromotion to aggregate.
+     */
+    where?: UserDMPromotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDMPromotions to fetch.
+     */
+    orderBy?: UserDMPromotionOrderByWithRelationInput | UserDMPromotionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserDMPromotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDMPromotions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDMPromotions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserDMPromotions
+    **/
+    _count?: true | UserDMPromotionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserDMPromotionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserDMPromotionMaxAggregateInputType
+  }
+
+  export type GetUserDMPromotionAggregateType<T extends UserDMPromotionAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserDMPromotion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserDMPromotion[P]>
+      : GetScalarType<T[P], AggregateUserDMPromotion[P]>
+  }
+
+
+
+
+  export type UserDMPromotionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserDMPromotionWhereInput
+    orderBy?: UserDMPromotionOrderByWithAggregationInput | UserDMPromotionOrderByWithAggregationInput[]
+    by: UserDMPromotionScalarFieldEnum[] | UserDMPromotionScalarFieldEnum
+    having?: UserDMPromotionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserDMPromotionCountAggregateInputType | true
+    _min?: UserDMPromotionMinAggregateInputType
+    _max?: UserDMPromotionMaxAggregateInputType
+  }
+
+  export type UserDMPromotionGroupByOutputType = {
+    userId: string
+    lastPromotionAt: Date | null
+    optOut: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: UserDMPromotionCountAggregateOutputType | null
+    _min: UserDMPromotionMinAggregateOutputType | null
+    _max: UserDMPromotionMaxAggregateOutputType | null
+  }
+
+  type GetUserDMPromotionGroupByPayload<T extends UserDMPromotionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserDMPromotionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserDMPromotionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserDMPromotionGroupByOutputType[P]>
+            : GetScalarType<T[P], UserDMPromotionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserDMPromotionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    lastPromotionAt?: boolean
+    optOut?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userDMPromotion"]>
+
+  export type UserDMPromotionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    lastPromotionAt?: boolean
+    optOut?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userDMPromotion"]>
+
+  export type UserDMPromotionSelectScalar = {
+    userId?: boolean
+    lastPromotionAt?: boolean
+    optOut?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserDMPromotionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserDMPromotionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserDMPromotionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserDMPromotion"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      userId: string
+      lastPromotionAt: Date | null
+      optOut: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userDMPromotion"]>
+    composites: {}
+  }
+
+  type UserDMPromotionGetPayload<S extends boolean | null | undefined | UserDMPromotionDefaultArgs> = $Result.GetResult<Prisma.$UserDMPromotionPayload, S>
+
+  type UserDMPromotionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserDMPromotionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserDMPromotionCountAggregateInputType | true
+    }
+
+  export interface UserDMPromotionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserDMPromotion'], meta: { name: 'UserDMPromotion' } }
+    /**
+     * Find zero or one UserDMPromotion that matches the filter.
+     * @param {UserDMPromotionFindUniqueArgs} args - Arguments to find a UserDMPromotion
+     * @example
+     * // Get one UserDMPromotion
+     * const userDMPromotion = await prisma.userDMPromotion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserDMPromotionFindUniqueArgs>(args: SelectSubset<T, UserDMPromotionFindUniqueArgs<ExtArgs>>): Prisma__UserDMPromotionClient<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UserDMPromotion that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserDMPromotionFindUniqueOrThrowArgs} args - Arguments to find a UserDMPromotion
+     * @example
+     * // Get one UserDMPromotion
+     * const userDMPromotion = await prisma.userDMPromotion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserDMPromotionFindUniqueOrThrowArgs>(args: SelectSubset<T, UserDMPromotionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserDMPromotionClient<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UserDMPromotion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDMPromotionFindFirstArgs} args - Arguments to find a UserDMPromotion
+     * @example
+     * // Get one UserDMPromotion
+     * const userDMPromotion = await prisma.userDMPromotion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserDMPromotionFindFirstArgs>(args?: SelectSubset<T, UserDMPromotionFindFirstArgs<ExtArgs>>): Prisma__UserDMPromotionClient<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserDMPromotion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDMPromotionFindFirstOrThrowArgs} args - Arguments to find a UserDMPromotion
+     * @example
+     * // Get one UserDMPromotion
+     * const userDMPromotion = await prisma.userDMPromotion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserDMPromotionFindFirstOrThrowArgs>(args?: SelectSubset<T, UserDMPromotionFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserDMPromotionClient<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UserDMPromotions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDMPromotionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserDMPromotions
+     * const userDMPromotions = await prisma.userDMPromotion.findMany()
+     * 
+     * // Get first 10 UserDMPromotions
+     * const userDMPromotions = await prisma.userDMPromotion.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const userDMPromotionWithUserIdOnly = await prisma.userDMPromotion.findMany({ select: { userId: true } })
+     * 
+     */
+    findMany<T extends UserDMPromotionFindManyArgs>(args?: SelectSubset<T, UserDMPromotionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UserDMPromotion.
+     * @param {UserDMPromotionCreateArgs} args - Arguments to create a UserDMPromotion.
+     * @example
+     * // Create one UserDMPromotion
+     * const UserDMPromotion = await prisma.userDMPromotion.create({
+     *   data: {
+     *     // ... data to create a UserDMPromotion
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserDMPromotionCreateArgs>(args: SelectSubset<T, UserDMPromotionCreateArgs<ExtArgs>>): Prisma__UserDMPromotionClient<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UserDMPromotions.
+     * @param {UserDMPromotionCreateManyArgs} args - Arguments to create many UserDMPromotions.
+     * @example
+     * // Create many UserDMPromotions
+     * const userDMPromotion = await prisma.userDMPromotion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserDMPromotionCreateManyArgs>(args?: SelectSubset<T, UserDMPromotionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserDMPromotions and returns the data saved in the database.
+     * @param {UserDMPromotionCreateManyAndReturnArgs} args - Arguments to create many UserDMPromotions.
+     * @example
+     * // Create many UserDMPromotions
+     * const userDMPromotion = await prisma.userDMPromotion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserDMPromotions and only return the `userId`
+     * const userDMPromotionWithUserIdOnly = await prisma.userDMPromotion.createManyAndReturn({ 
+     *   select: { userId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserDMPromotionCreateManyAndReturnArgs>(args?: SelectSubset<T, UserDMPromotionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a UserDMPromotion.
+     * @param {UserDMPromotionDeleteArgs} args - Arguments to delete one UserDMPromotion.
+     * @example
+     * // Delete one UserDMPromotion
+     * const UserDMPromotion = await prisma.userDMPromotion.delete({
+     *   where: {
+     *     // ... filter to delete one UserDMPromotion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserDMPromotionDeleteArgs>(args: SelectSubset<T, UserDMPromotionDeleteArgs<ExtArgs>>): Prisma__UserDMPromotionClient<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UserDMPromotion.
+     * @param {UserDMPromotionUpdateArgs} args - Arguments to update one UserDMPromotion.
+     * @example
+     * // Update one UserDMPromotion
+     * const userDMPromotion = await prisma.userDMPromotion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserDMPromotionUpdateArgs>(args: SelectSubset<T, UserDMPromotionUpdateArgs<ExtArgs>>): Prisma__UserDMPromotionClient<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserDMPromotions.
+     * @param {UserDMPromotionDeleteManyArgs} args - Arguments to filter UserDMPromotions to delete.
+     * @example
+     * // Delete a few UserDMPromotions
+     * const { count } = await prisma.userDMPromotion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserDMPromotionDeleteManyArgs>(args?: SelectSubset<T, UserDMPromotionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserDMPromotions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDMPromotionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserDMPromotions
+     * const userDMPromotion = await prisma.userDMPromotion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserDMPromotionUpdateManyArgs>(args: SelectSubset<T, UserDMPromotionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserDMPromotion.
+     * @param {UserDMPromotionUpsertArgs} args - Arguments to update or create a UserDMPromotion.
+     * @example
+     * // Update or create a UserDMPromotion
+     * const userDMPromotion = await prisma.userDMPromotion.upsert({
+     *   create: {
+     *     // ... data to create a UserDMPromotion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserDMPromotion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserDMPromotionUpsertArgs>(args: SelectSubset<T, UserDMPromotionUpsertArgs<ExtArgs>>): Prisma__UserDMPromotionClient<$Result.GetResult<Prisma.$UserDMPromotionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of UserDMPromotions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDMPromotionCountArgs} args - Arguments to filter UserDMPromotions to count.
+     * @example
+     * // Count the number of UserDMPromotions
+     * const count = await prisma.userDMPromotion.count({
+     *   where: {
+     *     // ... the filter for the UserDMPromotions we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserDMPromotionCountArgs>(
+      args?: Subset<T, UserDMPromotionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserDMPromotionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserDMPromotion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDMPromotionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserDMPromotionAggregateArgs>(args: Subset<T, UserDMPromotionAggregateArgs>): Prisma.PrismaPromise<GetUserDMPromotionAggregateType<T>>
+
+    /**
+     * Group by UserDMPromotion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDMPromotionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserDMPromotionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserDMPromotionGroupByArgs['orderBy'] }
+        : { orderBy?: UserDMPromotionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserDMPromotionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserDMPromotionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserDMPromotion model
+   */
+  readonly fields: UserDMPromotionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserDMPromotion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserDMPromotionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserDMPromotion model
+   */ 
+  interface UserDMPromotionFieldRefs {
+    readonly userId: FieldRef<"UserDMPromotion", 'String'>
+    readonly lastPromotionAt: FieldRef<"UserDMPromotion", 'DateTime'>
+    readonly optOut: FieldRef<"UserDMPromotion", 'Boolean'>
+    readonly createdAt: FieldRef<"UserDMPromotion", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserDMPromotion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserDMPromotion findUnique
+   */
+  export type UserDMPromotionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDMPromotion to fetch.
+     */
+    where: UserDMPromotionWhereUniqueInput
+  }
+
+  /**
+   * UserDMPromotion findUniqueOrThrow
+   */
+  export type UserDMPromotionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDMPromotion to fetch.
+     */
+    where: UserDMPromotionWhereUniqueInput
+  }
+
+  /**
+   * UserDMPromotion findFirst
+   */
+  export type UserDMPromotionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDMPromotion to fetch.
+     */
+    where?: UserDMPromotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDMPromotions to fetch.
+     */
+    orderBy?: UserDMPromotionOrderByWithRelationInput | UserDMPromotionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserDMPromotions.
+     */
+    cursor?: UserDMPromotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDMPromotions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDMPromotions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserDMPromotions.
+     */
+    distinct?: UserDMPromotionScalarFieldEnum | UserDMPromotionScalarFieldEnum[]
+  }
+
+  /**
+   * UserDMPromotion findFirstOrThrow
+   */
+  export type UserDMPromotionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDMPromotion to fetch.
+     */
+    where?: UserDMPromotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDMPromotions to fetch.
+     */
+    orderBy?: UserDMPromotionOrderByWithRelationInput | UserDMPromotionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserDMPromotions.
+     */
+    cursor?: UserDMPromotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDMPromotions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDMPromotions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserDMPromotions.
+     */
+    distinct?: UserDMPromotionScalarFieldEnum | UserDMPromotionScalarFieldEnum[]
+  }
+
+  /**
+   * UserDMPromotion findMany
+   */
+  export type UserDMPromotionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDMPromotions to fetch.
+     */
+    where?: UserDMPromotionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDMPromotions to fetch.
+     */
+    orderBy?: UserDMPromotionOrderByWithRelationInput | UserDMPromotionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserDMPromotions.
+     */
+    cursor?: UserDMPromotionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDMPromotions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDMPromotions.
+     */
+    skip?: number
+    distinct?: UserDMPromotionScalarFieldEnum | UserDMPromotionScalarFieldEnum[]
+  }
+
+  /**
+   * UserDMPromotion create
+   */
+  export type UserDMPromotionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserDMPromotion.
+     */
+    data: XOR<UserDMPromotionCreateInput, UserDMPromotionUncheckedCreateInput>
+  }
+
+  /**
+   * UserDMPromotion createMany
+   */
+  export type UserDMPromotionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserDMPromotions.
+     */
+    data: UserDMPromotionCreateManyInput | UserDMPromotionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserDMPromotion createManyAndReturn
+   */
+  export type UserDMPromotionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many UserDMPromotions.
+     */
+    data: UserDMPromotionCreateManyInput | UserDMPromotionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserDMPromotion update
+   */
+  export type UserDMPromotionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserDMPromotion.
+     */
+    data: XOR<UserDMPromotionUpdateInput, UserDMPromotionUncheckedUpdateInput>
+    /**
+     * Choose, which UserDMPromotion to update.
+     */
+    where: UserDMPromotionWhereUniqueInput
+  }
+
+  /**
+   * UserDMPromotion updateMany
+   */
+  export type UserDMPromotionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserDMPromotions.
+     */
+    data: XOR<UserDMPromotionUpdateManyMutationInput, UserDMPromotionUncheckedUpdateManyInput>
+    /**
+     * Filter which UserDMPromotions to update
+     */
+    where?: UserDMPromotionWhereInput
+  }
+
+  /**
+   * UserDMPromotion upsert
+   */
+  export type UserDMPromotionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserDMPromotion to update in case it exists.
+     */
+    where: UserDMPromotionWhereUniqueInput
+    /**
+     * In case the UserDMPromotion found by the `where` argument doesn't exist, create a new UserDMPromotion with this data.
+     */
+    create: XOR<UserDMPromotionCreateInput, UserDMPromotionUncheckedCreateInput>
+    /**
+     * In case the UserDMPromotion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserDMPromotionUpdateInput, UserDMPromotionUncheckedUpdateInput>
+  }
+
+  /**
+   * UserDMPromotion delete
+   */
+  export type UserDMPromotionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+    /**
+     * Filter which UserDMPromotion to delete.
+     */
+    where: UserDMPromotionWhereUniqueInput
+  }
+
+  /**
+   * UserDMPromotion deleteMany
+   */
+  export type UserDMPromotionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserDMPromotions to delete
+     */
+    where?: UserDMPromotionWhereInput
+  }
+
+  /**
+   * UserDMPromotion without action
+   */
+  export type UserDMPromotionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDMPromotion
+     */
+    select?: UserDMPromotionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDMPromotionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -18359,6 +21747,54 @@ export namespace Prisma {
   export type DashboardAuditLogScalarFieldEnum = (typeof DashboardAuditLogScalarFieldEnum)[keyof typeof DashboardAuditLogScalarFieldEnum]
 
 
+  export const ServerListingScalarFieldEnum: {
+    guildId: 'guildId',
+    description: 'description',
+    iconUrl: 'iconUrl',
+    inviteUrl: 'inviteUrl',
+    category: 'category',
+    tags: 'tags',
+    language: 'language',
+    isPublic: 'isPublic',
+    views: 'views',
+    clicks: 'clicks',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ServerListingScalarFieldEnum = (typeof ServerListingScalarFieldEnum)[keyof typeof ServerListingScalarFieldEnum]
+
+
+  export const FeaturedPromotionScalarFieldEnum: {
+    id: 'id',
+    guildId: 'guildId',
+    promotionType: 'promotionType',
+    status: 'status',
+    startAt: 'startAt',
+    expiresAt: 'expiresAt',
+    promotionalMessage: 'promotionalMessage',
+    impressions: 'impressions',
+    clicks: 'clicks',
+    dmSent: 'dmSent',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    approvedBy: 'approvedBy'
+  };
+
+  export type FeaturedPromotionScalarFieldEnum = (typeof FeaturedPromotionScalarFieldEnum)[keyof typeof FeaturedPromotionScalarFieldEnum]
+
+
+  export const UserDMPromotionScalarFieldEnum: {
+    userId: 'userId',
+    lastPromotionAt: 'lastPromotionAt',
+    optOut: 'optOut',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserDMPromotionScalarFieldEnum = (typeof UserDMPromotionScalarFieldEnum)[keyof typeof UserDMPromotionScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -18494,6 +21930,7 @@ export namespace Prisma {
     warnings?: WarningListRelationFilter
     sessions?: SessionListRelationFilter
     DashboardAuditLog?: DashboardAuditLogListRelationFilter
+    dmPromotion?: XOR<UserDMPromotionNullableRelationFilter, UserDMPromotionWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -18509,6 +21946,7 @@ export namespace Prisma {
     warnings?: WarningOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     DashboardAuditLog?: DashboardAuditLogOrderByRelationAggregateInput
+    dmPromotion?: UserDMPromotionOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -18527,6 +21965,7 @@ export namespace Prisma {
     warnings?: WarningListRelationFilter
     sessions?: SessionListRelationFilter
     DashboardAuditLog?: DashboardAuditLogListRelationFilter
+    dmPromotion?: XOR<UserDMPromotionNullableRelationFilter, UserDMPromotionWhereInput> | null
   }, "id">
 
   export type UserOrderByWithAggregationInput = {
@@ -18629,6 +22068,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionListRelationFilter
     rules?: RuleListRelationFilter
     DashboardAuditLog?: DashboardAuditLogListRelationFilter
+    serverListing?: XOR<ServerListingNullableRelationFilter, ServerListingWhereInput> | null
+    featuredPromotions?: FeaturedPromotionListRelationFilter
   }
 
   export type GuildOrderByWithRelationInput = {
@@ -18647,6 +22088,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionOrderByRelationAggregateInput
     rules?: RuleOrderByRelationAggregateInput
     DashboardAuditLog?: DashboardAuditLogOrderByRelationAggregateInput
+    serverListing?: ServerListingOrderByWithRelationInput
+    featuredPromotions?: FeaturedPromotionOrderByRelationAggregateInput
   }
 
   export type GuildWhereUniqueInput = Prisma.AtLeast<{
@@ -18668,6 +22111,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionListRelationFilter
     rules?: RuleListRelationFilter
     DashboardAuditLog?: DashboardAuditLogListRelationFilter
+    serverListing?: XOR<ServerListingNullableRelationFilter, ServerListingWhereInput> | null
+    featuredPromotions?: FeaturedPromotionListRelationFilter
   }, "id">
 
   export type GuildOrderByWithAggregationInput = {
@@ -19533,6 +22978,250 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"DashboardAuditLog"> | Date | string
   }
 
+  export type ServerListingWhereInput = {
+    AND?: ServerListingWhereInput | ServerListingWhereInput[]
+    OR?: ServerListingWhereInput[]
+    NOT?: ServerListingWhereInput | ServerListingWhereInput[]
+    guildId?: StringFilter<"ServerListing"> | string
+    description?: StringNullableFilter<"ServerListing"> | string | null
+    iconUrl?: StringNullableFilter<"ServerListing"> | string | null
+    inviteUrl?: StringNullableFilter<"ServerListing"> | string | null
+    category?: StringNullableFilter<"ServerListing"> | string | null
+    tags?: StringNullableListFilter<"ServerListing">
+    language?: StringFilter<"ServerListing"> | string
+    isPublic?: BoolFilter<"ServerListing"> | boolean
+    views?: IntFilter<"ServerListing"> | number
+    clicks?: IntFilter<"ServerListing"> | number
+    createdAt?: DateTimeFilter<"ServerListing"> | Date | string
+    updatedAt?: DateTimeFilter<"ServerListing"> | Date | string
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+  }
+
+  export type ServerListingOrderByWithRelationInput = {
+    guildId?: SortOrder
+    description?: SortOrderInput | SortOrder
+    iconUrl?: SortOrderInput | SortOrder
+    inviteUrl?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    language?: SortOrder
+    isPublic?: SortOrder
+    views?: SortOrder
+    clicks?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    guild?: GuildOrderByWithRelationInput
+  }
+
+  export type ServerListingWhereUniqueInput = Prisma.AtLeast<{
+    guildId?: string
+    AND?: ServerListingWhereInput | ServerListingWhereInput[]
+    OR?: ServerListingWhereInput[]
+    NOT?: ServerListingWhereInput | ServerListingWhereInput[]
+    description?: StringNullableFilter<"ServerListing"> | string | null
+    iconUrl?: StringNullableFilter<"ServerListing"> | string | null
+    inviteUrl?: StringNullableFilter<"ServerListing"> | string | null
+    category?: StringNullableFilter<"ServerListing"> | string | null
+    tags?: StringNullableListFilter<"ServerListing">
+    language?: StringFilter<"ServerListing"> | string
+    isPublic?: BoolFilter<"ServerListing"> | boolean
+    views?: IntFilter<"ServerListing"> | number
+    clicks?: IntFilter<"ServerListing"> | number
+    createdAt?: DateTimeFilter<"ServerListing"> | Date | string
+    updatedAt?: DateTimeFilter<"ServerListing"> | Date | string
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+  }, "guildId">
+
+  export type ServerListingOrderByWithAggregationInput = {
+    guildId?: SortOrder
+    description?: SortOrderInput | SortOrder
+    iconUrl?: SortOrderInput | SortOrder
+    inviteUrl?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    language?: SortOrder
+    isPublic?: SortOrder
+    views?: SortOrder
+    clicks?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ServerListingCountOrderByAggregateInput
+    _avg?: ServerListingAvgOrderByAggregateInput
+    _max?: ServerListingMaxOrderByAggregateInput
+    _min?: ServerListingMinOrderByAggregateInput
+    _sum?: ServerListingSumOrderByAggregateInput
+  }
+
+  export type ServerListingScalarWhereWithAggregatesInput = {
+    AND?: ServerListingScalarWhereWithAggregatesInput | ServerListingScalarWhereWithAggregatesInput[]
+    OR?: ServerListingScalarWhereWithAggregatesInput[]
+    NOT?: ServerListingScalarWhereWithAggregatesInput | ServerListingScalarWhereWithAggregatesInput[]
+    guildId?: StringWithAggregatesFilter<"ServerListing"> | string
+    description?: StringNullableWithAggregatesFilter<"ServerListing"> | string | null
+    iconUrl?: StringNullableWithAggregatesFilter<"ServerListing"> | string | null
+    inviteUrl?: StringNullableWithAggregatesFilter<"ServerListing"> | string | null
+    category?: StringNullableWithAggregatesFilter<"ServerListing"> | string | null
+    tags?: StringNullableListFilter<"ServerListing">
+    language?: StringWithAggregatesFilter<"ServerListing"> | string
+    isPublic?: BoolWithAggregatesFilter<"ServerListing"> | boolean
+    views?: IntWithAggregatesFilter<"ServerListing"> | number
+    clicks?: IntWithAggregatesFilter<"ServerListing"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ServerListing"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ServerListing"> | Date | string
+  }
+
+  export type FeaturedPromotionWhereInput = {
+    AND?: FeaturedPromotionWhereInput | FeaturedPromotionWhereInput[]
+    OR?: FeaturedPromotionWhereInput[]
+    NOT?: FeaturedPromotionWhereInput | FeaturedPromotionWhereInput[]
+    id?: IntFilter<"FeaturedPromotion"> | number
+    guildId?: StringFilter<"FeaturedPromotion"> | string
+    promotionType?: StringFilter<"FeaturedPromotion"> | string
+    status?: StringFilter<"FeaturedPromotion"> | string
+    startAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    expiresAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    promotionalMessage?: StringNullableFilter<"FeaturedPromotion"> | string | null
+    impressions?: IntFilter<"FeaturedPromotion"> | number
+    clicks?: IntFilter<"FeaturedPromotion"> | number
+    dmSent?: IntFilter<"FeaturedPromotion"> | number
+    createdAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    updatedAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    approvedBy?: StringNullableFilter<"FeaturedPromotion"> | string | null
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+  }
+
+  export type FeaturedPromotionOrderByWithRelationInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    promotionType?: SortOrder
+    status?: SortOrder
+    startAt?: SortOrder
+    expiresAt?: SortOrder
+    promotionalMessage?: SortOrderInput | SortOrder
+    impressions?: SortOrder
+    clicks?: SortOrder
+    dmSent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    approvedBy?: SortOrderInput | SortOrder
+    guild?: GuildOrderByWithRelationInput
+  }
+
+  export type FeaturedPromotionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: FeaturedPromotionWhereInput | FeaturedPromotionWhereInput[]
+    OR?: FeaturedPromotionWhereInput[]
+    NOT?: FeaturedPromotionWhereInput | FeaturedPromotionWhereInput[]
+    guildId?: StringFilter<"FeaturedPromotion"> | string
+    promotionType?: StringFilter<"FeaturedPromotion"> | string
+    status?: StringFilter<"FeaturedPromotion"> | string
+    startAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    expiresAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    promotionalMessage?: StringNullableFilter<"FeaturedPromotion"> | string | null
+    impressions?: IntFilter<"FeaturedPromotion"> | number
+    clicks?: IntFilter<"FeaturedPromotion"> | number
+    dmSent?: IntFilter<"FeaturedPromotion"> | number
+    createdAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    updatedAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    approvedBy?: StringNullableFilter<"FeaturedPromotion"> | string | null
+    guild?: XOR<GuildRelationFilter, GuildWhereInput>
+  }, "id">
+
+  export type FeaturedPromotionOrderByWithAggregationInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    promotionType?: SortOrder
+    status?: SortOrder
+    startAt?: SortOrder
+    expiresAt?: SortOrder
+    promotionalMessage?: SortOrderInput | SortOrder
+    impressions?: SortOrder
+    clicks?: SortOrder
+    dmSent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    approvedBy?: SortOrderInput | SortOrder
+    _count?: FeaturedPromotionCountOrderByAggregateInput
+    _avg?: FeaturedPromotionAvgOrderByAggregateInput
+    _max?: FeaturedPromotionMaxOrderByAggregateInput
+    _min?: FeaturedPromotionMinOrderByAggregateInput
+    _sum?: FeaturedPromotionSumOrderByAggregateInput
+  }
+
+  export type FeaturedPromotionScalarWhereWithAggregatesInput = {
+    AND?: FeaturedPromotionScalarWhereWithAggregatesInput | FeaturedPromotionScalarWhereWithAggregatesInput[]
+    OR?: FeaturedPromotionScalarWhereWithAggregatesInput[]
+    NOT?: FeaturedPromotionScalarWhereWithAggregatesInput | FeaturedPromotionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"FeaturedPromotion"> | number
+    guildId?: StringWithAggregatesFilter<"FeaturedPromotion"> | string
+    promotionType?: StringWithAggregatesFilter<"FeaturedPromotion"> | string
+    status?: StringWithAggregatesFilter<"FeaturedPromotion"> | string
+    startAt?: DateTimeWithAggregatesFilter<"FeaturedPromotion"> | Date | string
+    expiresAt?: DateTimeWithAggregatesFilter<"FeaturedPromotion"> | Date | string
+    promotionalMessage?: StringNullableWithAggregatesFilter<"FeaturedPromotion"> | string | null
+    impressions?: IntWithAggregatesFilter<"FeaturedPromotion"> | number
+    clicks?: IntWithAggregatesFilter<"FeaturedPromotion"> | number
+    dmSent?: IntWithAggregatesFilter<"FeaturedPromotion"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"FeaturedPromotion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"FeaturedPromotion"> | Date | string
+    approvedBy?: StringNullableWithAggregatesFilter<"FeaturedPromotion"> | string | null
+  }
+
+  export type UserDMPromotionWhereInput = {
+    AND?: UserDMPromotionWhereInput | UserDMPromotionWhereInput[]
+    OR?: UserDMPromotionWhereInput[]
+    NOT?: UserDMPromotionWhereInput | UserDMPromotionWhereInput[]
+    userId?: StringFilter<"UserDMPromotion"> | string
+    lastPromotionAt?: DateTimeNullableFilter<"UserDMPromotion"> | Date | string | null
+    optOut?: BoolFilter<"UserDMPromotion"> | boolean
+    createdAt?: DateTimeFilter<"UserDMPromotion"> | Date | string
+    updatedAt?: DateTimeFilter<"UserDMPromotion"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type UserDMPromotionOrderByWithRelationInput = {
+    userId?: SortOrder
+    lastPromotionAt?: SortOrderInput | SortOrder
+    optOut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserDMPromotionWhereUniqueInput = Prisma.AtLeast<{
+    userId?: string
+    AND?: UserDMPromotionWhereInput | UserDMPromotionWhereInput[]
+    OR?: UserDMPromotionWhereInput[]
+    NOT?: UserDMPromotionWhereInput | UserDMPromotionWhereInput[]
+    lastPromotionAt?: DateTimeNullableFilter<"UserDMPromotion"> | Date | string | null
+    optOut?: BoolFilter<"UserDMPromotion"> | boolean
+    createdAt?: DateTimeFilter<"UserDMPromotion"> | Date | string
+    updatedAt?: DateTimeFilter<"UserDMPromotion"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "userId">
+
+  export type UserDMPromotionOrderByWithAggregationInput = {
+    userId?: SortOrder
+    lastPromotionAt?: SortOrderInput | SortOrder
+    optOut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserDMPromotionCountOrderByAggregateInput
+    _max?: UserDMPromotionMaxOrderByAggregateInput
+    _min?: UserDMPromotionMinOrderByAggregateInput
+  }
+
+  export type UserDMPromotionScalarWhereWithAggregatesInput = {
+    AND?: UserDMPromotionScalarWhereWithAggregatesInput | UserDMPromotionScalarWhereWithAggregatesInput[]
+    OR?: UserDMPromotionScalarWhereWithAggregatesInput[]
+    NOT?: UserDMPromotionScalarWhereWithAggregatesInput | UserDMPromotionScalarWhereWithAggregatesInput[]
+    userId?: StringWithAggregatesFilter<"UserDMPromotion"> | string
+    lastPromotionAt?: DateTimeNullableWithAggregatesFilter<"UserDMPromotion"> | Date | string | null
+    optOut?: BoolWithAggregatesFilter<"UserDMPromotion"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"UserDMPromotion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserDMPromotion"> | Date | string
+  }
+
   export type UserCreateInput = {
     id: string
     username: string
@@ -19546,6 +23235,7 @@ export namespace Prisma {
     warnings?: WarningCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -19561,6 +23251,7 @@ export namespace Prisma {
     warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -19576,6 +23267,7 @@ export namespace Prisma {
     warnings?: WarningUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -19591,6 +23283,7 @@ export namespace Prisma {
     warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -19694,6 +23387,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateInput = {
@@ -19712,6 +23407,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUpdateInput = {
@@ -19730,6 +23427,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateInput = {
@@ -19748,6 +23447,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateManyInput = {
@@ -20588,6 +24289,273 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ServerListingCreateInput = {
+    description?: string | null
+    iconUrl?: string | null
+    inviteUrl?: string | null
+    category?: string | null
+    tags?: ServerListingCreatetagsInput | string[]
+    language?: string
+    isPublic?: boolean
+    views?: number
+    clicks?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guild: GuildCreateNestedOneWithoutServerListingInput
+  }
+
+  export type ServerListingUncheckedCreateInput = {
+    guildId: string
+    description?: string | null
+    iconUrl?: string | null
+    inviteUrl?: string | null
+    category?: string | null
+    tags?: ServerListingCreatetagsInput | string[]
+    language?: string
+    isPublic?: boolean
+    views?: number
+    clicks?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ServerListingUpdateInput = {
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    iconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    inviteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ServerListingUpdatetagsInput | string[]
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guild?: GuildUpdateOneRequiredWithoutServerListingNestedInput
+  }
+
+  export type ServerListingUncheckedUpdateInput = {
+    guildId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    iconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    inviteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ServerListingUpdatetagsInput | string[]
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ServerListingCreateManyInput = {
+    guildId: string
+    description?: string | null
+    iconUrl?: string | null
+    inviteUrl?: string | null
+    category?: string | null
+    tags?: ServerListingCreatetagsInput | string[]
+    language?: string
+    isPublic?: boolean
+    views?: number
+    clicks?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ServerListingUpdateManyMutationInput = {
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    iconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    inviteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ServerListingUpdatetagsInput | string[]
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ServerListingUncheckedUpdateManyInput = {
+    guildId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    iconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    inviteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ServerListingUpdatetagsInput | string[]
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FeaturedPromotionCreateInput = {
+    promotionType: string
+    status: string
+    startAt?: Date | string
+    expiresAt: Date | string
+    promotionalMessage?: string | null
+    impressions?: number
+    clicks?: number
+    dmSent?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedBy?: string | null
+    guild: GuildCreateNestedOneWithoutFeaturedPromotionsInput
+  }
+
+  export type FeaturedPromotionUncheckedCreateInput = {
+    id?: number
+    guildId: string
+    promotionType: string
+    status: string
+    startAt?: Date | string
+    expiresAt: Date | string
+    promotionalMessage?: string | null
+    impressions?: number
+    clicks?: number
+    dmSent?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedBy?: string | null
+  }
+
+  export type FeaturedPromotionUpdateInput = {
+    promotionType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    promotionalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    dmSent?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    guild?: GuildUpdateOneRequiredWithoutFeaturedPromotionsNestedInput
+  }
+
+  export type FeaturedPromotionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    promotionType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    promotionalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    dmSent?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FeaturedPromotionCreateManyInput = {
+    id?: number
+    guildId: string
+    promotionType: string
+    status: string
+    startAt?: Date | string
+    expiresAt: Date | string
+    promotionalMessage?: string | null
+    impressions?: number
+    clicks?: number
+    dmSent?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedBy?: string | null
+  }
+
+  export type FeaturedPromotionUpdateManyMutationInput = {
+    promotionType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    promotionalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    dmSent?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FeaturedPromotionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    guildId?: StringFieldUpdateOperationsInput | string
+    promotionType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    promotionalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    dmSent?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserDMPromotionCreateInput = {
+    lastPromotionAt?: Date | string | null
+    optOut?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutDmPromotionInput
+  }
+
+  export type UserDMPromotionUncheckedCreateInput = {
+    userId: string
+    lastPromotionAt?: Date | string | null
+    optOut?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDMPromotionUpdateInput = {
+    lastPromotionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    optOut?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDmPromotionNestedInput
+  }
+
+  export type UserDMPromotionUncheckedUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    lastPromotionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    optOut?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDMPromotionCreateManyInput = {
+    userId: string
+    lastPromotionAt?: Date | string | null
+    optOut?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDMPromotionUpdateManyMutationInput = {
+    lastPromotionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    optOut?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDMPromotionUncheckedUpdateManyInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    lastPromotionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    optOut?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -20662,6 +24630,11 @@ export namespace Prisma {
     every?: DashboardAuditLogWhereInput
     some?: DashboardAuditLogWhereInput
     none?: DashboardAuditLogWhereInput
+  }
+
+  export type UserDMPromotionNullableRelationFilter = {
+    is?: UserDMPromotionWhereInput | null
+    isNot?: UserDMPromotionWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -20860,6 +24833,17 @@ export namespace Prisma {
     none?: RuleWhereInput
   }
 
+  export type ServerListingNullableRelationFilter = {
+    is?: ServerListingWhereInput | null
+    isNot?: ServerListingWhereInput | null
+  }
+
+  export type FeaturedPromotionListRelationFilter = {
+    every?: FeaturedPromotionWhereInput
+    some?: FeaturedPromotionWhereInput
+    none?: FeaturedPromotionWhereInput
+  }
+
   export type SecurityEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -20881,6 +24865,10 @@ export namespace Prisma {
   }
 
   export type RuleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FeaturedPromotionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -21488,6 +25476,153 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type ServerListingCountOrderByAggregateInput = {
+    guildId?: SortOrder
+    description?: SortOrder
+    iconUrl?: SortOrder
+    inviteUrl?: SortOrder
+    category?: SortOrder
+    tags?: SortOrder
+    language?: SortOrder
+    isPublic?: SortOrder
+    views?: SortOrder
+    clicks?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ServerListingAvgOrderByAggregateInput = {
+    views?: SortOrder
+    clicks?: SortOrder
+  }
+
+  export type ServerListingMaxOrderByAggregateInput = {
+    guildId?: SortOrder
+    description?: SortOrder
+    iconUrl?: SortOrder
+    inviteUrl?: SortOrder
+    category?: SortOrder
+    language?: SortOrder
+    isPublic?: SortOrder
+    views?: SortOrder
+    clicks?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ServerListingMinOrderByAggregateInput = {
+    guildId?: SortOrder
+    description?: SortOrder
+    iconUrl?: SortOrder
+    inviteUrl?: SortOrder
+    category?: SortOrder
+    language?: SortOrder
+    isPublic?: SortOrder
+    views?: SortOrder
+    clicks?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ServerListingSumOrderByAggregateInput = {
+    views?: SortOrder
+    clicks?: SortOrder
+  }
+
+  export type FeaturedPromotionCountOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    promotionType?: SortOrder
+    status?: SortOrder
+    startAt?: SortOrder
+    expiresAt?: SortOrder
+    promotionalMessage?: SortOrder
+    impressions?: SortOrder
+    clicks?: SortOrder
+    dmSent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    approvedBy?: SortOrder
+  }
+
+  export type FeaturedPromotionAvgOrderByAggregateInput = {
+    id?: SortOrder
+    impressions?: SortOrder
+    clicks?: SortOrder
+    dmSent?: SortOrder
+  }
+
+  export type FeaturedPromotionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    promotionType?: SortOrder
+    status?: SortOrder
+    startAt?: SortOrder
+    expiresAt?: SortOrder
+    promotionalMessage?: SortOrder
+    impressions?: SortOrder
+    clicks?: SortOrder
+    dmSent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    approvedBy?: SortOrder
+  }
+
+  export type FeaturedPromotionMinOrderByAggregateInput = {
+    id?: SortOrder
+    guildId?: SortOrder
+    promotionType?: SortOrder
+    status?: SortOrder
+    startAt?: SortOrder
+    expiresAt?: SortOrder
+    promotionalMessage?: SortOrder
+    impressions?: SortOrder
+    clicks?: SortOrder
+    dmSent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    approvedBy?: SortOrder
+  }
+
+  export type FeaturedPromotionSumOrderByAggregateInput = {
+    id?: SortOrder
+    impressions?: SortOrder
+    clicks?: SortOrder
+    dmSent?: SortOrder
+  }
+
+  export type UserDMPromotionCountOrderByAggregateInput = {
+    userId?: SortOrder
+    lastPromotionAt?: SortOrder
+    optOut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserDMPromotionMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    lastPromotionAt?: SortOrder
+    optOut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserDMPromotionMinOrderByAggregateInput = {
+    userId?: SortOrder
+    lastPromotionAt?: SortOrder
+    optOut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type ModerationCaseCreateNestedManyWithoutUserInput = {
     create?: XOR<ModerationCaseCreateWithoutUserInput, ModerationCaseUncheckedCreateWithoutUserInput> | ModerationCaseCreateWithoutUserInput[] | ModerationCaseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ModerationCaseCreateOrConnectWithoutUserInput | ModerationCaseCreateOrConnectWithoutUserInput[]
@@ -21523,6 +25658,12 @@ export namespace Prisma {
     connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
   }
 
+  export type UserDMPromotionCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserDMPromotionCreateWithoutUserInput, UserDMPromotionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserDMPromotionCreateOrConnectWithoutUserInput
+    connect?: UserDMPromotionWhereUniqueInput
+  }
+
   export type ModerationCaseUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ModerationCaseCreateWithoutUserInput, ModerationCaseUncheckedCreateWithoutUserInput> | ModerationCaseCreateWithoutUserInput[] | ModerationCaseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ModerationCaseCreateOrConnectWithoutUserInput | ModerationCaseCreateOrConnectWithoutUserInput[]
@@ -21556,6 +25697,12 @@ export namespace Prisma {
     connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutUserInput | DashboardAuditLogCreateOrConnectWithoutUserInput[]
     createMany?: DashboardAuditLogCreateManyUserInputEnvelope
     connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+  }
+
+  export type UserDMPromotionUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserDMPromotionCreateWithoutUserInput, UserDMPromotionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserDMPromotionCreateOrConnectWithoutUserInput
+    connect?: UserDMPromotionWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -21644,6 +25791,16 @@ export namespace Prisma {
     deleteMany?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
   }
 
+  export type UserDMPromotionUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserDMPromotionCreateWithoutUserInput, UserDMPromotionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserDMPromotionCreateOrConnectWithoutUserInput
+    upsert?: UserDMPromotionUpsertWithoutUserInput
+    disconnect?: UserDMPromotionWhereInput | boolean
+    delete?: UserDMPromotionWhereInput | boolean
+    connect?: UserDMPromotionWhereUniqueInput
+    update?: XOR<XOR<UserDMPromotionUpdateToOneWithWhereWithoutUserInput, UserDMPromotionUpdateWithoutUserInput>, UserDMPromotionUncheckedUpdateWithoutUserInput>
+  }
+
   export type ModerationCaseUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ModerationCaseCreateWithoutUserInput, ModerationCaseUncheckedCreateWithoutUserInput> | ModerationCaseCreateWithoutUserInput[] | ModerationCaseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ModerationCaseCreateOrConnectWithoutUserInput | ModerationCaseCreateOrConnectWithoutUserInput[]
@@ -21712,6 +25869,16 @@ export namespace Prisma {
     update?: DashboardAuditLogUpdateWithWhereUniqueWithoutUserInput | DashboardAuditLogUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: DashboardAuditLogUpdateManyWithWhereWithoutUserInput | DashboardAuditLogUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
+  }
+
+  export type UserDMPromotionUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserDMPromotionCreateWithoutUserInput, UserDMPromotionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserDMPromotionCreateOrConnectWithoutUserInput
+    upsert?: UserDMPromotionUpsertWithoutUserInput
+    disconnect?: UserDMPromotionWhereInput | boolean
+    delete?: UserDMPromotionWhereInput | boolean
+    connect?: UserDMPromotionWhereUniqueInput
+    update?: XOR<XOR<UserDMPromotionUpdateToOneWithWhereWithoutUserInput, UserDMPromotionUpdateWithoutUserInput>, UserDMPromotionUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -21797,6 +25964,19 @@ export namespace Prisma {
     connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
   }
 
+  export type ServerListingCreateNestedOneWithoutGuildInput = {
+    create?: XOR<ServerListingCreateWithoutGuildInput, ServerListingUncheckedCreateWithoutGuildInput>
+    connectOrCreate?: ServerListingCreateOrConnectWithoutGuildInput
+    connect?: ServerListingWhereUniqueInput
+  }
+
+  export type FeaturedPromotionCreateNestedManyWithoutGuildInput = {
+    create?: XOR<FeaturedPromotionCreateWithoutGuildInput, FeaturedPromotionUncheckedCreateWithoutGuildInput> | FeaturedPromotionCreateWithoutGuildInput[] | FeaturedPromotionUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: FeaturedPromotionCreateOrConnectWithoutGuildInput | FeaturedPromotionCreateOrConnectWithoutGuildInput[]
+    createMany?: FeaturedPromotionCreateManyGuildInputEnvelope
+    connect?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
+  }
+
   export type GuildSettingUncheckedCreateNestedOneWithoutGuildInput = {
     create?: XOR<GuildSettingCreateWithoutGuildInput, GuildSettingUncheckedCreateWithoutGuildInput>
     connectOrCreate?: GuildSettingCreateOrConnectWithoutGuildInput
@@ -21864,6 +26044,19 @@ export namespace Prisma {
     connectOrCreate?: DashboardAuditLogCreateOrConnectWithoutGuildInput | DashboardAuditLogCreateOrConnectWithoutGuildInput[]
     createMany?: DashboardAuditLogCreateManyGuildInputEnvelope
     connect?: DashboardAuditLogWhereUniqueInput | DashboardAuditLogWhereUniqueInput[]
+  }
+
+  export type ServerListingUncheckedCreateNestedOneWithoutGuildInput = {
+    create?: XOR<ServerListingCreateWithoutGuildInput, ServerListingUncheckedCreateWithoutGuildInput>
+    connectOrCreate?: ServerListingCreateOrConnectWithoutGuildInput
+    connect?: ServerListingWhereUniqueInput
+  }
+
+  export type FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput = {
+    create?: XOR<FeaturedPromotionCreateWithoutGuildInput, FeaturedPromotionUncheckedCreateWithoutGuildInput> | FeaturedPromotionCreateWithoutGuildInput[] | FeaturedPromotionUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: FeaturedPromotionCreateOrConnectWithoutGuildInput | FeaturedPromotionCreateOrConnectWithoutGuildInput[]
+    createMany?: FeaturedPromotionCreateManyGuildInputEnvelope
+    connect?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -22010,6 +26203,30 @@ export namespace Prisma {
     deleteMany?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
   }
 
+  export type ServerListingUpdateOneWithoutGuildNestedInput = {
+    create?: XOR<ServerListingCreateWithoutGuildInput, ServerListingUncheckedCreateWithoutGuildInput>
+    connectOrCreate?: ServerListingCreateOrConnectWithoutGuildInput
+    upsert?: ServerListingUpsertWithoutGuildInput
+    disconnect?: ServerListingWhereInput | boolean
+    delete?: ServerListingWhereInput | boolean
+    connect?: ServerListingWhereUniqueInput
+    update?: XOR<XOR<ServerListingUpdateToOneWithWhereWithoutGuildInput, ServerListingUpdateWithoutGuildInput>, ServerListingUncheckedUpdateWithoutGuildInput>
+  }
+
+  export type FeaturedPromotionUpdateManyWithoutGuildNestedInput = {
+    create?: XOR<FeaturedPromotionCreateWithoutGuildInput, FeaturedPromotionUncheckedCreateWithoutGuildInput> | FeaturedPromotionCreateWithoutGuildInput[] | FeaturedPromotionUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: FeaturedPromotionCreateOrConnectWithoutGuildInput | FeaturedPromotionCreateOrConnectWithoutGuildInput[]
+    upsert?: FeaturedPromotionUpsertWithWhereUniqueWithoutGuildInput | FeaturedPromotionUpsertWithWhereUniqueWithoutGuildInput[]
+    createMany?: FeaturedPromotionCreateManyGuildInputEnvelope
+    set?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
+    disconnect?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
+    delete?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
+    connect?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
+    update?: FeaturedPromotionUpdateWithWhereUniqueWithoutGuildInput | FeaturedPromotionUpdateWithWhereUniqueWithoutGuildInput[]
+    updateMany?: FeaturedPromotionUpdateManyWithWhereWithoutGuildInput | FeaturedPromotionUpdateManyWithWhereWithoutGuildInput[]
+    deleteMany?: FeaturedPromotionScalarWhereInput | FeaturedPromotionScalarWhereInput[]
+  }
+
   export type GuildSettingUncheckedUpdateOneWithoutGuildNestedInput = {
     create?: XOR<GuildSettingCreateWithoutGuildInput, GuildSettingUncheckedCreateWithoutGuildInput>
     connectOrCreate?: GuildSettingCreateOrConnectWithoutGuildInput
@@ -22144,6 +26361,30 @@ export namespace Prisma {
     update?: DashboardAuditLogUpdateWithWhereUniqueWithoutGuildInput | DashboardAuditLogUpdateWithWhereUniqueWithoutGuildInput[]
     updateMany?: DashboardAuditLogUpdateManyWithWhereWithoutGuildInput | DashboardAuditLogUpdateManyWithWhereWithoutGuildInput[]
     deleteMany?: DashboardAuditLogScalarWhereInput | DashboardAuditLogScalarWhereInput[]
+  }
+
+  export type ServerListingUncheckedUpdateOneWithoutGuildNestedInput = {
+    create?: XOR<ServerListingCreateWithoutGuildInput, ServerListingUncheckedCreateWithoutGuildInput>
+    connectOrCreate?: ServerListingCreateOrConnectWithoutGuildInput
+    upsert?: ServerListingUpsertWithoutGuildInput
+    disconnect?: ServerListingWhereInput | boolean
+    delete?: ServerListingWhereInput | boolean
+    connect?: ServerListingWhereUniqueInput
+    update?: XOR<XOR<ServerListingUpdateToOneWithWhereWithoutGuildInput, ServerListingUpdateWithoutGuildInput>, ServerListingUncheckedUpdateWithoutGuildInput>
+  }
+
+  export type FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput = {
+    create?: XOR<FeaturedPromotionCreateWithoutGuildInput, FeaturedPromotionUncheckedCreateWithoutGuildInput> | FeaturedPromotionCreateWithoutGuildInput[] | FeaturedPromotionUncheckedCreateWithoutGuildInput[]
+    connectOrCreate?: FeaturedPromotionCreateOrConnectWithoutGuildInput | FeaturedPromotionCreateOrConnectWithoutGuildInput[]
+    upsert?: FeaturedPromotionUpsertWithWhereUniqueWithoutGuildInput | FeaturedPromotionUpsertWithWhereUniqueWithoutGuildInput[]
+    createMany?: FeaturedPromotionCreateManyGuildInputEnvelope
+    set?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
+    disconnect?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
+    delete?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
+    connect?: FeaturedPromotionWhereUniqueInput | FeaturedPromotionWhereUniqueInput[]
+    update?: FeaturedPromotionUpdateWithWhereUniqueWithoutGuildInput | FeaturedPromotionUpdateWithWhereUniqueWithoutGuildInput[]
+    updateMany?: FeaturedPromotionUpdateManyWithWhereWithoutGuildInput | FeaturedPromotionUpdateManyWithWhereWithoutGuildInput[]
+    deleteMany?: FeaturedPromotionScalarWhereInput | FeaturedPromotionScalarWhereInput[]
   }
 
   export type GuildCreateNestedOneWithoutSettingsInput = {
@@ -22344,6 +26585,57 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutDashboardAuditLogInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDashboardAuditLogInput, UserUpdateWithoutDashboardAuditLogInput>, UserUncheckedUpdateWithoutDashboardAuditLogInput>
+  }
+
+  export type ServerListingCreatetagsInput = {
+    set: string[]
+  }
+
+  export type GuildCreateNestedOneWithoutServerListingInput = {
+    create?: XOR<GuildCreateWithoutServerListingInput, GuildUncheckedCreateWithoutServerListingInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutServerListingInput
+    connect?: GuildWhereUniqueInput
+  }
+
+  export type ServerListingUpdatetagsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type GuildUpdateOneRequiredWithoutServerListingNestedInput = {
+    create?: XOR<GuildCreateWithoutServerListingInput, GuildUncheckedCreateWithoutServerListingInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutServerListingInput
+    upsert?: GuildUpsertWithoutServerListingInput
+    connect?: GuildWhereUniqueInput
+    update?: XOR<XOR<GuildUpdateToOneWithWhereWithoutServerListingInput, GuildUpdateWithoutServerListingInput>, GuildUncheckedUpdateWithoutServerListingInput>
+  }
+
+  export type GuildCreateNestedOneWithoutFeaturedPromotionsInput = {
+    create?: XOR<GuildCreateWithoutFeaturedPromotionsInput, GuildUncheckedCreateWithoutFeaturedPromotionsInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutFeaturedPromotionsInput
+    connect?: GuildWhereUniqueInput
+  }
+
+  export type GuildUpdateOneRequiredWithoutFeaturedPromotionsNestedInput = {
+    create?: XOR<GuildCreateWithoutFeaturedPromotionsInput, GuildUncheckedCreateWithoutFeaturedPromotionsInput>
+    connectOrCreate?: GuildCreateOrConnectWithoutFeaturedPromotionsInput
+    upsert?: GuildUpsertWithoutFeaturedPromotionsInput
+    connect?: GuildWhereUniqueInput
+    update?: XOR<XOR<GuildUpdateToOneWithWhereWithoutFeaturedPromotionsInput, GuildUpdateWithoutFeaturedPromotionsInput>, GuildUncheckedUpdateWithoutFeaturedPromotionsInput>
+  }
+
+  export type UserCreateNestedOneWithoutDmPromotionInput = {
+    create?: XOR<UserCreateWithoutDmPromotionInput, UserUncheckedCreateWithoutDmPromotionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDmPromotionInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutDmPromotionNestedInput = {
+    create?: XOR<UserCreateWithoutDmPromotionInput, UserUncheckedCreateWithoutDmPromotionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDmPromotionInput
+    upsert?: UserUpsertWithoutDmPromotionInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDmPromotionInput, UserUpdateWithoutDmPromotionInput>, UserUncheckedUpdateWithoutDmPromotionInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -22680,6 +26972,25 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserDMPromotionCreateWithoutUserInput = {
+    lastPromotionAt?: Date | string | null
+    optOut?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDMPromotionUncheckedCreateWithoutUserInput = {
+    lastPromotionAt?: Date | string | null
+    optOut?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDMPromotionCreateOrConnectWithoutUserInput = {
+    where: UserDMPromotionWhereUniqueInput
+    create: XOR<UserDMPromotionCreateWithoutUserInput, UserDMPromotionUncheckedCreateWithoutUserInput>
+  }
+
   export type ModerationCaseUpsertWithWhereUniqueWithoutUserInput = {
     where: ModerationCaseWhereUniqueInput
     update: XOR<ModerationCaseUpdateWithoutUserInput, ModerationCaseUncheckedUpdateWithoutUserInput>
@@ -22811,6 +27122,31 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"DashboardAuditLog"> | Date | string
   }
 
+  export type UserDMPromotionUpsertWithoutUserInput = {
+    update: XOR<UserDMPromotionUpdateWithoutUserInput, UserDMPromotionUncheckedUpdateWithoutUserInput>
+    create: XOR<UserDMPromotionCreateWithoutUserInput, UserDMPromotionUncheckedCreateWithoutUserInput>
+    where?: UserDMPromotionWhereInput
+  }
+
+  export type UserDMPromotionUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserDMPromotionWhereInput
+    data: XOR<UserDMPromotionUpdateWithoutUserInput, UserDMPromotionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserDMPromotionUpdateWithoutUserInput = {
+    lastPromotionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    optOut?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDMPromotionUncheckedUpdateWithoutUserInput = {
+    lastPromotionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    optOut?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id: string
     username: string
@@ -22823,6 +27159,7 @@ export namespace Prisma {
     moderated?: ModerationCaseCreateNestedManyWithoutModeratorInput
     warnings?: WarningCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -22837,6 +27174,7 @@ export namespace Prisma {
     moderated?: ModerationCaseUncheckedCreateNestedManyWithoutModeratorInput
     warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -22867,6 +27205,7 @@ export namespace Prisma {
     moderated?: ModerationCaseUpdateManyWithoutModeratorNestedInput
     warnings?: WarningUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -22881,6 +27220,7 @@ export namespace Prisma {
     moderated?: ModerationCaseUncheckedUpdateManyWithoutModeratorNestedInput
     warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type GuildSettingCreateWithoutGuildInput = {
@@ -23151,6 +27491,78 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ServerListingCreateWithoutGuildInput = {
+    description?: string | null
+    iconUrl?: string | null
+    inviteUrl?: string | null
+    category?: string | null
+    tags?: ServerListingCreatetagsInput | string[]
+    language?: string
+    isPublic?: boolean
+    views?: number
+    clicks?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ServerListingUncheckedCreateWithoutGuildInput = {
+    description?: string | null
+    iconUrl?: string | null
+    inviteUrl?: string | null
+    category?: string | null
+    tags?: ServerListingCreatetagsInput | string[]
+    language?: string
+    isPublic?: boolean
+    views?: number
+    clicks?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ServerListingCreateOrConnectWithoutGuildInput = {
+    where: ServerListingWhereUniqueInput
+    create: XOR<ServerListingCreateWithoutGuildInput, ServerListingUncheckedCreateWithoutGuildInput>
+  }
+
+  export type FeaturedPromotionCreateWithoutGuildInput = {
+    promotionType: string
+    status: string
+    startAt?: Date | string
+    expiresAt: Date | string
+    promotionalMessage?: string | null
+    impressions?: number
+    clicks?: number
+    dmSent?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedBy?: string | null
+  }
+
+  export type FeaturedPromotionUncheckedCreateWithoutGuildInput = {
+    id?: number
+    promotionType: string
+    status: string
+    startAt?: Date | string
+    expiresAt: Date | string
+    promotionalMessage?: string | null
+    impressions?: number
+    clicks?: number
+    dmSent?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedBy?: string | null
+  }
+
+  export type FeaturedPromotionCreateOrConnectWithoutGuildInput = {
+    where: FeaturedPromotionWhereUniqueInput
+    create: XOR<FeaturedPromotionCreateWithoutGuildInput, FeaturedPromotionUncheckedCreateWithoutGuildInput>
+  }
+
+  export type FeaturedPromotionCreateManyGuildInputEnvelope = {
+    data: FeaturedPromotionCreateManyGuildInput | FeaturedPromotionCreateManyGuildInput[]
+    skipDuplicates?: boolean
+  }
+
   export type GuildSettingUpsertWithoutGuildInput = {
     update: XOR<GuildSettingUpdateWithoutGuildInput, GuildSettingUncheckedUpdateWithoutGuildInput>
     create: XOR<GuildSettingCreateWithoutGuildInput, GuildSettingUncheckedCreateWithoutGuildInput>
@@ -23415,6 +27827,80 @@ export namespace Prisma {
     data: XOR<DashboardAuditLogUpdateManyMutationInput, DashboardAuditLogUncheckedUpdateManyWithoutGuildInput>
   }
 
+  export type ServerListingUpsertWithoutGuildInput = {
+    update: XOR<ServerListingUpdateWithoutGuildInput, ServerListingUncheckedUpdateWithoutGuildInput>
+    create: XOR<ServerListingCreateWithoutGuildInput, ServerListingUncheckedCreateWithoutGuildInput>
+    where?: ServerListingWhereInput
+  }
+
+  export type ServerListingUpdateToOneWithWhereWithoutGuildInput = {
+    where?: ServerListingWhereInput
+    data: XOR<ServerListingUpdateWithoutGuildInput, ServerListingUncheckedUpdateWithoutGuildInput>
+  }
+
+  export type ServerListingUpdateWithoutGuildInput = {
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    iconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    inviteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ServerListingUpdatetagsInput | string[]
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ServerListingUncheckedUpdateWithoutGuildInput = {
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    iconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    inviteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ServerListingUpdatetagsInput | string[]
+    language?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    views?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FeaturedPromotionUpsertWithWhereUniqueWithoutGuildInput = {
+    where: FeaturedPromotionWhereUniqueInput
+    update: XOR<FeaturedPromotionUpdateWithoutGuildInput, FeaturedPromotionUncheckedUpdateWithoutGuildInput>
+    create: XOR<FeaturedPromotionCreateWithoutGuildInput, FeaturedPromotionUncheckedCreateWithoutGuildInput>
+  }
+
+  export type FeaturedPromotionUpdateWithWhereUniqueWithoutGuildInput = {
+    where: FeaturedPromotionWhereUniqueInput
+    data: XOR<FeaturedPromotionUpdateWithoutGuildInput, FeaturedPromotionUncheckedUpdateWithoutGuildInput>
+  }
+
+  export type FeaturedPromotionUpdateManyWithWhereWithoutGuildInput = {
+    where: FeaturedPromotionScalarWhereInput
+    data: XOR<FeaturedPromotionUpdateManyMutationInput, FeaturedPromotionUncheckedUpdateManyWithoutGuildInput>
+  }
+
+  export type FeaturedPromotionScalarWhereInput = {
+    AND?: FeaturedPromotionScalarWhereInput | FeaturedPromotionScalarWhereInput[]
+    OR?: FeaturedPromotionScalarWhereInput[]
+    NOT?: FeaturedPromotionScalarWhereInput | FeaturedPromotionScalarWhereInput[]
+    id?: IntFilter<"FeaturedPromotion"> | number
+    guildId?: StringFilter<"FeaturedPromotion"> | string
+    promotionType?: StringFilter<"FeaturedPromotion"> | string
+    status?: StringFilter<"FeaturedPromotion"> | string
+    startAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    expiresAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    promotionalMessage?: StringNullableFilter<"FeaturedPromotion"> | string | null
+    impressions?: IntFilter<"FeaturedPromotion"> | number
+    clicks?: IntFilter<"FeaturedPromotion"> | number
+    dmSent?: IntFilter<"FeaturedPromotion"> | number
+    createdAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    updatedAt?: DateTimeFilter<"FeaturedPromotion"> | Date | string
+    approvedBy?: StringNullableFilter<"FeaturedPromotion"> | string | null
+  }
+
   export type GuildCreateWithoutSettingsInput = {
     id: string
     name: string
@@ -23430,6 +27916,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutSettingsInput = {
@@ -23447,6 +27935,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutSettingsInput = {
@@ -23480,6 +27970,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutSettingsInput = {
@@ -23497,6 +27989,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutCasesInput = {
@@ -23514,6 +28008,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutCasesInput = {
@@ -23531,6 +28027,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutCasesInput = {
@@ -23550,6 +28048,7 @@ export namespace Prisma {
     warnings?: WarningCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCasesInput = {
@@ -23564,6 +28063,7 @@ export namespace Prisma {
     warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCasesInput = {
@@ -23583,6 +28083,7 @@ export namespace Prisma {
     warnings?: WarningCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutModeratedInput = {
@@ -23597,6 +28098,7 @@ export namespace Prisma {
     warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutModeratedInput = {
@@ -23630,6 +28132,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutCasesInput = {
@@ -23647,6 +28151,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type UserUpsertWithoutCasesInput = {
@@ -23672,6 +28178,7 @@ export namespace Prisma {
     warnings?: WarningUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCasesInput = {
@@ -23686,6 +28193,7 @@ export namespace Prisma {
     warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutModeratedInput = {
@@ -23711,6 +28219,7 @@ export namespace Prisma {
     warnings?: WarningUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutModeratedInput = {
@@ -23725,6 +28234,7 @@ export namespace Prisma {
     warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type GuildCreateWithoutWarningsInput = {
@@ -23742,6 +28252,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutWarningsInput = {
@@ -23759,6 +28271,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutWarningsInput = {
@@ -23778,6 +28292,7 @@ export namespace Prisma {
     moderated?: ModerationCaseCreateNestedManyWithoutModeratorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWarningsInput = {
@@ -23792,6 +28307,7 @@ export namespace Prisma {
     moderated?: ModerationCaseUncheckedCreateNestedManyWithoutModeratorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWarningsInput = {
@@ -23825,6 +28341,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutWarningsInput = {
@@ -23842,6 +28360,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type UserUpsertWithoutWarningsInput = {
@@ -23867,6 +28387,7 @@ export namespace Prisma {
     moderated?: ModerationCaseUpdateManyWithoutModeratorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWarningsInput = {
@@ -23881,6 +28402,7 @@ export namespace Prisma {
     moderated?: ModerationCaseUncheckedUpdateManyWithoutModeratorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type GuildCreateWithoutSecurityEventsInput = {
@@ -23898,6 +28420,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutSecurityEventsInput = {
@@ -23915,6 +28439,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutSecurityEventsInput = {
@@ -23948,6 +28474,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutSecurityEventsInput = {
@@ -23965,6 +28493,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutRaidEventsInput = {
@@ -23982,6 +28512,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutRaidEventsInput = {
@@ -23999,6 +28531,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutRaidEventsInput = {
@@ -24032,6 +28566,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutRaidEventsInput = {
@@ -24049,6 +28585,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutMemberSnapshotsInput = {
@@ -24066,6 +28604,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutMemberSnapshotsInput = {
@@ -24083,6 +28623,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutMemberSnapshotsInput = {
@@ -24116,6 +28658,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutMemberSnapshotsInput = {
@@ -24133,6 +28677,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutMessageActivityInput = {
@@ -24150,6 +28696,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutMessageActivityInput = {
@@ -24167,6 +28715,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutMessageActivityInput = {
@@ -24200,6 +28750,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutMessageActivityInput = {
@@ -24217,6 +28769,8 @@ export namespace Prisma {
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutRolePermissionsInput = {
@@ -24234,6 +28788,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutRolePermissionsInput = {
@@ -24251,6 +28807,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutRolePermissionsInput = {
@@ -24284,6 +28842,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutRolePermissionsInput = {
@@ -24301,6 +28861,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutRulesInput = {
@@ -24318,6 +28880,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutRulesInput = {
@@ -24335,6 +28899,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutRulesInput = {
@@ -24368,6 +28934,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutRulesInput = {
@@ -24385,6 +28953,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildCreateWithoutDashboardAuditLogInput = {
@@ -24402,6 +28972,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
     rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
     rules?: RuleCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
   }
 
   export type GuildUncheckedCreateWithoutDashboardAuditLogInput = {
@@ -24419,6 +28991,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
     rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
     rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
   }
 
   export type GuildCreateOrConnectWithoutDashboardAuditLogInput = {
@@ -24438,6 +29012,7 @@ export namespace Prisma {
     moderated?: ModerationCaseCreateNestedManyWithoutModeratorInput
     warnings?: WarningCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDashboardAuditLogInput = {
@@ -24452,6 +29027,7 @@ export namespace Prisma {
     moderated?: ModerationCaseUncheckedCreateNestedManyWithoutModeratorInput
     warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    dmPromotion?: UserDMPromotionUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDashboardAuditLogInput = {
@@ -24485,6 +29061,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
     rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
     rules?: RuleUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
   }
 
   export type GuildUncheckedUpdateWithoutDashboardAuditLogInput = {
@@ -24502,6 +29080,8 @@ export namespace Prisma {
     messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
     rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
     rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
   }
 
   export type UserUpsertWithoutDashboardAuditLogInput = {
@@ -24527,6 +29107,7 @@ export namespace Prisma {
     moderated?: ModerationCaseUpdateManyWithoutModeratorNestedInput
     warnings?: WarningUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDashboardAuditLogInput = {
@@ -24541,6 +29122,267 @@ export namespace Prisma {
     moderated?: ModerationCaseUncheckedUpdateManyWithoutModeratorNestedInput
     warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    dmPromotion?: UserDMPromotionUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type GuildCreateWithoutServerListingInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseCreateNestedManyWithoutGuildInput
+    warnings?: WarningCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionCreateNestedManyWithoutGuildInput
+  }
+
+  export type GuildUncheckedCreateWithoutServerListingInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingUncheckedCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseUncheckedCreateNestedManyWithoutGuildInput
+    warnings?: WarningUncheckedCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    featuredPromotions?: FeaturedPromotionUncheckedCreateNestedManyWithoutGuildInput
+  }
+
+  export type GuildCreateOrConnectWithoutServerListingInput = {
+    where: GuildWhereUniqueInput
+    create: XOR<GuildCreateWithoutServerListingInput, GuildUncheckedCreateWithoutServerListingInput>
+  }
+
+  export type GuildUpsertWithoutServerListingInput = {
+    update: XOR<GuildUpdateWithoutServerListingInput, GuildUncheckedUpdateWithoutServerListingInput>
+    create: XOR<GuildCreateWithoutServerListingInput, GuildUncheckedCreateWithoutServerListingInput>
+    where?: GuildWhereInput
+  }
+
+  export type GuildUpdateToOneWithWhereWithoutServerListingInput = {
+    where?: GuildWhereInput
+    data: XOR<GuildUpdateWithoutServerListingInput, GuildUncheckedUpdateWithoutServerListingInput>
+  }
+
+  export type GuildUpdateWithoutServerListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUpdateManyWithoutGuildNestedInput
+  }
+
+  export type GuildUncheckedUpdateWithoutServerListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUncheckedUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUncheckedUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUncheckedUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    featuredPromotions?: FeaturedPromotionUncheckedUpdateManyWithoutGuildNestedInput
+  }
+
+  export type GuildCreateWithoutFeaturedPromotionsInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseCreateNestedManyWithoutGuildInput
+    warnings?: WarningCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionCreateNestedManyWithoutGuildInput
+    rules?: RuleCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingCreateNestedOneWithoutGuildInput
+  }
+
+  export type GuildUncheckedCreateWithoutFeaturedPromotionsInput = {
+    id: string
+    name: string
+    memberCount?: number
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    settings?: GuildSettingUncheckedCreateNestedOneWithoutGuildInput
+    cases?: ModerationCaseUncheckedCreateNestedManyWithoutGuildInput
+    warnings?: WarningUncheckedCreateNestedManyWithoutGuildInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutGuildInput
+    raidEvents?: RaidEventUncheckedCreateNestedManyWithoutGuildInput
+    memberSnapshots?: MemberSnapshotUncheckedCreateNestedManyWithoutGuildInput
+    messageActivity?: MessageActivityUncheckedCreateNestedManyWithoutGuildInput
+    rolePermissions?: RoleCommandPermissionUncheckedCreateNestedManyWithoutGuildInput
+    rules?: RuleUncheckedCreateNestedManyWithoutGuildInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutGuildInput
+    serverListing?: ServerListingUncheckedCreateNestedOneWithoutGuildInput
+  }
+
+  export type GuildCreateOrConnectWithoutFeaturedPromotionsInput = {
+    where: GuildWhereUniqueInput
+    create: XOR<GuildCreateWithoutFeaturedPromotionsInput, GuildUncheckedCreateWithoutFeaturedPromotionsInput>
+  }
+
+  export type GuildUpsertWithoutFeaturedPromotionsInput = {
+    update: XOR<GuildUpdateWithoutFeaturedPromotionsInput, GuildUncheckedUpdateWithoutFeaturedPromotionsInput>
+    create: XOR<GuildCreateWithoutFeaturedPromotionsInput, GuildUncheckedCreateWithoutFeaturedPromotionsInput>
+    where?: GuildWhereInput
+  }
+
+  export type GuildUpdateToOneWithWhereWithoutFeaturedPromotionsInput = {
+    where?: GuildWhereInput
+    data: XOR<GuildUpdateWithoutFeaturedPromotionsInput, GuildUncheckedUpdateWithoutFeaturedPromotionsInput>
+  }
+
+  export type GuildUpdateWithoutFeaturedPromotionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUpdateManyWithoutGuildNestedInput
+    rules?: RuleUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUpdateOneWithoutGuildNestedInput
+  }
+
+  export type GuildUncheckedUpdateWithoutFeaturedPromotionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    memberCount?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: GuildSettingUncheckedUpdateOneWithoutGuildNestedInput
+    cases?: ModerationCaseUncheckedUpdateManyWithoutGuildNestedInput
+    warnings?: WarningUncheckedUpdateManyWithoutGuildNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutGuildNestedInput
+    raidEvents?: RaidEventUncheckedUpdateManyWithoutGuildNestedInput
+    memberSnapshots?: MemberSnapshotUncheckedUpdateManyWithoutGuildNestedInput
+    messageActivity?: MessageActivityUncheckedUpdateManyWithoutGuildNestedInput
+    rolePermissions?: RoleCommandPermissionUncheckedUpdateManyWithoutGuildNestedInput
+    rules?: RuleUncheckedUpdateManyWithoutGuildNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutGuildNestedInput
+    serverListing?: ServerListingUncheckedUpdateOneWithoutGuildNestedInput
+  }
+
+  export type UserCreateWithoutDmPromotionInput = {
+    id: string
+    username: string
+    globalName?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    cases?: ModerationCaseCreateNestedManyWithoutUserInput
+    moderated?: ModerationCaseCreateNestedManyWithoutModeratorInput
+    warnings?: WarningCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDmPromotionInput = {
+    id: string
+    username: string
+    globalName?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    cases?: ModerationCaseUncheckedCreateNestedManyWithoutUserInput
+    moderated?: ModerationCaseUncheckedCreateNestedManyWithoutModeratorInput
+    warnings?: WarningUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDmPromotionInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDmPromotionInput, UserUncheckedCreateWithoutDmPromotionInput>
+  }
+
+  export type UserUpsertWithoutDmPromotionInput = {
+    update: XOR<UserUpdateWithoutDmPromotionInput, UserUncheckedUpdateWithoutDmPromotionInput>
+    create: XOR<UserCreateWithoutDmPromotionInput, UserUncheckedCreateWithoutDmPromotionInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDmPromotionInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDmPromotionInput, UserUncheckedUpdateWithoutDmPromotionInput>
+  }
+
+  export type UserUpdateWithoutDmPromotionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cases?: ModerationCaseUpdateManyWithoutUserNestedInput
+    moderated?: ModerationCaseUpdateManyWithoutModeratorNestedInput
+    warnings?: WarningUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDmPromotionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    globalName?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cases?: ModerationCaseUncheckedUpdateManyWithoutUserNestedInput
+    moderated?: ModerationCaseUncheckedUpdateManyWithoutModeratorNestedInput
+    warnings?: WarningUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    DashboardAuditLog?: DashboardAuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ModerationCaseCreateManyUserInput = {
@@ -24792,6 +29634,21 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type FeaturedPromotionCreateManyGuildInput = {
+    id?: number
+    promotionType: string
+    status: string
+    startAt?: Date | string
+    expiresAt: Date | string
+    promotionalMessage?: string | null
+    impressions?: number
+    clicks?: number
+    dmSent?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    approvedBy?: string | null
+  }
+
   export type ModerationCaseUpdateWithoutGuildInput = {
     type?: StringFieldUpdateOperationsInput | string
     reason?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24990,6 +29847,50 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FeaturedPromotionUpdateWithoutGuildInput = {
+    promotionType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    promotionalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    dmSent?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FeaturedPromotionUncheckedUpdateWithoutGuildInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    promotionType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    promotionalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    dmSent?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FeaturedPromotionUncheckedUpdateManyWithoutGuildInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    promotionType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    promotionalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    impressions?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    dmSent?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
 
 
   /**
@@ -25067,6 +29968,18 @@ export namespace Prisma {
      * @deprecated Use DashboardAuditLogDefaultArgs instead
      */
     export type DashboardAuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DashboardAuditLogDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ServerListingDefaultArgs instead
+     */
+    export type ServerListingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ServerListingDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use FeaturedPromotionDefaultArgs instead
+     */
+    export type FeaturedPromotionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FeaturedPromotionDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserDMPromotionDefaultArgs instead
+     */
+    export type UserDMPromotionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDMPromotionDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

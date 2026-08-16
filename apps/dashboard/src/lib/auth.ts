@@ -40,3 +40,19 @@ export async function authorizeGuildAction(guildId: string) {
 
   return { session, targetGuild, dbGuild };
 }
+
+export async function authorizeGlobalAdmin() {
+  const session = await getSession();
+  
+  if (!session) {
+    throw new Error('Unauthorized');
+  }
+
+  const adminIds = (process.env.ADMIN_DISCORD_IDS || '').split(',').map(id => id.trim());
+  
+  if (!adminIds.includes(session.user.id)) {
+    throw new Error('Forbidden: Global Administrator access required.');
+  }
+
+  return session;
+}

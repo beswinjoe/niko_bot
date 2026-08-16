@@ -118,8 +118,11 @@ async function bootstrap() {
   client.on(Events.GuildDelete, async (guild) => {
     console.log(`[Niko] Left guild: ${guild.name} (${guild.id})`);
     try {
-      // We keep the data for audit/history, but you could mark it as inactive here
-      // if you add an isActive field to the schema later.
+      // Automatically disable public listing when Niko leaves the server
+      await prisma.serverListing.updateMany({
+        where: { guildId: guild.id },
+        data: { isPublic: false }
+      });
     } catch (error) {
       console.error(`[GuildDelete Error] Failed to handle leaving guild ${guild.id}:`, error);
     }

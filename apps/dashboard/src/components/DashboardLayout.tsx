@@ -26,6 +26,7 @@ export default function DashboardLayout({
     { name: 'Moderation', href: `/dashboard/${guildId}/moderation` },
     { name: 'Analytics', href: `/dashboard/${guildId}/analytics` },
     { name: 'Logs', href: `/dashboard/${guildId}/logs` },
+    { name: 'Discovery', href: `/dashboard/${guildId}/discovery` },
     { name: 'Settings', href: `/dashboard/${guildId}/settings/permissions` }
   ];
 
