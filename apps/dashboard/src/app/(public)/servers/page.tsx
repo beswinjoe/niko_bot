@@ -55,16 +55,28 @@ export default async function ServersPage({
       orderBy = { views: 'desc' };
   }
 
-  const [total, listings] = await Promise.all([
-    prisma.serverListing.count({ where }),
-    prisma.serverListing.findMany({
-      where,
-      include: { guild: true },
-      orderBy,
-      skip: (page - 1) * perPage,
-      take: perPage,
-    })
-  ]);
+  let total = 0;
+  let listings: any[] = [];
+  
+  try {
+    const [dbTotal, dbListings] = await Promise.all([
+      prisma.serverListing.count({ where }),
+      prisma.serverListing.findMany({
+        where,
+        include: { guild: true },
+        orderBy,
+        skip: (page - 1) * perPage,
+        take: perPage,
+      })
+    ]);
+    total = dbTotal;
+    listings = dbListings;
+  } catch (error) {
+    console.error("[Servers] Failed to load listings", error);
+    // Continue rendering with empty listings so the user sees the page instead of a 500 error,
+    // or we could throw to let Next.js Error boundary handle it, but we MUST log it first.
+    throw error; 
+  }
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
