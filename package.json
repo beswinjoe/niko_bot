@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "prisma generate --schema=packages/db/prisma/schema.prisma && npm run build:db && npm run build:bot",
+    "postinstall": "prisma generate --schema=packages/db/prisma/schema.prisma && npm run build:db",
     "build:db": "npm run build --workspace=@niko/db",
     "build:dashboard": "npm run build --workspace=dashboard",
     "build": "npm run build:db && npm run build:dashboard",
