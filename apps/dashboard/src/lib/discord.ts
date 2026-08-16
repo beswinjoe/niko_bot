@@ -63,7 +63,10 @@ export async function getDiscordUserGuilds(accessToken: string): Promise<Discord
   });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch user guilds');
+    if (response.status === 401 || response.status === 403) {
+      throw new Error('UNAUTHORIZED');
+    }
+    throw new Error(`Failed to fetch user guilds: ${response.status} ${response.statusText}`);
   }
 
   return response.json();

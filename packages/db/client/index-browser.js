@@ -158,6 +158,7 @@ exports.Prisma.GuildSettingScalarFieldEnum = {
   scamDetection: 'scamDetection',
   autoLockdown: 'autoLockdown',
   verificationSystem: 'verificationSystem',
+  publicListing: 'publicListing',
   aiModerationEnabled: 'aiModerationEnabled',
   aiLogChannelId: 'aiLogChannelId',
   aiActionThreshold: 'aiActionThreshold',

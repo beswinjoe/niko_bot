@@ -5526,6 +5526,7 @@ export namespace Prisma {
     scamDetection: boolean | null
     autoLockdown: boolean | null
     verificationSystem: boolean | null
+    publicListing: boolean | null
     aiModerationEnabled: boolean | null
     aiLogChannelId: string | null
     aiActionThreshold: number | null
@@ -5548,6 +5549,7 @@ export namespace Prisma {
     scamDetection: boolean | null
     autoLockdown: boolean | null
     verificationSystem: boolean | null
+    publicListing: boolean | null
     aiModerationEnabled: boolean | null
     aiLogChannelId: string | null
     aiActionThreshold: number | null
@@ -5570,6 +5572,7 @@ export namespace Prisma {
     scamDetection: number
     autoLockdown: number
     verificationSystem: number
+    publicListing: number
     aiModerationEnabled: number
     aiLogChannelId: number
     aiActionThreshold: number
@@ -5602,6 +5605,7 @@ export namespace Prisma {
     scamDetection?: true
     autoLockdown?: true
     verificationSystem?: true
+    publicListing?: true
     aiModerationEnabled?: true
     aiLogChannelId?: true
     aiActionThreshold?: true
@@ -5624,6 +5628,7 @@ export namespace Prisma {
     scamDetection?: true
     autoLockdown?: true
     verificationSystem?: true
+    publicListing?: true
     aiModerationEnabled?: true
     aiLogChannelId?: true
     aiActionThreshold?: true
@@ -5646,6 +5651,7 @@ export namespace Prisma {
     scamDetection?: true
     autoLockdown?: true
     verificationSystem?: true
+    publicListing?: true
     aiModerationEnabled?: true
     aiLogChannelId?: true
     aiActionThreshold?: true
@@ -5755,6 +5761,7 @@ export namespace Prisma {
     scamDetection: boolean
     autoLockdown: boolean
     verificationSystem: boolean
+    publicListing: boolean
     aiModerationEnabled: boolean
     aiLogChannelId: string | null
     aiActionThreshold: number
@@ -5796,6 +5803,7 @@ export namespace Prisma {
     scamDetection?: boolean
     autoLockdown?: boolean
     verificationSystem?: boolean
+    publicListing?: boolean
     aiModerationEnabled?: boolean
     aiLogChannelId?: boolean
     aiActionThreshold?: boolean
@@ -5819,6 +5827,7 @@ export namespace Prisma {
     scamDetection?: boolean
     autoLockdown?: boolean
     verificationSystem?: boolean
+    publicListing?: boolean
     aiModerationEnabled?: boolean
     aiLogChannelId?: boolean
     aiActionThreshold?: boolean
@@ -5842,6 +5851,7 @@ export namespace Prisma {
     scamDetection?: boolean
     autoLockdown?: boolean
     verificationSystem?: boolean
+    publicListing?: boolean
     aiModerationEnabled?: boolean
     aiLogChannelId?: boolean
     aiActionThreshold?: boolean
@@ -5876,6 +5886,7 @@ export namespace Prisma {
       scamDetection: boolean
       autoLockdown: boolean
       verificationSystem: boolean
+      publicListing: boolean
       aiModerationEnabled: boolean
       aiLogChannelId: string | null
       aiActionThreshold: number
@@ -6289,6 +6300,7 @@ export namespace Prisma {
     readonly scamDetection: FieldRef<"GuildSetting", 'Boolean'>
     readonly autoLockdown: FieldRef<"GuildSetting", 'Boolean'>
     readonly verificationSystem: FieldRef<"GuildSetting", 'Boolean'>
+    readonly publicListing: FieldRef<"GuildSetting", 'Boolean'>
     readonly aiModerationEnabled: FieldRef<"GuildSetting", 'Boolean'>
     readonly aiLogChannelId: FieldRef<"GuildSetting", 'String'>
     readonly aiActionThreshold: FieldRef<"GuildSetting", 'Int'>
@@ -18195,6 +18207,7 @@ export namespace Prisma {
     scamDetection: 'scamDetection',
     autoLockdown: 'autoLockdown',
     verificationSystem: 'verificationSystem',
+    publicListing: 'publicListing',
     aiModerationEnabled: 'aiModerationEnabled',
     aiLogChannelId: 'aiLogChannelId',
     aiActionThreshold: 'aiActionThreshold',
@@ -18694,6 +18707,7 @@ export namespace Prisma {
     scamDetection?: BoolFilter<"GuildSetting"> | boolean
     autoLockdown?: BoolFilter<"GuildSetting"> | boolean
     verificationSystem?: BoolFilter<"GuildSetting"> | boolean
+    publicListing?: BoolFilter<"GuildSetting"> | boolean
     aiModerationEnabled?: BoolFilter<"GuildSetting"> | boolean
     aiLogChannelId?: StringNullableFilter<"GuildSetting"> | string | null
     aiActionThreshold?: IntFilter<"GuildSetting"> | number
@@ -18717,6 +18731,7 @@ export namespace Prisma {
     scamDetection?: SortOrder
     autoLockdown?: SortOrder
     verificationSystem?: SortOrder
+    publicListing?: SortOrder
     aiModerationEnabled?: SortOrder
     aiLogChannelId?: SortOrderInput | SortOrder
     aiActionThreshold?: SortOrder
@@ -18743,6 +18758,7 @@ export namespace Prisma {
     scamDetection?: BoolFilter<"GuildSetting"> | boolean
     autoLockdown?: BoolFilter<"GuildSetting"> | boolean
     verificationSystem?: BoolFilter<"GuildSetting"> | boolean
+    publicListing?: BoolFilter<"GuildSetting"> | boolean
     aiModerationEnabled?: BoolFilter<"GuildSetting"> | boolean
     aiLogChannelId?: StringNullableFilter<"GuildSetting"> | string | null
     aiActionThreshold?: IntFilter<"GuildSetting"> | number
@@ -18766,6 +18782,7 @@ export namespace Prisma {
     scamDetection?: SortOrder
     autoLockdown?: SortOrder
     verificationSystem?: SortOrder
+    publicListing?: SortOrder
     aiModerationEnabled?: SortOrder
     aiLogChannelId?: SortOrderInput | SortOrder
     aiActionThreshold?: SortOrder
@@ -18796,6 +18813,7 @@ export namespace Prisma {
     scamDetection?: BoolWithAggregatesFilter<"GuildSetting"> | boolean
     autoLockdown?: BoolWithAggregatesFilter<"GuildSetting"> | boolean
     verificationSystem?: BoolWithAggregatesFilter<"GuildSetting"> | boolean
+    publicListing?: BoolWithAggregatesFilter<"GuildSetting"> | boolean
     aiModerationEnabled?: BoolWithAggregatesFilter<"GuildSetting"> | boolean
     aiLogChannelId?: StringNullableWithAggregatesFilter<"GuildSetting"> | string | null
     aiActionThreshold?: IntWithAggregatesFilter<"GuildSetting"> | number
@@ -19765,6 +19783,7 @@ export namespace Prisma {
     scamDetection?: boolean
     autoLockdown?: boolean
     verificationSystem?: boolean
+    publicListing?: boolean
     aiModerationEnabled?: boolean
     aiLogChannelId?: string | null
     aiActionThreshold?: number
@@ -19788,6 +19807,7 @@ export namespace Prisma {
     scamDetection?: boolean
     autoLockdown?: boolean
     verificationSystem?: boolean
+    publicListing?: boolean
     aiModerationEnabled?: boolean
     aiLogChannelId?: string | null
     aiActionThreshold?: number
@@ -19809,6 +19829,7 @@ export namespace Prisma {
     scamDetection?: BoolFieldUpdateOperationsInput | boolean
     autoLockdown?: BoolFieldUpdateOperationsInput | boolean
     verificationSystem?: BoolFieldUpdateOperationsInput | boolean
+    publicListing?: BoolFieldUpdateOperationsInput | boolean
     aiModerationEnabled?: BoolFieldUpdateOperationsInput | boolean
     aiLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
@@ -19832,6 +19853,7 @@ export namespace Prisma {
     scamDetection?: BoolFieldUpdateOperationsInput | boolean
     autoLockdown?: BoolFieldUpdateOperationsInput | boolean
     verificationSystem?: BoolFieldUpdateOperationsInput | boolean
+    publicListing?: BoolFieldUpdateOperationsInput | boolean
     aiModerationEnabled?: BoolFieldUpdateOperationsInput | boolean
     aiLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
@@ -19854,6 +19876,7 @@ export namespace Prisma {
     scamDetection?: boolean
     autoLockdown?: boolean
     verificationSystem?: boolean
+    publicListing?: boolean
     aiModerationEnabled?: boolean
     aiLogChannelId?: string | null
     aiActionThreshold?: number
@@ -19875,6 +19898,7 @@ export namespace Prisma {
     scamDetection?: BoolFieldUpdateOperationsInput | boolean
     autoLockdown?: BoolFieldUpdateOperationsInput | boolean
     verificationSystem?: BoolFieldUpdateOperationsInput | boolean
+    publicListing?: BoolFieldUpdateOperationsInput | boolean
     aiModerationEnabled?: BoolFieldUpdateOperationsInput | boolean
     aiLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
@@ -19897,6 +19921,7 @@ export namespace Prisma {
     scamDetection?: BoolFieldUpdateOperationsInput | boolean
     autoLockdown?: BoolFieldUpdateOperationsInput | boolean
     verificationSystem?: BoolFieldUpdateOperationsInput | boolean
+    publicListing?: BoolFieldUpdateOperationsInput | boolean
     aiModerationEnabled?: BoolFieldUpdateOperationsInput | boolean
     aiLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
@@ -20927,6 +20952,7 @@ export namespace Prisma {
     scamDetection?: SortOrder
     autoLockdown?: SortOrder
     verificationSystem?: SortOrder
+    publicListing?: SortOrder
     aiModerationEnabled?: SortOrder
     aiLogChannelId?: SortOrder
     aiActionThreshold?: SortOrder
@@ -20953,6 +20979,7 @@ export namespace Prisma {
     scamDetection?: SortOrder
     autoLockdown?: SortOrder
     verificationSystem?: SortOrder
+    publicListing?: SortOrder
     aiModerationEnabled?: SortOrder
     aiLogChannelId?: SortOrder
     aiActionThreshold?: SortOrder
@@ -20975,6 +21002,7 @@ export namespace Prisma {
     scamDetection?: SortOrder
     autoLockdown?: SortOrder
     verificationSystem?: SortOrder
+    publicListing?: SortOrder
     aiModerationEnabled?: SortOrder
     aiLogChannelId?: SortOrder
     aiActionThreshold?: SortOrder
@@ -22864,6 +22892,7 @@ export namespace Prisma {
     scamDetection?: boolean
     autoLockdown?: boolean
     verificationSystem?: boolean
+    publicListing?: boolean
     aiModerationEnabled?: boolean
     aiLogChannelId?: string | null
     aiActionThreshold?: number
@@ -22885,6 +22914,7 @@ export namespace Prisma {
     scamDetection?: boolean
     autoLockdown?: boolean
     verificationSystem?: boolean
+    publicListing?: boolean
     aiModerationEnabled?: boolean
     aiLogChannelId?: string | null
     aiActionThreshold?: number
@@ -23141,6 +23171,7 @@ export namespace Prisma {
     scamDetection?: BoolFieldUpdateOperationsInput | boolean
     autoLockdown?: BoolFieldUpdateOperationsInput | boolean
     verificationSystem?: BoolFieldUpdateOperationsInput | boolean
+    publicListing?: BoolFieldUpdateOperationsInput | boolean
     aiModerationEnabled?: BoolFieldUpdateOperationsInput | boolean
     aiLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     aiActionThreshold?: IntFieldUpdateOperationsInput | number
@@ -23162,6 +23193,7 @@ export namespace Prisma {
     scamDetection?: BoolFieldUpdateOperationsInput | boolean
     autoLockdown?: BoolFieldUpdateOperationsInput | boolean
     verificationSystem?: BoolFieldUpdateOperationsInput | boolean
+    publicListing?: BoolFieldUpdateOperationsInput | boolean
     aiModerationEnabled?: BoolFieldUpdateOperationsInput | boolean
     aiLogChannelId?: NullableStringFieldUpdateOperationsInput | string | null
     aiActionThreshold?: IntFieldUpdateOperationsInput | number

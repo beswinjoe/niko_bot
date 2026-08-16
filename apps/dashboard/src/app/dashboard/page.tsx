@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/session';
 import { getDiscordUserGuilds, hasManageGuildPermission, getGuildIconUrl } from '@/lib/discord';
 import { prisma } from "@niko/db";
@@ -24,10 +25,13 @@ export default async function DashboardPage() {
   try {
     allGuilds = await getDiscordUserGuilds(discordToken);
   } catch (error: unknown) {
+    if (error instanceof Error && error.message === 'UNAUTHORIZED') {
+      redirect('/login');
+    }
     return (
       <div className="flex flex-col items-center justify-center h-[60vh] text-center">
         <h1 className="text-3xl font-bold mb-4">Error</h1>
-        <p className="text-neutral-400">Could not fetch your Discord servers.</p>
+        <p className="text-neutral-400">Could not fetch your Discord servers. Please try again later.</p>
       </div>
     );
   }

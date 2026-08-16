@@ -42,10 +42,7 @@ export default async function DashboardLayout({
             <LayoutDashboard className="w-5 h-5" />
             Servers
           </Link>
-          <Link href="/dashboard/settings" className="flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:text-white hover:bg-white/5 transition-colors font-medium">
-            <Settings className="w-5 h-5" />
-            Account Settings
-          </Link>
+          {/* Account Settings omitted as it is not implemented yet */}
         </nav>
 
         <div className="flex items-center gap-3 p-3 border-t border-white/5 mt-auto">

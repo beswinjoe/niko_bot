@@ -31,7 +31,8 @@ export async function getGuildRoles(guildId: string): Promise<DiscordRole[]> {
   });
 
   if (!res.ok) {
-    throw new Error('Failed to fetch roles from Discord');
+    const text = await res.text().catch(() => '');
+    throw new Error(`Failed to fetch roles from Discord: ${res.status} ${text}`);
   }
 
   const roles: DiscordRole[] = await res.json();
@@ -62,10 +63,12 @@ export async function saveRoleSettings(guildId: string, data: any) {
     where: { guildId },
     update: {
       mutedRole: data.mutedRole || null,
+      publicListing: data.publicListing ?? false,
     },
     create: {
       guildId,
       mutedRole: data.mutedRole || null,
+      publicListing: data.publicListing ?? false,
     }
   });
 
@@ -100,6 +103,7 @@ export async function saveRoleSettings(guildId: string, data: any) {
     targetId: 'rolePermissions',
     metadata: {
       mutedRole: data.mutedRole,
+      publicListing: data.publicListing,
       commandsUpdated: createData.length
     }
   });

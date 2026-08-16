@@ -1,9 +1,12 @@
 import 'dotenv/config';
+import { setDefaultResultOrder } from 'dns';
+setDefaultResultOrder('ipv4first');
 import { client, commands } from './client';
 import { Events, REST, Routes } from 'discord.js';
 import { sentinel } from './services/sentinel';
 import { intelligence } from './services/intelligence';
 import { startWorker, boss } from './worker';
+import { prisma } from '@niko/db';
 import { initAIModerationWorker } from './worker/aiModeration';
 import { initUnbanWorker } from './worker/unbanWorker';
 import { handlePrefixCommand } from './handlers/prefixCommandHandler';
@@ -90,6 +93,36 @@ async function bootstrap() {
 
   client.on(Events.GuildMemberAdd, async (member) => {
     await sentinel.evaluateJoin(member);
+  });
+
+  client.on(Events.GuildCreate, async (guild) => {
+    console.log(`[Niko] Joined new guild: ${guild.name} (${guild.id})`);
+    try {
+      await prisma.guild.upsert({
+        where: { id: guild.id },
+        update: { name: guild.name, memberCount: guild.memberCount },
+        create: {
+          id: guild.id,
+          name: guild.name,
+          memberCount: guild.memberCount,
+          settings: {
+            create: {}
+          }
+        }
+      });
+    } catch (error) {
+      console.error(`[GuildCreate Error] Failed to register guild ${guild.id}:`, error);
+    }
+  });
+
+  client.on(Events.GuildDelete, async (guild) => {
+    console.log(`[Niko] Left guild: ${guild.name} (${guild.id})`);
+    try {
+      // We keep the data for audit/history, but you could mark it as inactive here
+      // if you add an isActive field to the schema later.
+    } catch (error) {
+      console.error(`[GuildDelete Error] Failed to handle leaving guild ${guild.id}:`, error);
+    }
   });
 
   client.on(Events.MessageCreate, async (message) => {

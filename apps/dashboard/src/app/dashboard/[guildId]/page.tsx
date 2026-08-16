@@ -1,5 +1,5 @@
 import { getSession } from '@/lib/session';
-import { getDiscordUserGuilds, hasManageGuildPermission, getGuildIconUrl } from '@/lib/discord';
+import { getDiscordUserGuilds, hasManageGuildPermission } from '@/lib/discord';
 import { prisma } from "@niko/db";
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -22,7 +22,16 @@ export default async function GuildDashboard({ params }: { params: Promise<{ gui
   try {
     guilds = await getDiscordUserGuilds(discordToken);
   } catch (e) {
-    redirect('/login');
+    if (e instanceof Error && e.message === 'UNAUTHORIZED') {
+      redirect('/login');
+    }
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+        <h1 className="text-4xl font-bold mb-4">Discord API Error</h1>
+        <p className="text-neutral-400 mb-8 text-lg">Failed to verify your permissions with Discord. Please try again later.</p>
+        <Link href="/dashboard" className="px-6 py-3 bg-neutral-900 hover:bg-neutral-800 border border-white/5 text-white rounded-xl font-medium transition-colors">Back to Dashboard</Link>
+      </div>
+    );
   }
   const targetGuild = guilds.find(g => g.id === guildId);
 
@@ -61,42 +70,10 @@ export default async function GuildDashboard({ params }: { params: Promise<{ gui
     );
   }
 
-  const iconUrl = getGuildIconUrl(targetGuild.id, targetGuild.icon);
   const healthData = await getHealthAndRecommendations(guildId);
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-10">
-        <div className="flex items-center gap-6">
-          {iconUrl ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={iconUrl} alt={targetGuild.name} className="w-20 h-20 rounded-2xl object-cover shadow-xl border border-white/5" />
-          ) : (
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center text-3xl font-bold text-neutral-400 border border-white/5">
-              {targetGuild.name.charAt(0)}
-            </div>
-          )}
-          <div>
-            <h1 className="text-3xl font-extrabold text-white mb-2">{targetGuild.name}</h1>
-            <p className="text-neutral-400 flex items-center gap-2">
-              <ShieldCheck className={`w-5 h-5 ${healthData.score >= 80 ? 'text-emerald-400' : (healthData.score >= 50 ? 'text-amber-400' : 'text-red-400')}`} />
-              Security Score: <span className={`font-semibold ${healthData.score >= 80 ? 'text-emerald-400' : (healthData.score >= 50 ? 'text-amber-400' : 'text-red-400')}`}>{healthData.score}/100</span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex gap-2 border-b border-white/5 mb-8 overflow-x-auto pb-px">
-        {['Overview', 'Security', 'Moderation', 'Analytics', 'Logs', 'Settings'].map((tab, i) => (
-          <Link 
-            key={tab} 
-            href={tab === 'Settings' ? `/dashboard/${guildId}/settings/permissions` : tab === 'Logs' ? `/dashboard/${guildId}/logs` : `/dashboard/${guildId}`}
-            className={`px-5 py-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${i === 0 ? 'border-accent text-white' : 'border-transparent text-neutral-400 hover:text-white'}`}>
-            {tab}
-          </Link>
-        ))}
-      </div>
-
       <IntelligenceClient 
         guildId={guildId} 
         initialScore={healthData.score} 

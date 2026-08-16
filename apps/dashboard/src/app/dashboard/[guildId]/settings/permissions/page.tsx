@@ -9,7 +9,10 @@ export default async function PermissionsPage({ params }: { params: Promise<{ gu
 
   const { guildId } = await params;
 
-  const roles = await getGuildRoles(guildId).catch(() => []);
+  const roles = await getGuildRoles(guildId).catch((e) => {
+    console.error("getGuildRoles failed:", e);
+    return [];
+  });
   const data = await getRoleSettings(guildId).catch(() => ({ setting: null, cmdPerms: [] }));
 
   if (roles.length === 0) {

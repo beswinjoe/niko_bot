@@ -80,6 +80,8 @@ export default function PermissionsClient({
     mutedRole: initialData.setting?.mutedRole || '',
   });
 
+  const [publicListing, setPublicListing] = useState(initialData.setting?.publicListing || false);
+
   const initCmdRoles: Record<string, string[]> = {
     warn: [], mute: [], kick: [], ban: [], unban: [], purge: [], security: [], rules: [], muterole: [], permissions: [], '*': []
   };
@@ -114,7 +116,7 @@ export default function PermissionsClient({
   const handleSave = async () => {
     setLoading(true);
     try {
-      await saveRoleSettings(guildId, { ...baseRoles, commandRoles });
+      await saveRoleSettings(guildId, { ...baseRoles, commandRoles, publicListing });
       alert('Settings saved successfully!');
       router.refresh();
     } catch (err: unknown) {
@@ -129,6 +131,24 @@ export default function PermissionsClient({
       <h1 className="text-3xl font-bold mb-8">Role & Permissions Configuration</h1>
 
       <div className="space-y-8">
+        <section className="bg-neutral-950 border border-neutral-800 rounded-2xl p-6">
+          <h2 className="text-xl font-semibold mb-4 text-[#5865F2]">Server Configuration</h2>
+          <p className="text-neutral-400 mb-6 text-sm">General settings for your server.</p>
+          
+          <div className="flex items-center justify-between bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+            <div>
+              <h3 className="font-semibold text-white">Public Directory Listing</h3>
+              <p className="text-sm text-neutral-400">List this server on the public Niko Servers page.</p>
+            </div>
+            <button
+              onClick={() => setPublicListing(!publicListing)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${publicListing ? 'bg-[#5865F2]' : 'bg-neutral-700'}`}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${publicListing ? 'translate-x-6' : 'translate-x-1'}`} />
+            </button>
+          </div>
+        </section>
+
         <section className="bg-neutral-950 border border-neutral-800 rounded-2xl p-6">
           <h2 className="text-xl font-semibold mb-4 text-[#5865F2]">Mute Role</h2>
           <p className="text-neutral-400 mb-6 text-sm">Assign the role given to users when they are muted.</p>

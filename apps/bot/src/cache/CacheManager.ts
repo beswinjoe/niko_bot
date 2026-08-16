@@ -12,10 +12,10 @@ export class CacheManager {
   }
 
   private async initPgListener() {
-    if (!process.env.DATABASE_URL) return;
+    if (!process.env.DIRECT_URL) return;
 
     this.pgClient = new Client({
-      connectionString: process.env.DATABASE_URL
+      connectionString: process.env.DIRECT_URL
     });
 
     await this.pgClient.connect();

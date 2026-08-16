@@ -39,7 +39,13 @@ export default function IntelligenceClient({
       setShowConfirmId(null);
       router.refresh();
     } catch (err: unknown) {
-      alert(`Fix failed: ${err instanceof Error ? err.message : String(err)}`);
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes('UNAUTHORIZED') || msg.includes('Missing session')) {
+        alert('Your Discord session has expired. Please log in again.');
+        router.push('/login');
+      } else {
+        alert(`Fix failed: ${msg}`);
+      }
     } finally {
       setLoadingId(null);
     }

@@ -14,7 +14,16 @@ export async function authorizeGuildAction(guildId: string) {
     throw new Error('Unauthorized: Missing session or token');
   }
 
-  const guilds = await getDiscordUserGuilds(discordToken);
+  let guilds;
+  try {
+    guilds = await getDiscordUserGuilds(discordToken);
+  } catch (e: unknown) {
+    if (e instanceof Error && e.message === 'UNAUTHORIZED') {
+      throw new Error('UNAUTHORIZED');
+    }
+    throw new Error('Discord API Error: Failed to verify your permissions.');
+  }
+  
   const targetGuild = guilds.find(g => g.id === guildId);
 
   if (!targetGuild || (!targetGuild.owner && !hasManageGuildPermission(targetGuild.permissions))) {

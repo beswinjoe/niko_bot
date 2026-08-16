@@ -22,22 +22,24 @@ export class ModerationService {
     durationStr?: string | null
   ): Promise<ModerationResult> {
     try {
-      // Upsert DB records
-      await (prisma as any).user.upsert({
-        where: { id: targetUser.id },
-        update: { username: targetUser.username },
-        create: { id: targetUser.id, username: targetUser.username }
-      });
-      await (prisma as any).user.upsert({
-        where: { id: moderator.user.id },
-        update: { username: moderator.user.username },
-        create: { id: moderator.user.id, username: moderator.user.username }
-      });
-      await (prisma as any).guild.upsert({
-        where: { id: guild.id },
-        update: { name: guild.name },
-        create: { id: guild.id, name: guild.name }
-      });
+      // Upsert DB records in parallel
+      await Promise.all([
+        (prisma as any).user.upsert({
+          where: { id: targetUser.id },
+          update: { username: targetUser.username },
+          create: { id: targetUser.id, username: targetUser.username }
+        }),
+        (prisma as any).user.upsert({
+          where: { id: moderator.user.id },
+          update: { username: moderator.user.username },
+          create: { id: moderator.user.id, username: moderator.user.username }
+        }),
+        (prisma as any).guild.upsert({
+          where: { id: guild.id },
+          update: { name: guild.name },
+          create: { id: guild.id, name: guild.name }
+        })
+      ]);
 
       const targetMember = await guild.members.fetch(targetUser.id).catch(() => null);
 
@@ -58,12 +60,12 @@ export class ModerationService {
         }
       }
 
-      // Fetch Server Configuration
-      const settings = await (prisma as any).guildSetting.findUnique({ where: { guildId: guild.id } });
+      // Fetch Server Configuration & command permissions in parallel
+      const [settings, rolePerms] = await Promise.all([
+        (prisma as any).guildSetting.findUnique({ where: { guildId: guild.id } }),
+        (prisma as any).roleCommandPermission.findMany({ where: { guildId: guild.id } })
+      ]);
       const prefix = settings?.prefix || '$';
-
-      // Fetch command permissions
-      const rolePerms = await (prisma as any).roleCommandPermission.findMany({ where: { guildId: guild.id } });
 
       // Helper for role checks
       const checkRole = (cmdName: string) => {
@@ -124,8 +126,10 @@ export class ModerationService {
         }
         actionMs = ms;
         
-        await targetMember.roles.add(muteRole, reason);
-        await targetMember.timeout(ms, reason).catch(() => null); // Fallback to timeout, but don't fail if permissions are weird.
+        await Promise.all([
+          targetMember.roles.add(muteRole, reason),
+          targetMember.timeout(ms, reason).catch(() => null) // Fallback to timeout, but don't fail if permissions are weird.
+        ]);
         
         actionDesc = 'Mute';
         parsedDurationLabel = durationStr;
@@ -196,18 +200,14 @@ export class ModerationService {
         } as any
       });
 
-      // DM the target user (silently fail if DMs are closed)
-      try {
-        const dmVerbs: Record<ModerationAction, string> = {
-          WARN: `You were warned in ${guild.name}.`,
-          TIMEOUT: `You were muted in ${guild.name}.`,
-          KICK: `You were kicked from ${guild.name}.`,
-          BAN: `You were banned from ${guild.name}.`,
-        };
-        await targetUser.send(`${dmVerbs[action]}\nReason: ${reason}`);
-      } catch {
-        // User has DMs closed — silently continue
-      }
+      // DM the target user (silently fail if DMs are closed, run asynchronously)
+      const dmVerbs: Record<ModerationAction, string> = {
+        WARN: `You were warned in ${guild.name}.`,
+        TIMEOUT: `You were muted in ${guild.name}.`,
+        KICK: `You were kicked from ${guild.name}.`,
+        BAN: `You were banned from ${guild.name}.`,
+      };
+      targetUser.send(`${dmVerbs[action]}\nReason: ${reason}`).catch(() => {});
 
       const embed = new EmbedBuilder()
         .setColor(color as any)

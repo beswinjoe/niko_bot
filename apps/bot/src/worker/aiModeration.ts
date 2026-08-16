@@ -2,6 +2,7 @@ import { Message, TextChannel } from 'discord.js';
 import { client } from '../client';
 import { prisma } from '@niko/db';
 import { boss } from './index';
+import { cache } from '../cache/CacheManager';
 
 // Simple mock for Gemini AI for the time being, to avoid hitting rate limits locally
 // In production, this would call the actual Google Gemini API
@@ -38,7 +39,7 @@ export async function initAIModerationWorker() {
         const classification = await classifyContent(data.content);
 
         if (classification.isToxic) {
-          const settings = await prisma.guildSetting.findUnique({ where: { guildId: data.guildId } });
+          const settings = await cache.getGuildSettings(data.guildId);
           const threshold = settings?.aiActionThreshold || 80;
 
           if (classification.score >= threshold) {

@@ -69,6 +69,7 @@ model GuildSetting {
   scamDetection      Boolean @default(true)
   autoLockdown       Boolean @default(false)
   verificationSystem Boolean @default(false)
+  publicListing      Boolean @default(false)
 
   // AI Moderation
   aiModerationEnabled Boolean @default(true)
